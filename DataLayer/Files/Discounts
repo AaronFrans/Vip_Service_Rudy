@@ -1,0 +1,131 @@
+[
+	{
+		"ClientType": "Vip",
+		"NrOfReservationsNeeded": "0",
+		"Discount": "0.0",
+	},
+	{
+		"ClientType": "Vip",
+		"NrOfReservationsNeeded": "2",
+		"Discount": "5.0",
+	},
+	{
+		"ClientType": "Vip",
+		"NrOfReservationsNeeded": "7",
+		"Discount": "7.5",
+	},
+	{
+		"ClientType": "Vip",
+		"NrOfReservationsNeeded": "15",
+		"Discount": "10.0",
+	},{
+		"ClientType": "HuwelijksPlanner",
+		"NrOfReservationsNeeded": "0",
+		"Discount": "0.0",
+	},
+	{
+		"ClientType": "HuwelijksPlanner",
+		"NrOfReservationsNeeded": "5",
+		"Discount": "7.5",
+	},
+	{
+		"ClientType": "HuwelijksPlanner",
+		"NrOfReservationsNeeded": "10",
+		"Discount": "10.0",
+	},
+	{
+		"ClientType": "HuwelijksPlanner",
+		"NrOfReservationsNeeded": "15",
+		"Discount": "12.5",
+	},
+	{
+		"ClientType": "HuwelijksPlanner",
+		"NrOfReservationsNeeded": "20",
+		"Discount": "15.0",
+	},
+	{
+		"ClientType": "HuwelijksPlanner",
+		"NrOfReservationsNeeded": "25",
+		"Discount": "25.0",
+	},
+	{
+		"ClientType": "ConcertPromotor",
+		"NrOfReservationsNeeded": "0",
+		"Discount": "0.0",
+	},
+	{
+		"ClientType": "ConcertPromotor",
+		"NrOfReservationsNeeded": "3",
+		"Discount": "10.0",
+	},
+	{
+		"ClientType": "ConcertPromotor",
+		"NrOfReservationsNeeded": "5",
+		"Discount": "12.5",
+	},
+	{
+		"ClientType": "ConcertPromotor",
+		"NrOfReservationsNeeded": "10",
+		"Discount": "20.0",
+	},
+	{
+		"ClientType": "EvenementenBureau",
+		"NrOfReservationsNeeded": "0",
+		"Discount": "0.0",
+	},
+	{
+		"ClientType": "EvenementenBureau",
+		"NrOfReservationsNeeded": "5",
+		"Discount": "1.0",
+	},
+	{
+		"ClientType": "EvenementenBureau",
+		"NrOfReservationsNeeded": "7",
+		"Discount": "2.5",
+	},
+	{
+		"ClientType": "EvenementenBureau",
+		"NrOfReservationsNeeded": "9",
+		"Discount": "5",
+	},
+	{
+		"ClientType": "Organisatie",
+		"NrOfReservationsNeeded": "0",
+		"Discount": "0.0",
+	},
+	{
+		"ClientType": "Organisatie",
+		"NrOfReservationsNeeded": "10",
+		"Discount": "7.5",
+	},
+	{
+		"ClientType": "Organisatie",
+		"NrOfReservationsNeeded": "20",
+		"Discount": "15.0",
+	},
+	{
+		"ClientType": "Organisatie",
+		"NrOfReservationsNeeded": "30",
+		"Discount": "30",
+	},
+	{
+		"ClientType": "Particulier",
+		"NrOfReservationsNeeded": "0",
+		"Discount": "0.0",
+	},
+	{
+		"ClientType": "Particulier",
+		"NrOfReservationsNeeded": "3",
+		"Discount": "2.5",
+	},
+	{
+		"ClientType": "Particulier",
+		"NrOfReservationsNeeded": "6",
+		"Discount": "3",
+	},
+	{
+		"ClientType": "Particulier",
+		"NrOfReservationsNeeded": "10",
+		"Discount": "5",
+	}
+]

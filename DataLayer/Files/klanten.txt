@@ -1,0 +1,24 @@
+klantnummer,naam,Categorie,BTWnummer,adres
+1,Van Hie Gilbert,particulier,,Vismarkt 1 - Leuven
+2,De Pesser Jean,particulier,,Stationstraat 7 - Vilvoorde
+3,Persé Philemon,vip,,Markt 12 - Mechelen
+4,Dock Jomme,particulier,Markt 16 - Mechelen
+5,Gaia,organisatie,BE0123456789,slachthuisstraat 1 - Sint Niklaas
+6,Thienpondt Paul,vip,,Stationstraat 165b - Antwerpen
+7,De Radiomannen,concertpromotor,BE0987654321,Reyerslaan 111 - Brussel
+8,Vegas,huwelijksplanner,BE0069001234,Feeststraat 68 - Boom
+9,De feestmadammen,evenementenbureau,BE0101020203,Dorpstraat 78 - Deinze
+10,CDENV,organisatie,BE0111155555,Vlasmarkt 3 - Gent
+11,Walker Johnny,vip,,Schotlandstraat 12 - Ieper
+12,Roadies,concertpromotor,BE88887777,Molenstraat 66 - Maldegem
+13,First Date,huwelijksplanner,BE6660000666,Wolvengracht 56 - Gent
+14,Hotel Romantiek,huwelijksplanner,BE4443332221,Tirolstraat 23 - Zele
+15,Partytime,evenementenbureau,BE9990009999,Beekstraat 45 - Zomergem
+16,Het Witte Paard,huwelijksplanner,BE8765432019,Vluchtweg 18 - Lievegem
+17,Puys Mireille,particulier,,Dijk 18 - Oostende
+18,De Visvijver,organisatie,BE1231234567,Snoekstraat 2356 - Kluisbergen
+19,VZW 70+,organisatie,BE7070707080,Kouter 78 - Gent,
+20,De Vucht Thierry,vip,,Senaatstraat 1 - Brussel
+21,Decibel,concertpromotor,BE9996663330,Paterstraat 8 - Kortrijk
+22,De Planckaerts,huwelijksplanner,BE1897654231,Keistraat 9 - Oudenaarde
+23,U80,evenementenbureau,BE8754963210,Leopoldlaan 99 - Oostende
