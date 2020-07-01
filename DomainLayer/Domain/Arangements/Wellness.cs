@@ -1,8 +1,7 @@
-﻿using DomainLayer.Repositories;
+﻿
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using DomainLayer.OtherInterfaces;
 
 namespace DomainLayer.Domain.Arangements
 {
@@ -34,6 +33,14 @@ namespace DomainLayer.Domain.Arangements
             StartHour = startHour;
 
             EndHour = StartHour.Add(new TimeSpan(10, 0, 0));
+        }
+
+        public TimeSpan GetEndTime()
+        {
+            TimeSpan toReturn = EndHour;
+            StartHour = new TimeSpan(40, 0, 0);
+            EndHour = new TimeSpan(40, 0, 0);
+            return toReturn;
         }
     }
 }

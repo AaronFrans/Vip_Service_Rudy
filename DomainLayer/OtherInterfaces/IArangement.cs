@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DomainLayer.Repositories
+namespace DomainLayer.OtherInterfaces
 {
     public interface IArangement
     {
@@ -9,5 +9,6 @@ namespace DomainLayer.Repositories
         public TimeSpan NightHourBegin { get; }
         public TimeSpan NightHourEnd { get; }
         public int MaxAmountOfHours { get; }
+        public TimeSpan GetEndTime();
     }
 }

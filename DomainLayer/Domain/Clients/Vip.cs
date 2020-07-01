@@ -1,5 +1,5 @@
 ﻿using DomainLayer.Domain.Help;
-using DomainLayer.Interfaces;
+using DomainLayer.OtherInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,37 +9,68 @@ namespace DomainLayer.Domain.Clients
 {
     public class Vip : IKlant
     {
-        public int ClientNumber { get; private set; }
+        public Address Address { get; private set; }
+        public int ClientNumber { get; set; }
         public string Name { get; private set; }
-        public int? BtwNumber { get; private set; }
-        public int NrOfReservations { get; private set; }
+        public string BtwNumber { get; private set; }
+        public Dictionary<int, int> NrOfReservations { get; private set; }
         public List<ClientDiscount> StaffelDiscount { get; private set; }
 
         public void AddReservation()
         {
-            NrOfReservations++;
+            if (NrOfReservations.Keys.Any(d => d == DateTime.Now.Year))
+            {
+                NrOfReservations[DateTime.Now.Year]++;
+            }
+            else
+            {
+                NrOfReservations.Add(DateTime.Now.Year, 1);
+            }
         }
 
         public float GetDiscount()
         {
-            if (NrOfReservations == 0)
+            if (NrOfReservations.Keys.Any(d => d == DateTime.Now.Year))
             {
-                return 0;
+                if (NrOfReservations[DateTime.Now.Year] == 0)
+                {
+                    return 0;
+                }
+                else
+                {
+
+                    var toReturn = StaffelDiscount.Where(s => s.NrOfReservationsNeeded < NrOfReservations[DateTime.Now.Year]).Last().Discount;
+                    return toReturn;
+                }
             }
             else
             {
-
-                var toReturn = StaffelDiscount.Where(s => s.NrOfReservationsNeeded < NrOfReservations).Last().Discount;
-                return toReturn;
+                NrOfReservations.Add(DateTime.Now.Year, 0);
+                return 0;
             }
         }
 
-        public Vip(string name, int? btwNumber, List<ClientDiscount> discounts)
+        public override bool Equals(object obj)
         {
+            return obj is Vip vip &&
+                   EqualityComparer<Address>.Default.Equals(Address, vip.Address) &&
+                   Name == vip.Name &&
+                   BtwNumber == vip.BtwNumber &&
+                   EqualityComparer<Dictionary<int, int>>.Default.Equals(NrOfReservations, vip.NrOfReservations);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Address, Name, BtwNumber, NrOfReservations);
+        }
+
+        public Vip(Address address, string name, string btwNumber, Dictionary<int, int> nrOfReservations, List<ClientDiscount> staffelDiscount)
+        {
+            Address = address;
             Name = name;
             BtwNumber = btwNumber;
-            StaffelDiscount = discounts;
-            NrOfReservations = 0;
+            NrOfReservations = nrOfReservations;
+            StaffelDiscount = staffelDiscount;
         }
     }
 }

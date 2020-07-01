@@ -1,9 +1,11 @@
 ﻿
 using DomainLayer.Domain;
 using DomainLayer.Domain.Arangements;
+using DomainLayer.Domain.Clients;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
 
 namespace Tests
 {
@@ -21,8 +23,6 @@ namespace Tests
             float SecondHoursPercentage = 65.0f;
             float NightHourPercentage = 140.0f;
 
-
-
             Airport airport = new Airport();
 
             airport.StartHour.Should().Be(StartHour);
@@ -39,7 +39,13 @@ namespace Tests
         public void AirportTest_Methods()
         {
             Airport airport = new Airport();
-            int price = 520;
+            int firstHourPrice = 100;
+            int nightHoursPrice = 420;
+            int dayHoursPrice = 0;
+            int firstHour = 1;
+            int nightHours = 3;
+            int dayHours = 0;
+            int totalPrice = 520;
             TimeSpan originalStartHour = new TimeSpan(40, 0, 0);
             TimeSpan originalEndHour = new TimeSpan(40, 0, 0);
             TimeSpan StartHour = new TimeSpan(22, 0, 0);
@@ -49,43 +55,107 @@ namespace Tests
             airport.StartHour.Should().Be(StartHour);
             airport.EndHour.Should().Be(EndHour);
 
-            airport.GetPrice(100).Should().Be(price);
+            var result = airport.GetPrice(100);
+            airport.GetEndTime();
+            result.Key.Should().Be(totalPrice);
+            result.Value.Single(h => h.Type == "Eerste uur").TotalPrice.Should().Be(firstHourPrice);
+            result.Value.Single(h => h.Type == "Nacht uren").TotalPrice.Should().Be(nightHoursPrice);
+            result.Value.Single(h => h.Type == "Dag uren").TotalPrice.Should().Be(dayHoursPrice);
+            result.Value.Single(h => h.Type == "Eerste uur").NrOfHours.Should().Be(firstHour);
+            result.Value.Single(h => h.Type == "Nacht uren").NrOfHours.Should().Be(nightHours);
+            result.Value.Single(h => h.Type == "Dag uren").NrOfHours.Should().Be(dayHours);
             airport.StartHour.Should().Be(originalStartHour);
             airport.EndHour.Should().Be(originalEndHour);
 
             StartHour = new TimeSpan(22, 0, 0);
             EndHour = new TimeSpan(26, 0, 0);
-            price = 537;
+            firstHourPrice = 102;
+            nightHoursPrice = 435;
+            dayHoursPrice = 0;
+            firstHour = 1;
+            nightHours = 3;
+            dayHours = 0;
+            totalPrice = 537;
             airport.SetTime(StartHour, EndHour);
 
-            airport.GetPrice(102).Should().Be(price);
+            result = airport.GetPrice(102);
+            airport.GetEndTime();
+            result.Key.Should().Be(totalPrice);
+            result.Value.Single(h => h.Type == "Eerste uur").TotalPrice.Should().Be(firstHourPrice);
+            result.Value.Single(h => h.Type == "Nacht uren").TotalPrice.Should().Be(nightHoursPrice);
+            result.Value.Single(h => h.Type == "Dag uren").TotalPrice.Should().Be(dayHoursPrice);
+            result.Value.Single(h => h.Type == "Eerste uur").NrOfHours.Should().Be(firstHour);
+            result.Value.Single(h => h.Type == "Nacht uren").NrOfHours.Should().Be(nightHours);
+            result.Value.Single(h => h.Type == "Dag uren").NrOfHours.Should().Be(dayHours);
             airport.StartHour.Should().Be(originalStartHour);
             airport.EndHour.Should().Be(originalEndHour);
 
             StartHour = new TimeSpan(8, 0, 0);
             EndHour = new TimeSpan(15, 0, 0);
-            price = 492;
+            firstHourPrice = 102;
+            nightHoursPrice = 0;
+            dayHoursPrice = 390;
+            firstHour = 1;
+            nightHours = 0;
+            dayHours = 6;
+            totalPrice = 492;
             airport.SetTime(StartHour, EndHour);
 
-            airport.GetPrice(102).Should().Be(price);
+            result = airport.GetPrice(102);
+            airport.GetEndTime();
+            result.Key.Should().Be(totalPrice);
+            result.Value.Single(h => h.Type == "Eerste uur").TotalPrice.Should().Be(firstHourPrice);
+            result.Value.Single(h => h.Type == "Nacht uren").TotalPrice.Should().Be(nightHoursPrice);
+            result.Value.Single(h => h.Type == "Dag uren").TotalPrice.Should().Be(dayHoursPrice);
+            result.Value.Single(h => h.Type == "Eerste uur").NrOfHours.Should().Be(firstHour);
+            result.Value.Single(h => h.Type == "Nacht uren").NrOfHours.Should().Be(nightHours);
+            result.Value.Single(h => h.Type == "Dag uren").NrOfHours.Should().Be(dayHours);
             airport.StartHour.Should().Be(originalStartHour);
             airport.EndHour.Should().Be(originalEndHour);
 
             StartHour = new TimeSpan(23, 0, 0);
             EndHour = new TimeSpan(24 + 8, 0, 0);
-            price = 1182;
+            firstHourPrice = 102;
+            nightHoursPrice = 1015;
+            dayHoursPrice = 65;
+            firstHour = 1;
+            nightHours = 7;
+            dayHours = 1;
+            totalPrice = 1182;
             airport.SetTime(StartHour, EndHour);
 
-            airport.GetPrice(102).Should().Be(price);
+            result = airport.GetPrice(102);
+            airport.GetEndTime();
+            result.Key.Should().Be(totalPrice);
+            result.Value.Single(h => h.Type == "Eerste uur").TotalPrice.Should().Be(firstHourPrice);
+            result.Value.Single(h => h.Type == "Nacht uren").TotalPrice.Should().Be(nightHoursPrice);
+            result.Value.Single(h => h.Type == "Dag uren").TotalPrice.Should().Be(dayHoursPrice);
+            result.Value.Single(h => h.Type == "Eerste uur").NrOfHours.Should().Be(firstHour);
+            result.Value.Single(h => h.Type == "Nacht uren").NrOfHours.Should().Be(nightHours);
+            result.Value.Single(h => h.Type == "Dag uren").NrOfHours.Should().Be(dayHours);
             airport.StartHour.Should().Be(originalStartHour);
             airport.EndHour.Should().Be(originalEndHour);
 
             StartHour = new TimeSpan(15, 0, 0);
             EndHour = new TimeSpan(24, 0, 0);
-            price = 782;
+            firstHourPrice = 102;
+            nightHoursPrice = 290;
+            dayHoursPrice = 390;
+            firstHour = 1;
+            nightHours = 2;
+            dayHours = 6;
+            totalPrice = 782;
             airport.SetTime(StartHour, EndHour);
 
-            airport.GetPrice(102).Should().Be(price);
+            result = airport.GetPrice(102);
+            airport.GetEndTime();
+            result.Key.Should().Be(totalPrice);
+            result.Value.Single(h => h.Type == "Eerste uur").TotalPrice.Should().Be(firstHourPrice);
+            result.Value.Single(h => h.Type == "Nacht uren").TotalPrice.Should().Be(nightHoursPrice);
+            result.Value.Single(h => h.Type == "Dag uren").TotalPrice.Should().Be(dayHoursPrice);
+            result.Value.Single(h => h.Type == "Eerste uur").NrOfHours.Should().Be(firstHour);
+            result.Value.Single(h => h.Type == "Nacht uren").NrOfHours.Should().Be(nightHours);
+            result.Value.Single(h => h.Type == "Dag uren").NrOfHours.Should().Be(dayHours);
             airport.StartHour.Should().Be(originalStartHour);
             airport.EndHour.Should().Be(originalEndHour);
 
@@ -151,7 +221,13 @@ namespace Tests
         public void BusinessTest_Methods()
         {
             Business business = new Business();
-            int price = 520;
+            int firstHourPrice = 100;
+            int nightHoursPrice = 420;
+            int dayHoursPrice = 0;
+            int firstHour = 1;
+            int nightHours = 3;
+            int dayHours = 0;
+            int totalPrice = 520;
             TimeSpan originalStartHour = new TimeSpan(40, 0, 0);
             TimeSpan originalEndHour = new TimeSpan(40, 0, 0);
             TimeSpan StartHour = new TimeSpan(22, 0, 0);
@@ -161,46 +237,109 @@ namespace Tests
             business.StartHour.Should().Be(StartHour);
             business.EndHour.Should().Be(EndHour);
 
-            business.GetPrice(100).Should().Be(price);
+            var result = business.GetPrice(100);
+            business.GetEndTime();
+            result.Key.Should().Be(totalPrice);
+            result.Value.Single(h => h.Type == "Eerste uur").TotalPrice.Should().Be(firstHourPrice);
+            result.Value.Single(h => h.Type == "Nacht uren").TotalPrice.Should().Be(nightHoursPrice);
+            result.Value.Single(h => h.Type == "Dag uren").TotalPrice.Should().Be(dayHoursPrice);
+            result.Value.Single(h => h.Type == "Eerste uur").NrOfHours.Should().Be(firstHour);
+            result.Value.Single(h => h.Type == "Nacht uren").NrOfHours.Should().Be(nightHours);
+            result.Value.Single(h => h.Type == "Dag uren").NrOfHours.Should().Be(dayHours);
             business.StartHour.Should().Be(originalStartHour);
             business.EndHour.Should().Be(originalEndHour);
 
             StartHour = new TimeSpan(22, 0, 0);
             EndHour = new TimeSpan(26, 0, 0);
-            price = 537;
+            firstHourPrice = 102;
+            nightHoursPrice = 435;
+            dayHoursPrice = 0;
+            firstHour = 1;
+            nightHours = 3;
+            dayHours = 0;
+            totalPrice = 537;
             business.SetTime(StartHour, EndHour);
 
-            business.GetPrice(102).Should().Be(price);
+            result = business.GetPrice(102);
+            business.GetEndTime();
+            result.Key.Should().Be(totalPrice);
+            result.Value.Single(h => h.Type == "Eerste uur").TotalPrice.Should().Be(firstHourPrice);
+            result.Value.Single(h => h.Type == "Nacht uren").TotalPrice.Should().Be(nightHoursPrice);
+            result.Value.Single(h => h.Type == "Dag uren").TotalPrice.Should().Be(dayHoursPrice);
+            result.Value.Single(h => h.Type == "Eerste uur").NrOfHours.Should().Be(firstHour);
+            result.Value.Single(h => h.Type == "Nacht uren").NrOfHours.Should().Be(nightHours);
+            result.Value.Single(h => h.Type == "Dag uren").NrOfHours.Should().Be(dayHours);
             business.StartHour.Should().Be(originalStartHour);
             business.EndHour.Should().Be(originalEndHour);
 
             StartHour = new TimeSpan(8, 0, 0);
             EndHour = new TimeSpan(15, 0, 0);
-            price = 492;
+            firstHourPrice = 102;
+            nightHoursPrice = 0;
+            dayHoursPrice = 390;
+            firstHour = 1;
+            nightHours = 0;
+            dayHours = 6;
+            totalPrice = 492;
             business.SetTime(StartHour, EndHour);
 
-            business.GetPrice(102).Should().Be(price);
+            result = business.GetPrice(102);
+            business.GetEndTime();
+            result.Key.Should().Be(totalPrice);
+            result.Value.Single(h => h.Type == "Eerste uur").TotalPrice.Should().Be(firstHourPrice);
+            result.Value.Single(h => h.Type == "Nacht uren").TotalPrice.Should().Be(nightHoursPrice);
+            result.Value.Single(h => h.Type == "Dag uren").TotalPrice.Should().Be(dayHoursPrice);
+            result.Value.Single(h => h.Type == "Eerste uur").NrOfHours.Should().Be(firstHour);
+            result.Value.Single(h => h.Type == "Nacht uren").NrOfHours.Should().Be(nightHours);
+            result.Value.Single(h => h.Type == "Dag uren").NrOfHours.Should().Be(dayHours);
             business.StartHour.Should().Be(originalStartHour);
             business.EndHour.Should().Be(originalEndHour);
 
             StartHour = new TimeSpan(23, 0, 0);
             EndHour = new TimeSpan(24 + 8, 0, 0);
-            price = 1182;
+            firstHourPrice = 102;
+            nightHoursPrice = 1015;
+            dayHoursPrice = 65;
+            firstHour = 1;
+            nightHours = 7;
+            dayHours = 1;
+            totalPrice = 1182;
             business.SetTime(StartHour, EndHour);
 
-            business.GetPrice(102).Should().Be(price);
+            result = business.GetPrice(102);
+            business.GetEndTime();
+            result.Key.Should().Be(totalPrice);
+            result.Value.Single(h => h.Type == "Eerste uur").TotalPrice.Should().Be(firstHourPrice);
+            result.Value.Single(h => h.Type == "Nacht uren").TotalPrice.Should().Be(nightHoursPrice);
+            result.Value.Single(h => h.Type == "Dag uren").TotalPrice.Should().Be(dayHoursPrice);
+            result.Value.Single(h => h.Type == "Eerste uur").NrOfHours.Should().Be(firstHour);
+            result.Value.Single(h => h.Type == "Nacht uren").NrOfHours.Should().Be(nightHours);
+            result.Value.Single(h => h.Type == "Dag uren").NrOfHours.Should().Be(dayHours);
             business.StartHour.Should().Be(originalStartHour);
             business.EndHour.Should().Be(originalEndHour);
 
             StartHour = new TimeSpan(15, 0, 0);
             EndHour = new TimeSpan(24, 0, 0);
-            price = 782;
+            firstHourPrice = 102;
+            nightHoursPrice = 290;
+            dayHoursPrice = 390;
+            firstHour = 1;
+            nightHours = 2;
+            dayHours = 6;
+            totalPrice = 782;
             business.SetTime(StartHour, EndHour);
 
-            business.GetPrice(102).Should().Be(price);
+            result = business.GetPrice(102);
+            business.GetEndTime();
+            result.Key.Should().Be(totalPrice);
+            result.Value.Single(h => h.Type == "Eerste uur").TotalPrice.Should().Be(firstHourPrice);
+            result.Value.Single(h => h.Type == "Nacht uren").TotalPrice.Should().Be(nightHoursPrice);
+            result.Value.Single(h => h.Type == "Dag uren").TotalPrice.Should().Be(dayHoursPrice);
+            result.Value.Single(h => h.Type == "Eerste uur").NrOfHours.Should().Be(firstHour);
+            result.Value.Single(h => h.Type == "Nacht uren").NrOfHours.Should().Be(nightHours);
+            result.Value.Single(h => h.Type == "Dag uren").NrOfHours.Should().Be(dayHours);
             business.StartHour.Should().Be(originalStartHour);
             business.EndHour.Should().Be(originalEndHour);
-
         }
         [TestMethod]
         public void BusinessTest_Exceptions()
@@ -263,6 +402,7 @@ namespace Tests
             wellness.SetTime(new TimeSpan(10, 0, 0));
             wellness.StartHour.Should().Be(StartHour);
             wellness.EndHour.Should().Be(EndHour);
+            wellness.GetEndTime();
         }
         [TestMethod]
         public void WellnessTest_Exceptions()
@@ -309,17 +449,26 @@ namespace Tests
         {
             Wedding wedding = new Wedding(2000);
             TimeSpan EndHour = new TimeSpan(15, 0, 0);
+            int extraHours = 2;
+            int extraHourPrice = 130;
             int CalculatedPrice = 2000;
 
             wedding.SetTime(null);
             wedding.EndHour.Should().Be(EndHour);
-            wedding.GetCalculatedPrice(100).Should().Be(CalculatedPrice);
+            var result = wedding.GetCalculatedPrice(100);
+            result.Key.Should().Be(CalculatedPrice);
+            result.Value.Any(s => s.Type == "Extra uren").Should().BeFalse();
+
 
             wedding.SetTime(2);
             CalculatedPrice = 2130;
             EndHour = new TimeSpan(17, 0, 0);
             wedding.EndHour.Should().Be(EndHour);
-            wedding.GetCalculatedPrice(100).Should().Be(CalculatedPrice);
+            result = wedding.GetCalculatedPrice(100);
+            wedding.GetEndTime();
+            result.Key.Should().Be(CalculatedPrice);
+            result.Value.Single(s => s.Type == "Extra uren").TotalPrice.Should().Be(extraHourPrice);
+            result.Value.Single(s => s.Type == "Extra uren").NrOfHours.Should().Be(extraHours);
         }
         [TestMethod]
         public void WeddingTest_Exceptions()
@@ -364,17 +513,26 @@ namespace Tests
         {
             NightLife nightLife = new NightLife(2000);
             TimeSpan EndHour = new TimeSpan(24, 0, 0);
+            int extraHours = 2;
+            int extraHourPrice = 280;
             int CalculatedPrice = 2000;
 
             nightLife.SetTime(null);
             nightLife.EndHour.Should().Be(EndHour);
-            nightLife.GetCalculatedPrice(100).Should().Be(CalculatedPrice);
+            var result = nightLife.GetCalculatedPrice(100);
+            nightLife.GetEndTime();
+            result.Key.Should().Be(CalculatedPrice);
+            result.Value.Any(s => s.Type == "Extra uren").Should().BeFalse();
 
             nightLife.SetTime(2);
             CalculatedPrice = 2280;
             EndHour = new TimeSpan(26, 0, 0);
             nightLife.EndHour.Should().Be(EndHour);
-            nightLife.GetCalculatedPrice(100).Should().Be(CalculatedPrice);
+            result = nightLife.GetCalculatedPrice(100);
+            nightLife.GetEndTime();
+            result.Key.Should().Be(CalculatedPrice);
+            result.Value.Single(s => s.Type == "Extra uren").TotalPrice.Should().Be(extraHourPrice);
+            result.Value.Single(s => s.Type == "Extra uren").NrOfHours.Should().Be(extraHours);
         }
         [TestMethod]
         public void NightLifeTest_Exceptions()

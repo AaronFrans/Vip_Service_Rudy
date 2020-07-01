@@ -2,7 +2,7 @@ klantnummer,naam,Categorie,BTWnummer,adres
 1,Van Hie Gilbert,particulier,,Vismarkt 1 - Leuven
 2,De Pesser Jean,particulier,,Stationstraat 7 - Vilvoorde
 3,Persé Philemon,vip,,Markt 12 - Mechelen
-4,Dock Jomme,particulier,Markt 16 - Mechelen
+4,Dock Jomme,particulier,,Markt 16 - Mechelen
 5,Gaia,organisatie,BE0123456789,slachthuisstraat 1 - Sint Niklaas
 6,Thienpondt Paul,vip,,Stationstraat 165b - Antwerpen
 7,De Radiomannen,concertpromotor,BE0987654321,Reyerslaan 111 - Brussel

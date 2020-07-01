@@ -1,4 +1,5 @@
-﻿using DomainLayer.Repositories;
+﻿using DomainLayer.Domain.Help;
+using DomainLayer.OtherInterfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace DomainLayer.Domain.Arangements
         {
         }
 
-        public int GetPrice(int FirstHourPrice)
+        public KeyValuePair<int, List<HourType>> GetPrice(int FirstHourPrice)
         {
             if (StartHour.TotalHours == 40 || EndHour.TotalHours == 40)
             {
@@ -29,40 +30,63 @@ namespace DomainLayer.Domain.Arangements
             }
             int returnPrice = FirstHourPrice;
 
+            List<HourType> hourTypes = new List<HourType>() { new HourType("Eerste uur", 1, FirstHourPrice) };
+
             int totalHours = (int)(EndHour.TotalHours - StartHour.TotalHours) - 1;
 
             if ((StartHour.TotalHours >= NightHourBegin.TotalHours) && (StartHour.TotalHours <= NightHourEnd.TotalHours) &&
                 (EndHour.TotalHours >= NightHourBegin.TotalHours) && (EndHour.TotalHours <= NightHourEnd.TotalHours))
             {
-                returnPrice += totalHours * (5 * (int)Math.Round(FirstHourPrice * (NightHourPercentage / 100.0) / 5.0));
+                int nightPrice = totalHours * (5 * (int)Math.Round(FirstHourPrice * (NightHourPercentage / 100.0) / 5.0));
+                returnPrice += nightPrice;
+                hourTypes.Add(new HourType("Nacht uren", totalHours, nightPrice));
+                hourTypes.Add(new HourType("Dag uren", 0, 0));
             }
             else if ((StartHour.TotalHours < NightHourBegin.TotalHours) &&
                      (EndHour.TotalHours < NightHourBegin.TotalHours))
             {
-                returnPrice += totalHours * (5 * (int)Math.Round((FirstHourPrice * (SecondHoursPercentage / 100.0)) / 5.0));
+                int dayPrice = totalHours * (5 * (int)Math.Round((FirstHourPrice * (SecondHoursPercentage / 100.0)) / 5.0));
+                returnPrice += dayPrice;
+                hourTypes.Add(new HourType("Nacht uren", 0, 0));
+                hourTypes.Add(new HourType("Dag uren", totalHours, dayPrice));
             }
             else if ((StartHour.TotalHours >= NightHourBegin.TotalHours) && (StartHour.TotalHours < NightHourEnd.TotalHours))
             {
                 int nightHours = (int)(NightHourEnd.TotalHours - StartHour.TotalHours) - 1;
-                returnPrice += nightHours * (5 * (int)Math.Round((FirstHourPrice * (NightHourPercentage / 100.0)) / 5.0));
+                int nightPrice = nightHours * (5 * (int)Math.Round((FirstHourPrice * (NightHourPercentage / 100.0)) / 5.0));
+                returnPrice += nightPrice;
                 if (totalHours - nightHours > 0)
-                    returnPrice += (totalHours - nightHours) * (5 * (int)Math.Round(FirstHourPrice * (SecondHoursPercentage / 100.0) / 5.0));
-
-
+                {
+                    int dayHours = (totalHours - nightHours);
+                    int dayPrice = dayHours * (5 * (int)Math.Round(FirstHourPrice * (SecondHoursPercentage / 100.0) / 5.0));
+                    returnPrice += dayPrice;
+                    hourTypes.Add(new HourType("Nacht uren", nightHours, nightPrice));
+                    hourTypes.Add(new HourType("Dag uren", dayHours, dayPrice));
+                }
+                else
+                {
+                    hourTypes.Add(new HourType("Nacht uren", nightHours, nightPrice));
+                    hourTypes.Add(new HourType("Dag uren", 0, 0));
+                }
             }
             else if ((EndHour.TotalHours >= NightHourBegin.TotalHours) && (EndHour.TotalHours < NightHourEnd.TotalHours))
             {
                 int dayHours = (int)(NightHourBegin.TotalHours - StartHour.TotalHours) - 1;
-                returnPrice += dayHours * (5 * (int)Math.Round((FirstHourPrice * (SecondHoursPercentage / 100.0)) / 5.0));
-                returnPrice += (totalHours - dayHours) * (5 * (int)Math.Round((FirstHourPrice * (NightHourPercentage / 100.0)) / 5.0));
+                int dayPrice = dayHours * (5 * (int)Math.Round((FirstHourPrice * (SecondHoursPercentage / 100.0)) / 5.0));
+                returnPrice += dayPrice;
 
+                int nightHours = (totalHours - dayHours);
+                int nightPrice = nightHours * (5 * (int)Math.Round((FirstHourPrice * (NightHourPercentage / 100.0)) / 5.0));
+                returnPrice += nightPrice;
+                hourTypes.Add(new HourType("Nacht uren", nightHours, nightPrice));
+                hourTypes.Add(new HourType("Dag uren", dayHours, dayPrice));
             }
 
             StartHour = new TimeSpan(40, 0, 0);
-            EndHour = new TimeSpan(40, 0, 0);
-            return returnPrice;
+            return new KeyValuePair<int, List<HourType>>(returnPrice, hourTypes);
 
         }
+
         public void SetTime(TimeSpan startHour, TimeSpan endHour)
         {
             if (startHour.TotalHours < 0)
@@ -91,6 +115,13 @@ namespace DomainLayer.Domain.Arangements
             }
             StartHour = startHour;
             EndHour = endHour;
+        }
+
+        public TimeSpan GetEndTime()
+        {
+            TimeSpan toReturn = EndHour;
+            EndHour = new TimeSpan(40, 0, 0);
+            return toReturn;
         }
 
     }

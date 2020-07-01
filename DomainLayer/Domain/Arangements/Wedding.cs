@@ -1,8 +1,9 @@
-﻿using DomainLayer.Repositories;
+﻿
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using DomainLayer.Domain.Help;
+using DomainLayer.OtherInterfaces;
 
 namespace DomainLayer.Domain.Arangements
 {
@@ -18,23 +19,25 @@ namespace DomainLayer.Domain.Arangements
         public int? ExtraHours { get; private set; } = null;
 
 
-        public int GetCalculatedPrice(int firstHourPrice)
+        public KeyValuePair<int, List<HourType>> GetCalculatedPrice(int firstHourPrice)
         {
             if (EndHour.TotalHours == 40)
             {
                 throw new DomainException("Zorg er aub voor dat de start- en eindtijd ingevuld zijn");
             }
             int returnPrice = Price;
+            List<HourType> hourTypes = new List<HourType>() { new HourType("Eerste uur", 0, 0) };
 
             if (ExtraHours != null)
             {
-                returnPrice += (int)ExtraHours * (5 * (int)Math.Round((firstHourPrice * (SecondHoursPercentage / 100.0)) / 5.0));
+                int extraHourPrice = (int)ExtraHours * (5 * (int)Math.Round((firstHourPrice * (SecondHoursPercentage / 100.0)) / 5.0));
+                returnPrice += extraHourPrice;
+                hourTypes.Add(new HourType("Extra uren", (int)ExtraHours, extraHourPrice));
             }
 
             ExtraHours = null;
-            EndHour = new TimeSpan(40, 0, 0);
 
-            return returnPrice;
+            return new KeyValuePair<int, List<HourType>>(returnPrice, hourTypes);
         }
         public void SetTime(int? extraHours)
         {
@@ -56,6 +59,13 @@ namespace DomainLayer.Domain.Arangements
                 EndHour = new TimeSpan(15, 0, 0);
 
             }
+        }
+
+        public TimeSpan GetEndTime()
+        {
+            TimeSpan toReturn = EndHour;
+            EndHour = new TimeSpan(40, 0, 0);
+            return toReturn;
         }
 
         [JsonConstructor]
