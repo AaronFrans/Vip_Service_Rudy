@@ -1,5 +1,7 @@
-﻿using DomainLayer.Domain.Help;
+﻿using DomainLayer.Domain.Clients;
+using DomainLayer.Domain.Help;
 using DomainLayer.Domain.Reservation;
+using DomainLayer.Domain.Vloot;
 using DomainLayer.OtherInterfaces;
 using System;
 using System.Collections.Generic;
@@ -9,8 +11,10 @@ namespace DomainLayer.Repositories
 {
     public interface IVloot
     {
-
-        public void HireVehicle(string name, string typeArangement, Address location, IKlant client, DateTime reservationDate, Address endLocation, DateTime dateLimousineNeeded,
+        public void AddVehicle(Limousine vehicle);
+        public void AddVehicles(List<Limousine> vehicles);
+        public List<Limousine> GetVehiclesNonTracking();
+        public Reservering HireVehicle(string name, string typeArangement, Address location, Client client, DateTime reservationDate, Address endLocation, DateTime dateLimousineNeeded,
              int? extraHours = null, TimeSpan? startHour = null, TimeSpan? endHour = null);
     }
 }

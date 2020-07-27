@@ -23,7 +23,7 @@ namespace Tests
         public void DetailsTest_Constructor()
         {
             Address location = new Address("Leusrhoek", "Gent", "20");
-            List<IArangement> arangements = new List<IArangement>() { new Wedding(2000) };
+            List<Arangement> arangements = new List<Arangement>() { new Wedding(2000) };
             Limousine limousine = new Limousine(200, "Tesla - X", 2, arangements);
             DateTime dateNeeded = new DateTime(10, 2, 23, 10, 0, 0);
             string arrangement = "Wedding";
@@ -31,7 +31,7 @@ namespace Tests
             Details details = new Details(location, location, limousine, dateNeeded, arrangement);
             details.StartLocation.Should().Be(location);
             details.EndLocation.Should().Be(location);
-            details.Vehicle.Should().Be(limousine);
+            details.Limousine.Should().Be(limousine);
             details.DateLimousineNeeded.Should().Be(dateNeeded);
             details.BtwPercentage.Should().Be(6.0f);
 
@@ -40,15 +40,15 @@ namespace Tests
         public void DetailsTest_Methods()
         {
             Address location = new Address("Leusrhoek", "Gent", "20");
-            List<IArangement> arangements = new List<IArangement>() { new Wedding(2000) };
+            List<Arangement> arangements = new List<Arangement>() { new Wedding(2000) };
             Limousine limousine = new Limousine(200, "Tesla - X", 2, arangements);
             DateTime dateNeeded = new DateTime(10, 2, 23, 10, 0, 0);
             string arrangement = "Wedding";
             Details details = new Details(location, location, limousine, dateNeeded, arrangement);
 
             Address address = new Address("Leusrhoek", "Beveren", "20");
-            var discounts = Parser.GetDiscounts().Where(d => d.ClientType == "Vip").ToList();
-            Vip vip = new Vip(new Address("Leurshoek", "Beveren", "61"), "Aaron", "0862333424", new Dictionary<int, int>(), discounts);
+            var discounts = Parser.GetDiscounts().Where(d => d.ClientType == ClientType.Vip).ToList();
+            Client test = new Client(ClientType.Vip, Parser.GetDiscounts().Where(s => s.ClientType.Equals("Vip")).ToList(), new Address("Leurshoek", "Beveren", "61"), "Vip", "0862333424", new List<ReservationsPerYear>());
 
             int subTotal = 2000;
             float usedDiscount = 0;
@@ -56,7 +56,7 @@ namespace Tests
             int btwAmount = 120;
             int toPay = 2120;
 
-            details.CalculatePrices(vip);
+            details.CalculatePrices(test, startHour: new TimeSpan(7,0,0));
 
             details.SubTotal.Should().Be(subTotal);
             details.UsedDiscount.Should().Be(usedDiscount);
@@ -69,7 +69,7 @@ namespace Tests
         {
             Address startLocation = new Address("Leusrhoek", "Beveren", "20");
             Address enddLocation = new Address("Leusrhoek", "Beveren", "20");
-            List<IArangement> arangements = new List<IArangement>() { new Wedding(2000) };
+            List<Arangement> arangements = new List<Arangement>() { new Wedding(2000) };
             Limousine limousine = new Limousine(200, "Tesla - X", 2, arangements);
             DateTime dateNeeded = new DateTime(10, 2, 23, 10, 0, 0);
             string arrangement = "Wedding";
@@ -86,13 +86,13 @@ namespace Tests
         {
             DateTime date = new DateTime(2000, 1, 10, 20, 3, 1);
             Address address = new Address("Leusrhoek", "Gent", "20");
-            var discounts = Parser.GetDiscounts().Where(d => d.ClientType == "Vip").ToList();
-            Vip vip = new Vip(new Address("Leurshoek", "Beveren", "61"), "Aaron", "0862333424", new Dictionary<int, int>(), discounts);
+            var discounts = Parser.GetDiscounts().Where(d => d.ClientType == ClientType.Vip).ToList();
+            Client test = new Client(ClientType.Vip, Parser.GetDiscounts().Where(s => s.ClientType.Equals("Vip")).ToList(), new Address("Leurshoek", "Beveren", "61"), "Vip", "0862333424", new List<ReservationsPerYear>());
 
-            Reservering reservering = new Reservering(date, vip, address);
+            Reservering reservering = new Reservering(date, test, address);
 
             reservering.ReservationDate.Should().Be(date);
-            reservering.Client.GetType().Should().Be(vip.GetType());
+            reservering.Client.Type.Should().Be(test.Type);
             reservering.Location.Should().Be(address);
 
         }
@@ -101,10 +101,10 @@ namespace Tests
         {
             DateTime date = new DateTime(2000, 1, 10, 20, 3, 1);
             Address address = new Address("Leusrhoek", "Beveren", "20");
-            var discounts = Parser.GetDiscounts().Where(d => d.ClientType == "Vip").ToList();
-            Vip vip = new Vip(new Address("Leurshoek", "Beveren", "61"), "Aaron", "0862333424", new Dictionary<int, int>(), discounts);
+            var discounts = Parser.GetDiscounts().Where(d => d.ClientType == ClientType.Vip).ToList();
+            Client test = new Client(ClientType.Vip, Parser.GetDiscounts().Where(s => s.ClientType.Equals("Vip")).ToList(), new Address("Leurshoek", "Beveren", "61"), "Vip", "0862333424", new List<ReservationsPerYear>());
 
-            Action act = () => new Reservering(date, vip, address);
+            Action act = () => new Reservering(date, test, address);
             act.Should().Throw<DomainException>().WithMessage("Limousines zijn aleen beschikbaar in volgende locaties: Antwerpen, Gent, Brussel, Hasselt en Charleroi.");
 
 
@@ -114,21 +114,23 @@ namespace Tests
         {
             DateTime date = new DateTime(2000, 1, 10, 20, 3, 1);
             Address address = new Address("Leusrhoek", "Gent", "20");
-            var discounts = Parser.GetDiscounts().Where(d => d.ClientType == "Vip").ToList();
-            Vip vip = new Vip(new Address("Leurshoek", "Beveren", "61"), "Aaron", "0862333424", new Dictionary<int, int>(), discounts);
-
+            var discounts = Parser.GetDiscounts().Where(d => d.ClientType == ClientType.Vip).ToList();
+            Client test = new Client(ClientType.Vip, Parser.GetDiscounts().Where(s => s.ClientType.Equals("Vip")).ToList(), new Address("Leurshoek", "Beveren", "61"), "Vip", "0862333424", new List<ReservationsPerYear>());
+            
             Address endLocation = new Address("Leusrhoek", "Gent", "20");
             DateTime dateNeeded = new DateTime(2000, 2, 13, 8, 0, 0);
-            List<IArangement> arangements = new List<IArangement>();
-            arangements.Add(new Wedding(2000));
-            arangements.Add(new Wellness(3200));
-            arangements.Add(new Airport());
-            arangements.Add(new Business());
-            arangements.Add(new NightLife(2500));
+            List<Arangement> arangements = new List<Arangement>
+            {
+                new Wedding(2000),
+                new Wellness(3200),
+                new Airport(),
+                new Business(),
+                new NightLife(2500)
+            };
             Limousine limousine = new Limousine(130, "Tesla Model X", 1, arangements);
 
-            Reservering reservering = new Reservering(date, vip, address);
-            reservering.AddDetails(endLocation, limousine, dateNeeded, "Wedding");
+            Reservering reservering = new Reservering(date, test, address);
+            reservering.AddDetails(endLocation, limousine, dateNeeded, "Wedding", startHour: new TimeSpan(7, 0, 0));
 
 
             reservering.Details.ToPayAmount.Should().Be(2120);

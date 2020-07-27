@@ -4,18 +4,21 @@ using System;
 using System.Collections.Generic;
 using DomainLayer.Domain.Help;
 using DomainLayer.OtherInterfaces;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DomainLayer.Domain.Arangements
 {
-    public class Wedding : IArangement
+    public class Wedding : Arangement
     {
         public int Price { get; private set; }
-        public TimeSpan StartHour { get; private set; } = new TimeSpan(7, 0, 0);
-        public TimeSpan EndHour { get; private set; } = new TimeSpan(40, 0, 0);
-        public TimeSpan NightHourBegin { get; private set; } = new TimeSpan(22, 0, 0);
-        public TimeSpan NightHourEnd { get; private set; } = new TimeSpan(1, 7, 0, 0);
-        public int MaxAmountOfHours { get; private set; } = 11;
-        public float SecondHoursPercentage { get; private set; } = 65.0f;
+
+
+        static public TimeSpan NightHourBegin { get; private set; } = new TimeSpan(22, 0, 0);
+
+        static public TimeSpan NightHourEnd { get; private set; } = new TimeSpan(1, 6, 0, 0);
+
+
+        static public float SecondHoursPercentage { get; private set; } = 65.0f;
         public int? ExtraHours { get; private set; } = null;
 
 
@@ -39,8 +42,17 @@ namespace DomainLayer.Domain.Arangements
 
             return new KeyValuePair<int, List<HourType>>(returnPrice, hourTypes);
         }
-        public void SetTime(int? extraHours)
+        public void SetTime(TimeSpan startHour, int? extraHours)
         {
+            if (startHour.Seconds > 0 || startHour.Minutes > 0)
+            {
+                throw new DomainException("Zorg er a.u.b. voor dat het start uur geen minuten of seconden heeft.");
+            }
+            if (startHour.Hours > 15 || startHour.Hours < 7)
+            {
+                throw new DomainException("Het arangement wellness kan aleen tussen 7 en 12 uur in de ochtend geboekt worden.");
+            }
+            StartHour = startHour;
 
             if (extraHours < 0)
                 throw new DomainException("Je kan geen negatief aantal extra uren hebben");
@@ -48,7 +60,7 @@ namespace DomainLayer.Domain.Arangements
 
             if (extraHours != null)
             {
-                EndHour = new TimeSpan(15 + (int)extraHours, 0, 0);
+                EndHour = new TimeSpan(startHour.Hours + 7 + (int)extraHours, 0, 0);
                 if ((EndHour.TotalHours - StartHour.TotalHours) > MaxAmountOfHours)
                 {
                     throw new DomainException("Zorg er a.u.b. voor dat het eind uur niet meer dan elf uur na het start uur is. (Het Wedding arangement heeft een standaartduuratie van 8 uur)");
@@ -56,7 +68,7 @@ namespace DomainLayer.Domain.Arangements
             }
             else
             {
-                EndHour = new TimeSpan(15, 0, 0);
+                EndHour = new TimeSpan(startHour.Hours + 7, 0, 0);
 
             }
         }
@@ -64,6 +76,7 @@ namespace DomainLayer.Domain.Arangements
         public TimeSpan GetEndTime()
         {
             TimeSpan toReturn = EndHour;
+            StartHour = new TimeSpan(40, 0, 0);
             EndHour = new TimeSpan(40, 0, 0);
             return toReturn;
         }
@@ -72,6 +85,10 @@ namespace DomainLayer.Domain.Arangements
         public Wedding(int price)
         {
             Price = price;
+            EndHourTicks = 1440000000000;
+            StartHourTicks = 1440000000000;
+            StartHour = new TimeSpan(StartHourTicks);
+            EndHour = new TimeSpan(EndHourTicks);
         }
     }
 }

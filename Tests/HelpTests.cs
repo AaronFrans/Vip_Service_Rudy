@@ -1,4 +1,5 @@
-﻿using DomainLayer.Domain.Help;
+﻿using DomainLayer.Domain.Clients;
+using DomainLayer.Domain.Help;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -23,11 +24,11 @@ namespace Tests
         [TestMethod]
         public void TestClientDiscount()
         {
-            string type = "Vip";
+            ClientType type = ClientType.Vip;
             int needed = 5; ;
             float discount = 10.0f;
 
-            ClientDiscount clientDiscount = new ClientDiscount("Vip", 5, 10.0f);
+            ClientDiscount clientDiscount = new ClientDiscount(ClientType.Vip, 5, 10.0f);
 
             clientDiscount.ClientType.Should().BeEquivalentTo(type);
             clientDiscount.NrOfReservationsNeeded.Should().Be(needed);

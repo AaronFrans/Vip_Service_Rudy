@@ -1,8 +1,6 @@
 ﻿using DomainLayer.Domain.Clients;
 using DomainLayer.Domain.Help;
-using DomainLayer.OtherInterfaces;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,11 +21,11 @@ namespace DataLayer.Func
             return discounts;
         }
 
-        public static List<IKlant> GetClients()
+        public static List<Client> GetClients()
         {
             using (StreamReader sr = new StreamReader(@"Files\klanten.txt"))
             {
-                List<IKlant> toReturn = new List<IKlant>();
+                List<Client> toReturn = new List<Client>();
 
                 List<ClientDiscount> discounts = GetDiscounts();
 
@@ -42,51 +40,36 @@ namespace DataLayer.Func
                     string btwNumber = lines[3];
                     Address address = MakeAddress(lines[4]);
 
-                    IKlant toAdd = null;
+                    Client toAdd = null;
                     switch (clientType.ToLower())
                     {
                         case "particulier":
                             {
-                                toAdd = new Particulier(address, name, btwNumber, new Dictionary<int, int>(), discounts
-                                                                                                                          .Where(d => d.ClientType.Equals("Particulier"))
-                                                                                                                          .ToList());
+                                
+
                             }
                             break;
                         case "vip":
                             {
-                                toAdd = new Vip(address, name, btwNumber, new Dictionary<int, int>(), discounts
-                                                                                                                         .Where(d => d.ClientType.Equals("Vip"))
-                                                                                                                         .ToList());
+
                             }
                             break;
                         case "organisatie":
                             {
-                                toAdd = new Organisatie(address, name, btwNumber, new Dictionary<int, int>(), discounts
-                                                                                                                         .Where(d => d.ClientType.Equals("Organisatie"))
-                                                                                                                         .ToList());
                             }
-                            break;
+                                break;
                         case "concertpromotor":
                             {
-                                toAdd = new ConcertPromotor(address, name, btwNumber, new Dictionary<int, int>(), discounts
-                                                                                                                         .Where(d => d.ClientType.Equals("ConcertPromotor"))
-                                                                                                                         .ToList());
+
                             }
-                            break;
+                                break;
                         case "evenementenbureau":
                             {
-                                toAdd = new EvenementenBureau(address, name, btwNumber, new Dictionary<int, int>(), discounts
-                                                                                                                         .Where(d => d.ClientType.Equals("EvenementenBureau"))
-                                                                                                                         .ToList());
+
                             }
                             break;
                         case "huwelijksplanner":
                             {
-                                toAdd = new HuwelijksPlanner(address, name, btwNumber, new Dictionary<int, int>(), discounts
-                                                                                                                         .Where(d => d.ClientType.Equals("HuwelijksPlanner"))
-                                                                                                                         .ToList());
-
-
                             }
                             break;
                     }

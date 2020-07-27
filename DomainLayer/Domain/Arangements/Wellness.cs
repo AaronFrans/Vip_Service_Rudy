@@ -2,22 +2,27 @@
 using Newtonsoft.Json;
 using System;
 using DomainLayer.OtherInterfaces;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DomainLayer.Domain.Arangements
 {
-    public class Wellness : IArangement
+    public class Wellness: Arangement
     {
         public int Price { get; private set; }
-        public TimeSpan StartHour { get; private set; } = new TimeSpan(40, 0, 0);
-        public TimeSpan EndHour { get; private set; } = new TimeSpan(40, 0, 0);
-        public int MaxAmountOfHours { get; private set; } = 11;
-        public TimeSpan NightHourBegin { get; private set; } = new TimeSpan(22, 0, 0);
-        public TimeSpan NightHourEnd { get; private set; } = new TimeSpan(1, 7, 0, 0);
+
+        
+        static public TimeSpan NightHourBegin { get; private set; } = new TimeSpan(22, 0, 0);
+
+        static public TimeSpan NightHourEnd { get; private set; } = new TimeSpan(1, 6, 0, 0);
 
         [JsonConstructor]
         public Wellness(int price)
         {
             Price = price;
+            EndHourTicks = 1440000000000;
+            StartHourTicks = 1440000000000;
+            StartHour = new TimeSpan(StartHourTicks);
+            EndHour = new TimeSpan(EndHourTicks);
         }
 
         public void SetTime(TimeSpan startHour)

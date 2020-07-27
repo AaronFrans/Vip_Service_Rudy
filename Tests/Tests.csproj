@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ConsoleLayer\ConsoleLayer.csproj" />
     <ProjectReference Include="..\DataLayer\DataLayer.csproj" />
-    <ProjectReference Include="..\DomainLayer\DomainLayer.csproj" />
   </ItemGroup>
 
 </Project>

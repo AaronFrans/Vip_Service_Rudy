@@ -6,6 +6,7 @@ namespace DomainLayer.Domain.Help
 {
     public class HourType
     {
+        public int Id { get; set; }
         public string Type;
         public int NrOfHours;
         public int TotalPrice;

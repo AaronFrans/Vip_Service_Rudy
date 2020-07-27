@@ -9,6 +9,7 @@ using DomainLayer.Domain;
 using DomainLayer.Domain.Vloot;
 using DataLayer.Func;
 using Microsoft.EntityFrameworkCore;
+using DomainLayer.Domain.Clients;
 
 namespace DataLayer.Repositories
 {
@@ -22,36 +23,37 @@ namespace DataLayer.Repositories
             this.context = context;
         }
 
-        public void AddVehicle(IVehicle vehicle)
+        public void AddVehicle(Limousine limousine)
         {
-            context.Vehicles.Add(vehicle);
-            context.SaveChanges();
+            context.Vehicles.Add(limousine);
         }
-        public void AddVehicles(List<IVehicle> vehicles)
+        public void AddVehicles(List<Limousine> limousines)
         {
-            context.Vehicles.AddRange(vehicles);
-            context.SaveChanges();
+            context.Vehicles.AddRange(limousines);
         }
 
-        public List<IVehicle> GetVehiclesNonTracking()
+        public List<Limousine> GetVehiclesNonTracking()
         {
             return context.Vehicles.AsNoTracking().ToList();
         }
-
-        public void HireVehicle(string name, string typeArangement, Address location, IKlant client, DateTime reservationDate, Address endLocation, DateTime dateLimousineNeeded,
+        public Reservering HireVehicle(string name, string typeArangement, Address location, Client client, DateTime reservationDate, Address endLocation, DateTime dateLimousineNeeded,
             int? extraHours = null, TimeSpan? startHour = null, TimeSpan? endHour = null)
         {
-            if (!context.Vehicles.Any(l => (l as Limousine).Name == (name)))
+            if (!context.Vehicles.Any(l => l.Name == (name)))
             {
                 throw new DomainException($"Deze vloot heeft de gevraagde limousine niet.");
             }
-            var limo = context.Vehicles.Single(l => (l as Limousine).Name == name);
+            var limo = context.Vehicles
+                                       .Include(l => l.Arangements)
+                                       .Include(l=> l.HireDates)
+                                       .Single(l => l.Name == name);
 
             Reservering reservation = new Reservering(reservationDate, client, location);
 
-            reservation.AddDetails(endLocation, limo, dateLimousineNeeded, typeArangement, extraHours, startHour, endHour);\
+            reservation.AddDetails(endLocation, limo, dateLimousineNeeded, typeArangement, extraHours, startHour, endHour);
 
             context.Reservations.Add(reservation);
+            return reservation;
         }
 
     }

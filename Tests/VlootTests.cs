@@ -16,17 +16,19 @@ using System.Linq;
 namespace Tests
 {
     [TestClass]
-    public class VlootTests
+    public class LimousineTests
     {
         [TestMethod]
         public void LimousineTest_Constructor()
         {
-            List<IArangement> arangements = new List<IArangement>();
-            arangements.Add(new Wedding(2000));
-            arangements.Add(new Wellness(3200));
-            arangements.Add(new Airport());
-            arangements.Add(new Business());
-            arangements.Add(new NightLife(2500));
+            List<Arangement> arangements = new List<Arangement>
+            {
+                new Wedding(2000),
+                new Wellness(3200),
+                new Airport(),
+                new Business(),
+                new NightLife(2500)
+            };
             int FirsHourprice = 130;
             int Available = 1;
             string Name = "Tesla Model X";
@@ -47,17 +49,19 @@ namespace Tests
         [TestMethod]
         public void LimousineTest_Methods()
         {
-            List<IArangement> arangements = new List<IArangement>();
-            arangements.Add(new Wedding(2000));
-            arangements.Add(new Wellness(3200));
-            arangements.Add(new Airport());
-            arangements.Add(new Business());
-            arangements.Add(new NightLife(2500));
+            List<Arangement> arangements = new List<Arangement>
+            {
+                new Wedding(2000),
+                new Wellness(3200),
+                new Airport(),
+                new Business(),
+                new NightLife(2500)
+            };
             Limousine limousine = new Limousine(100, "Tesla Model X", 10, arangements);
             int price = 2000;
             DateTime dateNeeded = new DateTime(2000, 2, 23, 10, 0, 0);
 
-            limousine.PriceForArangement(dateNeeded, "Wedding").Key.Should().Be(price);
+            limousine.PriceForArangement(dateNeeded, "Wedding",startHour: new TimeSpan(7,0,0)).Key.Should().Be(price);
             price = 3200;
             dateNeeded = new DateTime(2000, 2, 25, 10, 0, 0);
 
@@ -65,7 +69,7 @@ namespace Tests
             price = 2500;
             dateNeeded = new DateTime(2000, 2, 24, 10, 0, 0);
 
-            limousine.PriceForArangement(dateNeeded, "NightLife").Key.Should().Be(price);
+            limousine.PriceForArangement(dateNeeded, "NightLife", startHour: new TimeSpan(22, 0, 0)).Key.Should().Be(price);
             TimeSpan startHour = new TimeSpan(10, 0, 0);
             TimeSpan endHour = new TimeSpan(15, 0, 0);
             price = 360;
@@ -81,7 +85,7 @@ namespace Tests
         public void LimousineTest_Exceptions()
         {
 
-            List<IArangement> arangements = new List<IArangement>();
+            List<Arangement> arangements = new List<Arangement>();
             Action act = () => new Limousine(100, "Tesla Model X", 0, arangements);
             act.Should().Throw<DomainException>().WithMessage("Een limousine moet minstens 1 keer beschikbaar zijn.");
 
@@ -94,26 +98,39 @@ namespace Tests
             act.Should().Throw<DomainException>().WithMessage("Een limousine kan geen arangement 2 keer hebben.");
 
             DateTime dateNeeded = new DateTime(2000, 2, 27, 10, 0, 0);
-            arangements = new List<IArangement>();
-            arangements.Add(new Wedding(2000));
+            arangements = new List<Arangement>
+            {
+                new Wedding(2000)
+            };
             Limousine limousine = new Limousine(100, "Tesla Model X", 1, arangements);
-            limousine.PriceForArangement(dateNeeded, "Wedding");
             act = () => limousine.PriceForArangement(dateNeeded, "Wedding");
+            act.Should().Throw<DomainException>().WithMessage($"Het arangement Wedding heeft een start uur nodig.");
+
+            limousine.PriceForArangement(dateNeeded, "Wedding", startHour: new TimeSpan(7, 0, 0));
+
+
+            act = () => limousine.PriceForArangement(dateNeeded, "Wedding",startHour: new TimeSpan(7,0,0));
             act.Should().Throw<DomainException>().WithMessage($"Limousine {limousine.Name} is niet vrij.");
 
             dateNeeded = new DateTime(2000, 2, 28, 10, 0, 0);
             act = () => limousine.PriceForArangement(dateNeeded, "Wellness", startHour: new TimeSpan(7,0,0));
             act.Should().Throw<DomainException>().WithMessage($"Limousine {limousine.Name} does not have a wellness arangement.");
 
-            arangements = new List<IArangement>();
-            arangements.Add(new Wellness(3200));
+            arangements = new List<Arangement>
+            {
+                new Wellness(3200)
+            };
             limousine = new Limousine(100, "Tesla Model X", 10, arangements);
-            act = () => limousine.PriceForArangement(dateNeeded, "Wedding");
+            act = () => limousine.PriceForArangement(dateNeeded, "Wedding", startHour: new TimeSpan(7, 0, 0));
             act.Should().Throw<DomainException>().WithMessage($"Limousine {limousine.Name} does not have a wedding arangement.");
             arangements.Add(new Wedding(2000));
 
 
             act = () => limousine.PriceForArangement(dateNeeded, "NightLife");
+            act.Should().Throw<DomainException>().WithMessage($"Het arangement NightLife heeft een start uur nodig.");
+
+
+            act = () => limousine.PriceForArangement(dateNeeded, "NightLife", startHour: new TimeSpan(20,0,0));
             act.Should().Throw<DomainException>().WithMessage($"Limousine {limousine.Name} does not have a nightlife arangement.");
             arangements.Add(new NightLife(2500));
 
@@ -137,23 +154,6 @@ namespace Tests
             act = () => limousine.PriceForArangement(dateNeeded, "Business", startHour: new TimeSpan(10, 0, 0), endHour: new TimeSpan(18, 0, 0));
             act.Should().Throw<DomainException>().WithMessage($"Limousine {limousine.Name} does not have a business arangement.");
             arangements.Add(new Business());
-        }
-
-
-        [TestMethod]
-        public void VlootTest_Constructor()
-        {
-            
-        }
-        [TestMethod]
-        public void VlootTest_Methods()
-        {
-            
-        }
-        [TestMethod]
-        public void VlootTest_Exceptions()
-        {
-            
         }
     }
 }

@@ -4,20 +4,26 @@ using DomainLayer.OtherInterfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace DomainLayer.Domain.Vloot
 {
-    public class Limousine : IVehicle
+    public class Limousine
     {
         public int FirstHourPrice { get; private set; }
+        [Key]
         public string Name { get; private set; }
         public int Available { get; private set; }
-        public List<IArangement> Arangements { get; private set; }
-        public List<DateTime> HireDates { get; private set; }
+        public List<Arangement> Arangements { get; private set; }
+        public List<HireDate> HireDates { get; private set; }
 
+        public Limousine()
+        {
+
+        }
         [JsonConstructor]
-        public Limousine(int firstHourPrice, string name, int available, List<IArangement> arangements)
+        public Limousine(int firstHourPrice, string name, int available, List<Arangement> arangements)
         {
             FirstHourPrice = firstHourPrice;
             Name = name;
@@ -30,16 +36,16 @@ namespace DomainLayer.Domain.Vloot
             {
                 throw new DomainException("Een limousine moet minstens 1 arangement hebben.");
             }
-            if (CheckForoDoubles(arangements))
+            if (CheckForDoubles(arangements))
             {
                 throw new DomainException("Een limousine kan geen arangement 2 keer hebben.");
             }
             Arangements = arangements;
-            HireDates = new List<DateTime>();
+            HireDates = new List<HireDate>();
 
         }
 
-        private bool CheckForoDoubles(List<IArangement> arangements)
+        private bool CheckForDoubles(List<Arangement> arangements)
         {
 
             var check = arangements.GroupBy(a => a.GetType()).OrderByDescending(g => g.Count()).First();
@@ -60,7 +66,7 @@ namespace DomainLayer.Domain.Vloot
                     {
                         if (startHour == null)
                         {
-                            throw new DomainException("Het arangement Business heeft een start uur nodig.");
+                            throw new DomainException("Het arangement Wellness heeft een start uur nodig.");
                         }
                         toReturn = WellnessPrice((TimeSpan)startHour, hireDate);
                     }
@@ -92,10 +98,22 @@ namespace DomainLayer.Domain.Vloot
                     }
                     break;
                 case "Wedding":
-                    toReturn = WeddingPrice(extraHours, hireDate);
+                    {
+                        if (startHour == null)
+                        {
+                            throw new DomainException("Het arangement Wedding heeft een start uur nodig.");
+                        }
+                        toReturn = WeddingPrice((TimeSpan)startHour, extraHours, hireDate);
+                    }
                     break;
                 case "NightLife":
-                    toReturn = NightLifePrice(extraHours, hireDate);
+                    {
+                        if (startHour == null)
+                        {
+                            throw new DomainException("Het arangement NightLife heeft een start uur nodig.");
+                        }
+                        toReturn = NightLifePrice((TimeSpan)startHour, extraHours, hireDate);
+                    }
                     break;
                 default:
                     throw new DomainException("Het opgegeven arangement bestaat niet.");
@@ -107,15 +125,15 @@ namespace DomainLayer.Domain.Vloot
 
         private void AddHireDate(DateTime hireDate)
         {
-            HireDates.Add(hireDate);
+            HireDates.Add(new HireDate( hireDate));
         }
         private bool IsVehicleAvailable(DateTime hireDate)
         {
             if (HireDates.Count == Available)
             {
-                if (HireDates.Any(d => d.AddHours(6) <= hireDate))
+                if (HireDates.Any(d => d.Date.AddHours(6) <= hireDate))
                 {
-                    HireDates = HireDates.Where(d => d.AddHours(6) >= hireDate).ToList();
+                    HireDates = HireDates.Where(d => d.Date.AddHours(6) >= hireDate).ToList();
                     return true;
                 }
                 else
@@ -191,7 +209,7 @@ namespace DomainLayer.Domain.Vloot
                 return new KeyValuePair<int, List<HourType>>(ar.Price, new List<HourType>());
             }
         }
-        private KeyValuePair<int, List<HourType>> WeddingPrice(int? extraHours, DateTime hireDate)
+        private KeyValuePair<int, List<HourType>> WeddingPrice(TimeSpan startHour, int? extraHours, DateTime hireDate)
         {
             if (!Arangements.Any(a => a.GetType().ToString() == typeof(Wedding).ToString()))
             {
@@ -200,7 +218,7 @@ namespace DomainLayer.Domain.Vloot
             else
             {
                 var ar = Arangements.Single(a => a.GetType().ToString() == typeof(Wedding).ToString()) as Wedding;
-                ar.SetTime(extraHours);
+                ar.SetTime(startHour, extraHours);
                 var toReturn = ar.GetCalculatedPrice(FirstHourPrice);
                 TimeSpan end = ar.GetEndTime();
                 DateTime toSetDate = new DateTime(hireDate.Year, hireDate.Month, hireDate.Day, end.Hours, end.Minutes, end.Seconds);
@@ -213,7 +231,7 @@ namespace DomainLayer.Domain.Vloot
                 return toReturn;
             }
         }
-        private KeyValuePair<int, List<HourType>> NightLifePrice(int? extraHours, DateTime hireDate)
+        private KeyValuePair<int, List<HourType>> NightLifePrice(TimeSpan startHour, int? extraHours, DateTime hireDate)
         {
             if (!Arangements.Any(a => a.GetType().ToString() == typeof(NightLife).ToString()))
             {
@@ -222,7 +240,7 @@ namespace DomainLayer.Domain.Vloot
             else
             {
                 var ar = Arangements.Single(a => a.GetType().ToString() == typeof(NightLife).ToString()) as NightLife;
-                ar.SetTime(extraHours);
+                ar.SetTime(startHour, extraHours);
                 var toReturn = ar.GetCalculatedPrice(FirstHourPrice);
                 TimeSpan end = ar.GetEndTime();
                 DateTime toSetDate = new DateTime(hireDate.Year, hireDate.Month, hireDate.Day, end.Hours, end.Minutes, end.Seconds);
