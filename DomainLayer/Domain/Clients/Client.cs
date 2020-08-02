@@ -12,12 +12,12 @@ namespace DomainLayer.Domain.Clients
     {
         [Key]
         public int ClientNumber { get; set; }
-        public ClientType Type;
-        public List<ClientDiscount> StaffelDiscount { get; }
-        public Address Address { get; }
-        public string Name { get; }
-        public string BtwNumber { get; }
-        public List<ReservationsPerYear> PastReservations { get; }
+        public ClientType Type { get; private set; }
+        public List<ClientDiscount> StaffelDiscount { get; private set; }
+        public Address Address { get; private set; }
+        public string Name { get; private set; }
+        public string BtwNumber { get; private set; }
+        public List<ReservationsPerYear> PastReservations { get; private set; }
 
         public Client()
         {

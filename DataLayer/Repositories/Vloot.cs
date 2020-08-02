@@ -34,19 +34,30 @@ namespace DataLayer.Repositories
 
         public List<Limousine> GetVehiclesNonTracking()
         {
-            return context.Vehicles.AsNoTracking().ToList();
+            return context.Vehicles.Include(s => s.HireDates)
+                                   .Include(s => s.Arangements)
+                                   .AsNoTracking().ToList();
         }
-        public Reservering HireVehicle(string name, string typeArangement, Address location, Client client, DateTime reservationDate, Address endLocation, DateTime dateLimousineNeeded,
+        public void UpdateLimousinesAvailability(DateTime hireDate)
+        {
+            context.Vehicles.Include(c => c.HireDates).ForEachAsync(l => l.IsVehicleAvailable(hireDate));
+        }
+
+        public Reservering HireVehicle(string name, string typeArangement, Address location, int clientNr, DateTime reservationDate, Address endLocation, DateTime dateLimousineNeeded,
             int? extraHours = null, TimeSpan? startHour = null, TimeSpan? endHour = null)
         {
-            if (!context.Vehicles.Any(l => l.Name == (name)))
+            if (!context.Vehicles.AsNoTracking().Any(l => l.Name == (name)))
             {
                 throw new DomainException($"Deze vloot heeft de gevraagde limousine niet.");
             }
-            var limo = context.Vehicles
-                                       .Include(l => l.Arangements)
-                                       .Include(l=> l.HireDates)
+            var limo = context.Vehicles.Include(l => l.Arangements)
+                                       .Include(l => l.HireDates)
                                        .Single(l => l.Name == name);
+
+            var client = context.Clients.Include(c => c.StaffelDiscount)
+                                        .Include(c => c.Address)
+                                        .Include(c => c.PastReservations)
+                                        .Single(s => s.ClientNumber == clientNr);
 
             Reservering reservation = new Reservering(reservationDate, client, location);
 
@@ -56,5 +67,55 @@ namespace DataLayer.Repositories
             return reservation;
         }
 
+        public List<Reservering> GetReserveringen(int clientNr)
+        {
+            if (context.Reservations.Any(r => r.Client.ClientNumber == clientNr))
+            {
+                return context.Reservations.AsNoTracking()
+                                           .Include(r => r.Client)
+                                           .Include(r => r.Location)
+                                           .Include(r => r.Details)
+                                           .Include(r => r.Details.StartLocation)
+                                           .Include(r => r.Details.EndLocation)
+                                           .Include(r => r.Details.Limousine)
+                                           .Include(r => r.Details.Hours)
+                                           .Where(r => r.Client.ClientNumber == clientNr).ToList();
+            }
+            else return null;
+        }
+
+        public List<Reservering> GetReserveringen(DateTime reservationDate)
+        {
+            if (context.Reservations.Any(r => r.ReservationDate == reservationDate))
+            {
+                return context.Reservations.AsNoTracking()
+                                           .Include(r => r.Client)
+                                           .Include(r => r.Location)
+                                           .Include(r => r.Details)
+                                           .Include(r => r.Details.StartLocation)
+                                           .Include(r => r.Details.EndLocation)
+                                           .Include(r => r.Details.Limousine)
+                                           .Include(r => r.Details.Hours)
+                                           .Where(r => r.ReservationDate == reservationDate).ToList();
+            }
+            else return null;
+        }
+
+        public List<Reservering> GetReserveringen(int clientNr, DateTime reservationDate)
+        {
+            if (context.Reservations.Any(r => r.ReservationDate == reservationDate && r.Client.ClientNumber == clientNr))
+            {
+                return context.Reservations.AsNoTracking()
+                                           .Include(r => r.Client)
+                                           .Include(r => r.Location)
+                                           .Include(r => r.Details)
+                                           .Include(r => r.Details.StartLocation)
+                                           .Include(r => r.Details.EndLocation)
+                                           .Include(r => r.Details.Limousine)
+                                           .Include(r => r.Details.Hours)
+                                           .Where(r => r.ReservationDate == reservationDate && r.Client.ClientNumber == clientNr).ToList();
+            }
+            else return null;
+        }
     }
 }

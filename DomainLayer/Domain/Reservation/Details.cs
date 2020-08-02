@@ -12,18 +12,18 @@ namespace DomainLayer.Domain.Reservation
     public class Details
     {
         public int Id { get; set; }
-        public Address StartLocation;
-        public Address EndLocation;
-        public Limousine Limousine;
-        public DateTime DateLimousineNeeded;
-        public string Arangement;
-        public List<HourType> Hours;
-        public int SubTotal;
-        public float UsedDiscount;
-        public int AmountWithoutBtw;
-        public float BtwPercentage;
-        public int BtwAmount;
-        public int ToPayAmount;
+        public Address StartLocation { get; private set; }
+        public Address EndLocation { get; private set; }
+        public Limousine Limousine { get; private set; }
+        public DateTime DateLimousineNeeded { get; private set; }
+        public string Arangement { get; private set; }
+        public List<HourType> Hours { get; private set; }
+        public int SubTotal { get; private set; }
+        public float UsedDiscount { get; private set; }
+        public int AmountWithoutBtw { get; private set; }
+        public float BtwPercentage { get; private set; }
+        public int BtwAmount { get; private set; }
+        public int ToPayAmount { get; private set; }
 
         public Details()
         {

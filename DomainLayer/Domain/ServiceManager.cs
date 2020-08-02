@@ -5,6 +5,7 @@ using DomainLayer.Domain.Vloot;
 using DomainLayer.OtherInterfaces;
 using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace DomainLayer.Domain
@@ -18,10 +19,10 @@ namespace DomainLayer.Domain
             this.unitOfWork = unitOfWork;
         }
 
-        public Reservering HireVehicle(string name, string typeArangement, Address location, Client client, DateTime reservationDate, Address endLocation, DateTime dateLimousineNeeded,
+        public Reservering HireVehicle(string name, string typeArangement, Address location, int clientNr, DateTime reservationDate, Address endLocation, DateTime dateLimousineNeeded,
             int? extraHours = null, TimeSpan? startHour = null, TimeSpan? endHour = null)
         {
-            Reservering reservering = unitOfWork.vloot.HireVehicle(name, typeArangement, location, client,reservationDate,endLocation,dateLimousineNeeded,extraHours,startHour,endHour);
+            Reservering reservering = unitOfWork.vloot.HireVehicle(name, typeArangement, location, clientNr, reservationDate,endLocation,dateLimousineNeeded,extraHours,startHour,endHour);
             unitOfWork.Complete();
 
             return reservering;
@@ -51,14 +52,30 @@ namespace DomainLayer.Domain
             unitOfWork.clients.AddClients(clients);
             unitOfWork.Complete();
         }
+
         public Client GetClientViaNumber(int clientNumber)
         {
             return unitOfWork.clients.GetClientNonTracking(clientNumber);
         }
-        public Client GetClientViaNumber(string name, Address address)
+        public Client GetClientViaInfo(string name)
         {
-            return unitOfWork.clients.GetClientNonTracking(name, address);
+            return unitOfWork.clients.GetClientNonTracking(name);
+        }
+        public List<Client> GetClients()
+        {
+            return unitOfWork.clients.GetClientsNonTracking();
+        }
+
+        public List<ClientDiscount> GetDiscountsForType(ClientType type)
+        {
+            return unitOfWork.clients.GetDiscountsForType(type);
+        }
+
+        public void UpdateVehicles(DateTime hireDate)
+        {
+            unitOfWork.vloot.UpdateLimousinesAvailability(hireDate);
+            unitOfWork.Complete();
         }
 
     }
-}
+} 

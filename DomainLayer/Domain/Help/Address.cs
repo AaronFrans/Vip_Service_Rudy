@@ -8,11 +8,11 @@ namespace DomainLayer.Domain.Help
 {
     public class Address
     {
-       
+        public int Id { get; set; }
         public string Town { get; private set; }
-        
+
         public string Street { get; private set; }
-        
+
         public string StreetNumber { get; private set; }
 
         public Address(string street, string town, string streetNumber)

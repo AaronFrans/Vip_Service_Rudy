@@ -4,16 +4,14 @@ using DataLayer.Func;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DataLayer.Migrations
+namespace DataLayer.Migrations.Manager
 {
-    [DbContext(typeof(ManagerContextTest))]
-    [Migration("20200727120754_Init-Test_2")]
-    partial class InitTest_2
+    [DbContext(typeof(ManagerContext))]
+    partial class ManagerContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,9 +35,6 @@ namespace DataLayer.Migrations
                     b.Property<string>("LimousineName")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("MaxAmountOfHours")
-                        .HasColumnType("int");
-
                     b.Property<long>("StartHourTicks")
                         .HasColumnType("bigint");
 
@@ -57,23 +52,42 @@ namespace DataLayer.Migrations
                     b.Property<int>("ClientNumber")
                         .HasColumnType("int");
 
+                    b.Property<int?>("AddressId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BtwNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
                     b.HasKey("ClientNumber");
+
+                    b.HasIndex("AddressId");
 
                     b.ToTable("Clients");
                 });
 
             modelBuilder.Entity("DomainLayer.Domain.Help.Address", b =>
                 {
-                    b.Property<string>("Town")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Street")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StreetNumber")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Town", "Street", "StreetNumber");
+                    b.Property<string>("Town")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Address");
                 });
@@ -124,6 +138,32 @@ namespace DataLayer.Migrations
                     b.ToTable("HireDate");
                 });
 
+            modelBuilder.Entity("DomainLayer.Domain.Help.HourType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("DetailsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NrOfHours")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalPrice")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DetailsId");
+
+                    b.ToTable("HourType");
+                });
+
             modelBuilder.Entity("DomainLayer.Domain.Help.ReservationsPerYear", b =>
                 {
                     b.Property<int>("Id")
@@ -154,7 +194,46 @@ namespace DataLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AmountWithoutBtw")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Arangement")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("BtwAmount")
+                        .HasColumnType("int");
+
+                    b.Property<float>("BtwPercentage")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime>("DateLimousineNeeded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("EndLocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LimousineName")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("StartLocationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubTotal")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ToPayAmount")
+                        .HasColumnType("int");
+
+                    b.Property<float>("UsedDiscount")
+                        .HasColumnType("real");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("EndLocationId");
+
+                    b.HasIndex("LimousineName");
+
+                    b.HasIndex("StartLocationId");
 
                     b.ToTable("Details");
                 });
@@ -172,14 +251,8 @@ namespace DataLayer.Migrations
                     b.Property<int?>("DetailsId")
                         .HasColumnType("int");
 
-                    b.Property<string>("LocationStreet")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LocationStreetNumber")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LocationTown")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("LocationId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("ReservationDate")
                         .HasColumnType("datetime2");
@@ -190,7 +263,7 @@ namespace DataLayer.Migrations
 
                     b.HasIndex("DetailsId");
 
-                    b.HasIndex("LocationTown", "LocationStreet", "LocationStreetNumber");
+                    b.HasIndex("LocationId");
 
                     b.ToTable("Reservations");
                 });
@@ -229,9 +302,6 @@ namespace DataLayer.Migrations
                 {
                     b.HasBaseType("DomainLayer.Domain.Arangements.Arangement");
 
-                    b.Property<int?>("ExtraHours")
-                        .HasColumnType("int");
-
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
@@ -241,10 +311,6 @@ namespace DataLayer.Migrations
             modelBuilder.Entity("DomainLayer.Domain.Arangements.Wedding", b =>
                 {
                     b.HasBaseType("DomainLayer.Domain.Arangements.Arangement");
-
-                    b.Property<int?>("ExtraHours")
-                        .HasColumnName("Wedding_ExtraHours")
-                        .HasColumnType("int");
 
                     b.Property<int>("Price")
                         .HasColumnName("Wedding_Price")
@@ -271,6 +337,13 @@ namespace DataLayer.Migrations
                         .HasForeignKey("LimousineName");
                 });
 
+            modelBuilder.Entity("DomainLayer.Domain.Clients.Client", b =>
+                {
+                    b.HasOne("DomainLayer.Domain.Help.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId");
+                });
+
             modelBuilder.Entity("DomainLayer.Domain.Help.ClientDiscount", b =>
                 {
                     b.HasOne("DomainLayer.Domain.Clients.Client", null)
@@ -285,11 +358,33 @@ namespace DataLayer.Migrations
                         .HasForeignKey("LimousineName");
                 });
 
+            modelBuilder.Entity("DomainLayer.Domain.Help.HourType", b =>
+                {
+                    b.HasOne("DomainLayer.Domain.Reservation.Details", null)
+                        .WithMany("Hours")
+                        .HasForeignKey("DetailsId");
+                });
+
             modelBuilder.Entity("DomainLayer.Domain.Help.ReservationsPerYear", b =>
                 {
                     b.HasOne("DomainLayer.Domain.Clients.Client", null)
                         .WithMany("PastReservations")
                         .HasForeignKey("ClientNumber");
+                });
+
+            modelBuilder.Entity("DomainLayer.Domain.Reservation.Details", b =>
+                {
+                    b.HasOne("DomainLayer.Domain.Help.Address", "EndLocation")
+                        .WithMany()
+                        .HasForeignKey("EndLocationId");
+
+                    b.HasOne("DomainLayer.Domain.Vloot.Limousine", "Limousine")
+                        .WithMany()
+                        .HasForeignKey("LimousineName");
+
+                    b.HasOne("DomainLayer.Domain.Help.Address", "StartLocation")
+                        .WithMany()
+                        .HasForeignKey("StartLocationId");
                 });
 
             modelBuilder.Entity("DomainLayer.Domain.Reservation.Reservering", b =>
@@ -304,7 +399,7 @@ namespace DataLayer.Migrations
 
                     b.HasOne("DomainLayer.Domain.Help.Address", "Location")
                         .WithMany()
-                        .HasForeignKey("LocationTown", "LocationStreet", "LocationStreetNumber");
+                        .HasForeignKey("LocationId");
                 });
 #pragma warning restore 612, 618
         }

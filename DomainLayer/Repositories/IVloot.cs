@@ -14,7 +14,15 @@ namespace DomainLayer.Repositories
         public void AddVehicle(Limousine vehicle);
         public void AddVehicles(List<Limousine> vehicles);
         public List<Limousine> GetVehiclesNonTracking();
-        public Reservering HireVehicle(string name, string typeArangement, Address location, Client client, DateTime reservationDate, Address endLocation, DateTime dateLimousineNeeded,
+        public Reservering HireVehicle(string name, string typeArangement, Address location, int clientNr, DateTime reservationDate, Address endLocation, DateTime dateLimousineNeeded,
              int? extraHours = null, TimeSpan? startHour = null, TimeSpan? endHour = null);
+
+        public void UpdateLimousinesAvailability(DateTime hireDate);
+
+
+        public List<Reservering> GetReserveringen(int clientNr);
+        public List<Reservering> GetReserveringen(DateTime reservationDate);
+        public List<Reservering> GetReserveringen(int clientNr, DateTime reservationDate);
+
     }
 }

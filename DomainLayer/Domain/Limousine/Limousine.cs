@@ -1,6 +1,5 @@
 ﻿using DomainLayer.Domain.Arangements;
 using DomainLayer.Domain.Help;
-using DomainLayer.OtherInterfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -52,6 +51,71 @@ namespace DomainLayer.Domain.Vloot
             if (check.Count() > 1)
                 return true;
             return false;
+        }
+        public bool HasArangement(string arangementName)
+        {
+            switch (arangementName)
+            {
+                case "Wellness":
+                    {
+                        if (!Arangements.Any(a => a.GetType().ToString() == typeof(Wellness).ToString()))
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                case "Business":
+                    {
+                        if (!Arangements.Any(a => a.GetType().ToString() == typeof(Business).ToString()))
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                case "Airport":
+                    {
+                        if (!Arangements.Any(a => a.GetType().ToString() == typeof(Airport).ToString()))
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                case "Wedding":
+                    {
+                        if (!Arangements.Any(a => a.GetType().ToString() == typeof(Wedding).ToString()))
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                case "NightLife":
+                    {
+                        if (!Arangements.Any(a => a.GetType().ToString() == typeof(NightLife).ToString()))
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                default:
+                    return false;
+            }
+
+
         }
 
         public KeyValuePair<int, List<HourType>> PriceForArangement(DateTime hireDate, string arangementType, int? extraHours = null, TimeSpan? startHour = null, TimeSpan? endHour = null)
@@ -125,9 +189,9 @@ namespace DomainLayer.Domain.Vloot
 
         private void AddHireDate(DateTime hireDate)
         {
-            HireDates.Add(new HireDate( hireDate));
+            HireDates.Add(new HireDate(hireDate));
         }
-        private bool IsVehicleAvailable(DateTime hireDate)
+        public bool IsVehicleAvailable(DateTime hireDate)
         {
             if (HireDates.Count == Available)
             {

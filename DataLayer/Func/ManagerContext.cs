@@ -51,6 +51,7 @@ namespace DataLayer.Func
                 SetConnectionString();
             }
             optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.EnableSensitiveDataLogging();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -61,11 +62,8 @@ namespace DataLayer.Func
                                                 .HasValue<Wellness>(3)
                                                 .HasValue<NightLife>(4)
                                                 .HasValue<Wedding>(5);
-            modelBuilder.Entity<Address>().HasKey(a => new { a.Town, a.Street, a.StreetNumber });
-            modelBuilder.Entity<Client>().Property(et => et.ClientNumber)
+            modelBuilder.Entity<Client>().Property(c => c.ClientNumber)
                                                 .ValueGeneratedNever();
-
-
         }
 
         public DbSet<Limousine> Vehicles { get; set; }

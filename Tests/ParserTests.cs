@@ -15,7 +15,7 @@ namespace Tests
         {
             var discounts = Parser.GetDiscounts();
             discounts.Should().NotBeEmpty();
-            discounts.Count.Should().Be(26);
+            discounts.Count.Should().Be(14);
         }
         [TestMethod]
         public void ClientTest()
@@ -23,6 +23,14 @@ namespace Tests
             var clients = Parser.GetClients();
             clients.Should().NotBeEmpty();
             clients.Count.Should().Be(23);
+        }
+
+        [TestMethod]
+        public void LimousineTest()
+        {
+            var limousines = Parser.GetLimousines();
+            limousines.Should().NotBeEmpty();
+            limousines.Count.Should().Be(16);
         }
     }
 }

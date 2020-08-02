@@ -7,9 +7,9 @@ namespace DomainLayer.Domain.Help
     public class HourType
     {
         public int Id { get; set; }
-        public string Type;
-        public int NrOfHours;
-        public int TotalPrice;
+        public string Type { get; private set; }
+        public int NrOfHours { get; private set; }
+        public int TotalPrice { get; private set; }
 
         public HourType(string type, int nrOfHours, int totalPrice)
         {

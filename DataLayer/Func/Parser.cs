@@ -1,5 +1,6 @@
 ﻿using DomainLayer.Domain.Clients;
 using DomainLayer.Domain.Help;
+using DomainLayer.Domain.Vloot;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
@@ -12,13 +13,30 @@ namespace DataLayer.Func
         public static List<ClientDiscount> GetDiscounts()
         {
             List<ClientDiscount> discounts = new List<ClientDiscount>();
-            using (StreamReader sr = new StreamReader(@"Files\Discounts"))
+            using (StreamReader sr = new StreamReader(@"Files\Discounts.json"))
             {
 
                 discounts = JsonConvert.DeserializeObject<List<ClientDiscount>>(sr.ReadToEnd());
             }
 
             return discounts;
+        }
+
+        public static List<Limousine> GetLimousines()
+        {
+            List<Limousine> limousines = new List<Limousine>();
+            var settings = new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+                TypeNameHandling = TypeNameHandling.All
+            };
+            using (StreamReader sr = new StreamReader(@"Files\Limousines.json"))
+            {
+
+                limousines = JsonConvert.DeserializeObject<List<Limousine>>(sr.ReadToEnd(),settings);
+            }
+
+            return limousines;
         }
 
         public static List<Client> GetClients()
@@ -45,34 +63,43 @@ namespace DataLayer.Func
                     {
                         case "particulier":
                             {
+                                toAdd = new Client(ClientType.Particulier, discounts.Where(d => d.ClientType == ClientType.Particulier).ToList(),
+                                    address, name, btwNumber, new List<ReservationsPerYear>());
                                 
-
                             }
                             break;
                         case "vip":
                             {
-
+                                toAdd = new Client(ClientType.Vip, discounts.Where(d => d.ClientType == ClientType.Vip).ToList(),
+                                    address, name, btwNumber, new List<ReservationsPerYear>());
                             }
                             break;
                         case "organisatie":
                             {
+                                toAdd = new Client(ClientType.Organisatie, discounts.Where(d => d.ClientType == ClientType.Organisatie).ToList(),
+                                    address, name, btwNumber, new List<ReservationsPerYear>());
                             }
                                 break;
                         case "concertpromotor":
                             {
-
+                                toAdd = new Client(ClientType.ConcertPromotor, discounts.Where(d => d.ClientType == ClientType.ConcertPromotor).ToList(),
+                                    address, name, btwNumber, new List<ReservationsPerYear>());
                             }
                                 break;
                         case "evenementenbureau":
                             {
-
+                                toAdd = new Client(ClientType.EvenementenBureau, discounts.Where(d => d.ClientType == ClientType.EvenementenBureau).ToList(),
+                                    address, name, btwNumber, new List<ReservationsPerYear>());
                             }
                             break;
                         case "huwelijksplanner":
                             {
+                                toAdd = new Client(ClientType.HuwelijksPlanner, discounts.Where(d => d.ClientType == ClientType.HuwelijksPlanner).ToList(),
+                                    address, name, btwNumber, new List<ReservationsPerYear>());
                             }
                             break;
                     }
+                    toAdd.ClientNumber = clientNumber;
                     toReturn.Add(toAdd);
                 }
 

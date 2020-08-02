@@ -54,39 +54,9 @@
 		"Discount": "0.0",
 	},
 	{
-		"ClientType": "1",
-		"NrOfReservationsNeeded": "3",
-		"Discount": "10.0",
-	},
-	{
-		"ClientType": "1",
-		"NrOfReservationsNeeded": "5",
-		"Discount": "12.5",
-	},
-	{
-		"ClientType": "1",
-		"NrOfReservationsNeeded": "10",
-		"Discount": "20.0",
-	},
-	{
 		"ClientType": "5",
 		"NrOfReservationsNeeded": "0",
 		"Discount": "0.0",
-	},
-	{
-		"ClientType": "5",
-		"NrOfReservationsNeeded": "5",
-		"Discount": "1.0",
-	},
-	{
-		"ClientType": "5",
-		"NrOfReservationsNeeded": "7",
-		"Discount": "2.5",
-	},
-	{
-		"ClientType": "5",
-		"NrOfReservationsNeeded": "9",
-		"Discount": "5",
 	},
 	{
 		"ClientType": "3",
@@ -94,38 +64,8 @@
 		"Discount": "0.0",
 	},
 	{
-		"ClientType": "3",
-		"NrOfReservationsNeeded": "10",
-		"Discount": "7.5",
-	},
-	{
-		"ClientType": "3",
-		"NrOfReservationsNeeded": "20",
-		"Discount": "15.0",
-	},
-	{
-		"ClientType": "3",
-		"NrOfReservationsNeeded": "30",
-		"Discount": "30",
-	},
-	{
 		"ClientType": "2",
 		"NrOfReservationsNeeded": "0",
 		"Discount": "0.0",
-	},
-	{
-		"ClientType": "2",
-		"NrOfReservationsNeeded": "3",
-		"Discount": "2.5",
-	},
-	{
-		"ClientType": "2",
-		"NrOfReservationsNeeded": "6",
-		"Discount": "3",
-	},
-	{
-		"ClientType": "2",
-		"NrOfReservationsNeeded": "10",
-		"Discount": "5",
 	}
 ]

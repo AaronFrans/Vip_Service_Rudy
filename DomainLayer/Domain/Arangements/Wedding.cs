@@ -19,6 +19,7 @@ namespace DomainLayer.Domain.Arangements
 
 
         static public float SecondHoursPercentage { get; private set; } = 65.0f;
+        [NotMapped]
         public int? ExtraHours { get; private set; } = null;
 
 

@@ -1,0 +1,938 @@
+{
+  "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Vloot.Limousine, DomainLayer]], System.Private.CoreLib",
+  "$values": [
+    {
+      "$type": "DomainLayer.Domain.Vloot.Limousine, DomainLayer",
+      "FirstHourPrice": 310,
+      "Name": "Porsche Cayenne Limousine White (met TV)",
+      "Available": 1,
+      "Arangements": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Arangements.Arangement, DomainLayer]], System.Private.CoreLib",
+        "$values": [
+          {
+            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "Price": 1500,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wedding, DomainLayer",
+            "Price": 1200,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wellness, DomainLayer",
+            "Price": 1600,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Airport, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Business, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          }
+        ]
+      },
+      "HireDates": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Help.HireDate, DomainLayer]], System.Private.CoreLib",
+        "$values": []
+      }
+    },
+    {
+      "$type": "DomainLayer.Domain.Vloot.Limousine, DomainLayer",
+      "FirstHourPrice": 350,
+      "Name": "Porsche Cayenne Limousine Electric Blue",
+      "Available": 1,
+      "Arangements": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Arangements.Arangement, DomainLayer]], System.Private.CoreLib",
+        "$values": [
+          {
+            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "Price": 1600,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wedding, DomainLayer",
+            "Price": 1300,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wellness, DomainLayer",
+            "Price": 1750,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Airport, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Business, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          }
+        ]
+      },
+      "HireDates": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Help.HireDate, DomainLayer]], System.Private.CoreLib",
+        "$values": []
+      }
+    },
+    {
+      "$type": "DomainLayer.Domain.Vloot.Limousine, DomainLayer",
+      "FirstHourPrice": 225,
+      "Name": "Mercedes SL 55 AMG Silver",
+      "Available": 1,
+      "Arangements": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Arangements.Arangement, DomainLayer]], System.Private.CoreLib",
+        "$values": [
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wedding, DomainLayer",
+            "Price": 700,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wellness, DomainLayer",
+            "Price": 1000,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Airport, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Business, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          }
+        ]
+      },
+      "HireDates": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Help.HireDate, DomainLayer]], System.Private.CoreLib",
+        "$values": []
+      }
+    },
+    {
+      "$type": "DomainLayer.Domain.Vloot.Limousine, DomainLayer",
+      "FirstHourPrice": 600,
+      "Name": "Tesla Model X - White",
+      "Available": 1,
+      "Arangements": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Arangements.Arangement, DomainLayer]], System.Private.CoreLib",
+        "$values": [
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wedding, DomainLayer",
+            "Price": 2500,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wellness, DomainLayer",
+            "Price": 2700,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Airport, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Business, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          }
+        ]
+      },
+      "HireDates": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Help.HireDate, DomainLayer]], System.Private.CoreLib",
+        "$values": []
+      }
+    },
+    {
+      "$type": "DomainLayer.Domain.Vloot.Limousine, DomainLayer",
+      "FirstHourPrice": 500,
+      "Name": "Tesla Model S - White",
+      "Available": 1,
+      "Arangements": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Arangements.Arangement, DomainLayer]], System.Private.CoreLib",
+        "$values": [
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wedding, DomainLayer",
+            "Price": 2000,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wellness, DomainLayer",
+            "Price": 2200,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Airport, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Business, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          }
+        ]
+      },
+      "HireDates": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Help.HireDate, DomainLayer]], System.Private.CoreLib",
+        "$values": []
+      }
+    },
+    {
+      "$type": "DomainLayer.Domain.Vloot.Limousine, DomainLayer",
+      "FirstHourPrice": 300,
+      "Name": "Porsche Cayenne Limousine White",
+      "Available": 4,
+      "Arangements": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Arangements.Arangement, DomainLayer]], System.Private.CoreLib",
+        "$values": [
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wedding, DomainLayer",
+            "Price": 1000,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Airport, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Business, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "Price": 1500,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          }
+        ]
+      },
+      "HireDates": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Help.HireDate, DomainLayer]], System.Private.CoreLib",
+        "$values": []
+      }
+    },
+    {
+      "$type": "DomainLayer.Domain.Vloot.Limousine, DomainLayer",
+      "FirstHourPrice": 225,
+      "Name": "Lincoln White XXL Navigator Limousine",
+      "Available": 1,
+      "Arangements": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Arangements.Arangement, DomainLayer]], System.Private.CoreLib",
+        "$values": [
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wedding, DomainLayer",
+            "Price": 650,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wellness, DomainLayer",
+            "Price": 950,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Airport, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Business, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "Price": 790,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          }
+        ]
+      },
+      "HireDates": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Help.HireDate, DomainLayer]], System.Private.CoreLib",
+        "$values": []
+      }
+    },
+    {
+      "$type": "DomainLayer.Domain.Vloot.Limousine, DomainLayer",
+      "FirstHourPrice": 180,
+      "Name": "Lincoln Pink Limousine",
+      "Available": 1,
+      "Arangements": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Arangements.Arangement, DomainLayer]], System.Private.CoreLib",
+        "$values": [
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wedding, DomainLayer",
+            "Price": 500,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wellness, DomainLayer",
+            "Price": 1000,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Airport, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Business, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "Price": 900,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          }
+        ]
+      },
+      "HireDates": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Help.HireDate, DomainLayer]], System.Private.CoreLib",
+        "$values": []
+      }
+    },
+    {
+      "$type": "DomainLayer.Domain.Vloot.Limousine, DomainLayer",
+      "FirstHourPrice": 195,
+      "Name": "Lincoln Black Limousine",
+      "Available": 1,
+      "Arangements": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Arangements.Arangement, DomainLayer]], System.Private.CoreLib",
+        "$values": [
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wedding, DomainLayer",
+            "Price": 600,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wellness, DomainLayer",
+            "Price": 1000,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Airport, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Business, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "Price": 850,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          }
+        ]
+      },
+      "HireDates": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Help.HireDate, DomainLayer]], System.Private.CoreLib",
+        "$values": []
+      }
+    },
+    {
+      "$type": "DomainLayer.Domain.Vloot.Limousine, DomainLayer",
+      "FirstHourPrice": 225,
+      "Name": "Hummer Limousine Yellow",
+      "Available": 1,
+      "Arangements": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Arangements.Arangement, DomainLayer]], System.Private.CoreLib",
+        "$values": [
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wedding, DomainLayer",
+            "Price": 790,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wellness, DomainLayer",
+            "Price": 1500,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Airport, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Business, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "Price": 1290,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          }
+        ]
+      },
+      "HireDates": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Help.HireDate, DomainLayer]], System.Private.CoreLib",
+        "$values": []
+      }
+    },
+    {
+      "$type": "DomainLayer.Domain.Vloot.Limousine, DomainLayer",
+      "FirstHourPrice": 195,
+      "Name": "Hummer Limousine Black",
+      "Available": 1,
+      "Arangements": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Arangements.Arangement, DomainLayer]], System.Private.CoreLib",
+        "$values": [
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wellness, DomainLayer",
+            "Price": 1100,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Airport, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Business, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "Price": 990,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          }
+        ]
+      },
+      "HireDates": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Help.HireDate, DomainLayer]], System.Private.CoreLib",
+        "$values": []
+      }
+    },
+    {
+      "$type": "DomainLayer.Domain.Vloot.Limousine, DomainLayer",
+      "FirstHourPrice": 195,
+      "Name": "Hummer Limousine White",
+      "Available": 1,
+      "Arangements": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Arangements.Arangement, DomainLayer]], System.Private.CoreLib",
+        "$values": [
+          {
+            "$type": "DomainLayer.Domain.Arangements.Airport, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Business, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "Price": 990,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          }
+        ]
+      },
+      "HireDates": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Help.HireDate, DomainLayer]], System.Private.CoreLib",
+        "$values": []
+      }
+    },
+    {
+      "$type": "DomainLayer.Domain.Vloot.Limousine, DomainLayer",
+      "FirstHourPrice": 175,
+      "Name": "Chrysler 300C Sedan - White",
+      "Available": 1,
+      "Arangements": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Arangements.Arangement, DomainLayer]], System.Private.CoreLib",
+        "$values": [
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wedding, DomainLayer",
+            "Price": 450,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wellness, DomainLayer",
+            "Price": 600,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Airport, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Business, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          }
+        ]
+      },
+      "HireDates": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Help.HireDate, DomainLayer]], System.Private.CoreLib",
+        "$values": []
+      }
+    },
+    {
+      "$type": "DomainLayer.Domain.Vloot.Limousine, DomainLayer",
+      "FirstHourPrice": 175,
+      "Name": "Chrysler 300C Sedan - Black",
+      "Available": 1,
+      "Arangements": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Arangements.Arangement, DomainLayer]], System.Private.CoreLib",
+        "$values": [
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wedding, DomainLayer",
+            "Price": 450,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wellness, DomainLayer",
+            "Price": 600,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Airport, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Business, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          }
+        ]
+      },
+      "HireDates": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Help.HireDate, DomainLayer]], System.Private.CoreLib",
+        "$values": []
+      }
+    },
+    {
+      "$type": "DomainLayer.Domain.Vloot.Limousine, DomainLayer",
+      "FirstHourPrice": 175,
+      "Name": "Chrysler 300C Limousine – White",
+      "Available": 1,
+      "Arangements": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Arangements.Arangement, DomainLayer]], System.Private.CoreLib",
+        "$values": [
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wedding, DomainLayer",
+            "Price": 500,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wellness, DomainLayer",
+            "Price": 1000,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Airport, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Business, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "Price": 800,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          }
+        ]
+      },
+      "HireDates": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Help.HireDate, DomainLayer]], System.Private.CoreLib",
+        "$values": []
+      }
+    },
+    {
+      "$type": "DomainLayer.Domain.Vloot.Limousine, DomainLayer",
+      "FirstHourPrice": 175,
+      "Name": "Chrysler 300C Limousine – Tuxedo Crème",
+      "Available": 1,
+      "Arangements": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Arangements.Arangement, DomainLayer]], System.Private.CoreLib",
+        "$values": [
+          {
+            "$type": "DomainLayer.Domain.Arangements.Wedding, DomainLayer",
+            "Price": 600,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Airport, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.Business, DomainLayer",
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          },
+          {
+            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "Price": 800,
+            "ExtraHours": null,
+            "Id": 0,
+            "StartHourTicks": 1440000000000,
+            "EndHourTicks": 1440000000000,
+            "StartHour": "1.16:00:00",
+            "EndHour": "1.16:00:00",
+            "MaxAmountOfHours": 11
+          }
+        ]
+      },
+      "HireDates": {
+        "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Help.HireDate, DomainLayer]], System.Private.CoreLib",
+        "$values": []
+      }
+    }
+  ]
+}

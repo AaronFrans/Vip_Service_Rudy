@@ -10,7 +10,7 @@ namespace DomainLayer.Domain.Reservation
     public class Reservering
     {
         [Key]
-        public int ReservationNumber { get; private set; }
+        public int ReservationNumber { get; set; }
         public DateTime ReservationDate { get; private set; }
         public Client Client { get; private set; }
         public Address Location { get; private set; }

@@ -24,7 +24,7 @@ namespace DataLayer.Repositories
         {
             if (client.ClientNumber == 0)
             {
-                client.ClientNumber = context.Clients.Count();
+                client.ClientNumber = context.Clients.Count() +1;
             }
             context.Clients.Add(client);
         }
@@ -35,23 +35,41 @@ namespace DataLayer.Repositories
 
         public List<ClientDiscount> GetDiscountsForType(ClientType type)
         {
-            return null;
+            return context.Clients.Include(c => c.StaffelDiscount).Single(c => c.Type == type).StaffelDiscount;
         }
 
+        public List<Client> GetClientsNonTracking()
+        {
+            return context.Clients.Include(c => c.StaffelDiscount)
+                                  .Include(c => c.Address)
+                                  .Include(c => c.PastReservations)
+                                  .AsNoTracking().ToList(); ;
+        }
         public Client GetClientNonTracking(int clientNumber)
         {
             if(context.Clients.AsNoTracking().ToList().Any(c => c.ClientNumber == clientNumber))
             {
-                return context.Clients.Include(c=> c.StaffelDiscount).AsNoTracking().ToList().Single(c => c.ClientNumber == clientNumber);
+                return context.Clients.AsNoTracking()
+                                      .Include(c => c.StaffelDiscount)
+                                      .Include(c => c.Address)
+                                      .Include(c => c.PastReservations)
+                                      .AsNoTracking()
+                                      .ToList()
+                                      .Single(c => c.ClientNumber == clientNumber);
             }
             else return null;
         }
-
-        public Client GetClientNonTracking(string name, Address address)
+        public Client GetClientNonTracking(string name)
         {
-            if (context.Clients.AsNoTracking().ToList().Any(c => c.Name == name && c.Address.Equals(address)))
+            if (context.Clients.AsNoTracking().ToList().Any(c => c.Name == name))
             {
-                return context.Clients.AsNoTracking().ToList().Single(c => c.Name == name && c.Address.Equals(address));
+                return context.Clients.AsNoTracking()
+                                      .Include(c => c.StaffelDiscount)
+                                      .Include(c => c.Address)
+                                      .Include(c => c.PastReservations)
+                                      .AsNoTracking()
+                                      .ToList()
+                                      .Single(c => c.Name == name);
             }
             else return null;
         }
