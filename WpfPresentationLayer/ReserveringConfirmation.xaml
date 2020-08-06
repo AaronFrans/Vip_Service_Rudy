@@ -1,0 +1,108 @@
+﻿<Window x:Class="WpfPresentationLayer.ReserveringConfirmation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPresentationLayer"
+        mc:Ignorable="d"
+        Title="ReserveringConfirmation" Height="500" MinHeight="500" MaxHeight="500" Width="300" MinWidth="300" MaxWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Margin="0,0,0,5">Limousine:</TextBlock>
+                <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
+                    <TextBlock Margin="0,0,10,0">Naam:</TextBlock>
+                    <TextBlock Text="{Binding SelectedLimousine.Name}"/>
+                </StackPanel>
+                <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
+                    <TextBlock Margin="0,0,10,0">Gekozen Arangement:</TextBlock>
+                    <TextBlock Text="{Binding SelectedArangement}"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Margin="0,0,0,5">Klant:</TextBlock>
+                <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
+                    <TextBlock Margin="0,0,10,0">Naam:</TextBlock>
+                    <TextBlock Text="{Binding SelectedClient.Name}"/>
+                </StackPanel>
+                <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
+                    <TextBlock Margin="0,0,10,0">Klant nummer:</TextBlock>
+                    <TextBlock Text="{Binding SelectedClient.ClientNumber}"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2">
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Margin="0,0,0,5">Datum:</TextBlock>
+                <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
+                    <TextBlock Margin="0,0,10,0">Yaar:</TextBlock>
+                    <TextBlock Text="{Binding SelectedDate.Year}"/>
+                </StackPanel>
+                <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
+                    <TextBlock Margin="0,0,10,0">Maand:</TextBlock>
+                    <TextBlock Text="{Binding SelectedDate.Month}"/>
+                </StackPanel>
+                <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
+                    <TextBlock Margin="0,0,10,0">Dag:</TextBlock>
+                    <TextBlock Text="{Binding SelectedDate.Day}"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="3">
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Margin="0,0,0,5">Begin Locatie:</TextBlock>
+                <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
+                    <TextBlock Margin="0,0,10,0">Gemeente:</TextBlock>
+                    <TextBlock Text="{Binding SelectedBeginLocation.Town}"/>
+                </StackPanel>
+                <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
+                    <TextBlock Margin="0,0,10,0">Straat:</TextBlock>
+                    <TextBlock Text="{Binding SelectedBeginLocation.Street}"/>
+                </StackPanel>
+                <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
+                    <TextBlock Margin="0,0,10,0"> Straat nummer:</TextBlock>
+                    <TextBlock Text="{Binding SelectedBeginLocation.StreetNumber}"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="4">
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Margin="0,0,0,5">Eind Locatie:</TextBlock>
+                <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
+                    <TextBlock Margin="0,0,10,0">Gemeente:</TextBlock>
+                    <TextBlock Text="{Binding SelectedEndLocation.Town}"/>
+                </StackPanel>
+                <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
+                    <TextBlock Margin="0,0,10,0">Straat:</TextBlock>
+                    <TextBlock Text="{Binding SelectedEndLocation.Street}"/>
+                </StackPanel>
+                <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
+                    <TextBlock Margin="0,0,10,0"> Straat nummer:</TextBlock>
+                    <TextBlock Text="{Binding SelectedEndLocation.StreetNumber}"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="5" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" x:Name="AcceptButton" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Click="AcceptButton_Click" >
+                Bestelling bevestigen
+            </Button>
+            <Button Grid.Column="1" x:Name="DenyButton" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" Click="DenyButton_Click">
+                Bestelling anuleren
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

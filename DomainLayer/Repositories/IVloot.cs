@@ -19,10 +19,7 @@ namespace DomainLayer.Repositories
 
         public void UpdateLimousinesAvailability(DateTime hireDate);
 
-
-        public List<Reservering> GetReserveringen(int clientNr);
-        public List<Reservering> GetReserveringen(DateTime reservationDate);
-        public List<Reservering> GetReserveringen(int clientNr, DateTime reservationDate);
+        public List<Reservering> GetReservations();
 
     }
 }

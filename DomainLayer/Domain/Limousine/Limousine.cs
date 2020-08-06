@@ -58,7 +58,7 @@ namespace DomainLayer.Domain.Vloot
             {
                 case "Wellness":
                     {
-                        if (!Arangements.Any(a => a.GetType().ToString() == typeof(Wellness).ToString()))
+                        if (Arangements.Any(a => a.GetType().ToString() == typeof(Wellness).ToString()))
                         {
                             return true;
                         }
@@ -69,7 +69,7 @@ namespace DomainLayer.Domain.Vloot
                     }
                 case "Business":
                     {
-                        if (!Arangements.Any(a => a.GetType().ToString() == typeof(Business).ToString()))
+                        if (Arangements.Any(a => a.GetType().ToString() == typeof(Business).ToString()))
                         {
                             return true;
                         }
@@ -80,7 +80,7 @@ namespace DomainLayer.Domain.Vloot
                     }
                 case "Airport":
                     {
-                        if (!Arangements.Any(a => a.GetType().ToString() == typeof(Airport).ToString()))
+                        if (Arangements.Any(a => a.GetType().ToString() == typeof(Airport).ToString()))
                         {
                             return true;
                         }
@@ -91,7 +91,7 @@ namespace DomainLayer.Domain.Vloot
                     }
                 case "Wedding":
                     {
-                        if (!Arangements.Any(a => a.GetType().ToString() == typeof(Wedding).ToString()))
+                        if (Arangements.Any(a => a.GetType().ToString() == typeof(Wedding).ToString()))
                         {
                             return true;
                         }
@@ -100,9 +100,9 @@ namespace DomainLayer.Domain.Vloot
                             return false;
                         }
                     }
-                case "NightLife":
+                case "Nightlife":
                     {
-                        if (!Arangements.Any(a => a.GetType().ToString() == typeof(NightLife).ToString()))
+                        if (Arangements.Any(a => a.GetType().ToString() == typeof(NightLife).ToString()))
                         {
                             return true;
                         }
@@ -121,8 +121,6 @@ namespace DomainLayer.Domain.Vloot
         public KeyValuePair<int, List<HourType>> PriceForArangement(DateTime hireDate, string arangementType, int? extraHours = null, TimeSpan? startHour = null, TimeSpan? endHour = null)
         {
             KeyValuePair<int, List<HourType>> toReturn = new KeyValuePair<int, List<HourType>>();
-
-
 
             switch (arangementType)
             {
@@ -182,7 +180,6 @@ namespace DomainLayer.Domain.Vloot
                 default:
                     throw new DomainException("Het opgegeven arangement bestaat niet.");
             }
-
 
             return toReturn;
         }

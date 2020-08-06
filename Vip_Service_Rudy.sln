@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleLayer", "ConsoleLaye
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfViewModel", "WpfViewModel\WpfViewModel.csproj", "{3E0B019E-43E6-45B2-88E9-AF65C5DBC8AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfPresentationLayer", "WpfPresentationLayer\WpfPresentationLayer.csproj", "{470EF274-A9BC-4B33-8229-810CE13CB147}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfPresentationLayer", "WpfPresentationLayer\WpfPresentationLayer.csproj", "{470EF274-A9BC-4B33-8229-810CE13CB147}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -12,6 +12,7 @@ namespace DomainLayer.Domain.Arangements
     {
         public int Price { get; private set; }
 
+        public static int Duration { get; private set; } = 7;
 
         static public TimeSpan NightHourBegin { get; private set; } = new TimeSpan(22, 0, 0);
 
@@ -22,7 +23,14 @@ namespace DomainLayer.Domain.Arangements
         [NotMapped]
         public int? ExtraHours { get; private set; } = null;
 
-
+        static public bool IsStartAllowed(TimeSpan startHour)
+        {
+            if (startHour.Hours > 15 || startHour.Hours < 7)
+            {
+                return false;
+            }
+            return true;
+        }
         public KeyValuePair<int, List<HourType>> GetCalculatedPrice(int firstHourPrice)
         {
             if (EndHour.TotalHours == 40)
@@ -30,7 +38,7 @@ namespace DomainLayer.Domain.Arangements
                 throw new DomainException("Zorg er aub voor dat de start- en eindtijd ingevuld zijn");
             }
             int returnPrice = Price;
-            List<HourType> hourTypes = new List<HourType>() { new HourType("Eerste uur", 0, 0) };
+            List<HourType> hourTypes = new List<HourType>();
 
             if (ExtraHours != null)
             {
@@ -61,7 +69,7 @@ namespace DomainLayer.Domain.Arangements
 
             if (extraHours != null)
             {
-                EndHour = new TimeSpan(startHour.Hours + 7 + (int)extraHours, 0, 0);
+                EndHour = new TimeSpan(startHour.Hours + Duration + (int)extraHours, 0, 0);
                 if ((EndHour.TotalHours - StartHour.TotalHours) > MaxAmountOfHours)
                 {
                     throw new DomainException("Zorg er a.u.b. voor dat het eind uur niet meer dan elf uur na het start uur is. (Het Wedding arangement heeft een standaartduuratie van 8 uur)");
@@ -69,7 +77,7 @@ namespace DomainLayer.Domain.Arangements
             }
             else
             {
-                EndHour = new TimeSpan(startHour.Hours + 7, 0, 0);
+                EndHour = new TimeSpan(startHour.Hours + Duration, 0, 0);
 
             }
         }

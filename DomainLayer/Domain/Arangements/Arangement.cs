@@ -16,8 +16,8 @@ namespace DomainLayer.Domain.Arangements
         public TimeSpan StartHour { get; protected set; }
         [NotMapped]
         public TimeSpan EndHour { get; protected set; }
-        [NotMapped]
-        public int MaxAmountOfHours { get; private set; } = 11;
+        
+        static public int MaxAmountOfHours { get; private set; } = 11;
 
 
     }

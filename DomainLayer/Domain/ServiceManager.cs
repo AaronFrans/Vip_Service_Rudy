@@ -77,5 +77,10 @@ namespace DomainLayer.Domain
             unitOfWork.Complete();
         }
 
+        public List<Reservering> GetReservations()
+        {
+            return unitOfWork.vloot.GetReservations();
+        }
+
     }
 } 

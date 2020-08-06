@@ -26,7 +26,7 @@
                 <ColumnDefinition Width="50*"/>
                 <ColumnDefinition Width="50*"/>
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0" x:Name="LimousineFilter"  Margin="10,10,10,10" VerticalContentAlignment="Center" Text="Zoek een limousine op naam" GotKeyboardFocus="LimousineFilter_GotKeyboardFocus"/>
+            <TextBox Grid.Column="0" x:Name="LimousineFilter"  Margin="10,10,10,10" VerticalAlignment="Center" VerticalContentAlignment="Center" Text="Zoek een limousine op naam" GotKeyboardFocus="LimousineFilter_GotKeyboardFocus"/>
             <Button x:Name="FilterButton" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Click="FilterButton_Click">Zoek</Button>
         </Grid>
         <DataGrid Grid.Row="1" ItemsSource = "{Binding LimousineInfo}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedLimousine}" x:Name="Vloot" CanUserAddRows="False" Margin="10,10,10,10">
@@ -46,7 +46,7 @@
             <Grid Grid.Column= "0" >
                 <StackPanel Orientation= "Horizontal" Margin= "10,0,10,0" HorizontalAlignment= "Left" VerticalAlignment= "Center" >
                     <TextBlock Margin= "0,0,5,0" ><Run Text= "Kies een arangement:" /></TextBlock >
-                    <ComboBox ItemsSource="Arangements" SelectedIndex="0" Padding= "10,0,10,0" Width= "auto" MinWidth= "100" />
+                    <ComboBox  SelectedItem="{Binding SelectedArangement}" ItemsSource="{Binding Arangements}" SelectedIndex="0" Padding= "10,0,10,0" Width= "auto" MinWidth= "100" />
                 </StackPanel >
 
             </Grid >

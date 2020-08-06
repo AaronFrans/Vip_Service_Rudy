@@ -1,0 +1,104 @@
+﻿<Window x:Class="WpfPresentationLayer.ReservationForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPresentationLayer"
+        mc:Ignorable="d"
+        Title="ReservationForm" MinHeight="500" MaxHeight="500" Height="500" MinWidth="400" MaxWidth="400" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="33*"/>
+            <RowDefinition Height="33*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+            <StackPanel Margin="10,10,0,10" Orientation="Vertical">
+                <StackPanel Margin="0,0,0,4" Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" Text="Start tijd:" Margin="0,0,10,0"/>
+                    <DatePicker x:Name="StartTimeDate" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <ComboBox  x:Name="StartTimeBox" SelectedIndex="0" VerticalAlignment="Center" MinWidth="150" ItemsSource="{Binding HoursInADay}"/>
+                </StackPanel>
+                <StackPanel x:Name="EndTimePanel"  Margin="0,4,0,0" Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" Text="Eind tijd:" Margin="0,0,10,0"/>
+                    <DatePicker x:Name="EndTimeDate" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <ComboBox x:Name="EndTimeBox" SelectedIndex="0" VerticalAlignment="Center" MinWidth="150" ItemsSource="{Binding HoursInADay}"/>
+                </StackPanel>
+                <StackPanel x:Name="ExtraHoursPanel" Margin="0,4,0,0" Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" Text="Extra uren:" Margin="0,0,10,0"/>
+                    <ComboBox x:Name="ExtraHoursBox" SelectedIndex="0" VerticalAlignment="Center" Width="250" ItemsSource="{Binding ExtraHours}"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Margin="10,5,10,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*" />
+                <RowDefinition Height="90*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="Begin Locatie: "/>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="242*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Grid.ColumnSpan="2">
+                        <TextBlock Margin="0,0,10,0">Gemeente:</TextBlock>
+                        <ComboBox x:Name="StartTown" ItemsSource="{Binding AllowedLocations}" SelectedIndex="0"  Width="200"></ComboBox>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1" HorizontalAlignment="Left">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock Margin="0,0,10,0">Straat:</TextBlock>
+                        <TextBox x:Name="StartStreet" Width="200"></TextBox>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="2" HorizontalAlignment="Left">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock Margin="0,0,10,0">Straat nummer:</TextBlock>
+                        <TextBox x:Name="StartStreetNumber" Width="160"></TextBox>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2" Margin="10,5,10,5" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*" />
+                <RowDefinition Height="90*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="Eind Locatie: "/>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" HorizontalAlignment="Left">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock Margin="0,0,10,0">Gemeente:</TextBlock>
+                        <ComboBox x:Name="EndTown" ItemsSource="{Binding AllowedLocations}" SelectedIndex="0" Width="200" ></ComboBox>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1" HorizontalAlignment="Left">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock Margin="0,0,10,0">Straat:</TextBlock>
+                        <TextBox x:Name="EndStreet" Width="200"></TextBox>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="2" HorizontalAlignment="Left">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock Margin="0,0,10,0">Straat nummer:</TextBlock>
+                        <TextBox x:Name="EndStreetNumber" Width="160"></TextBox>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Button x:Name="MakeReservationButton" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Click="MakeReservationButton_Click">Maak reservatie aan</Button>
+    </Grid>
+</Window>

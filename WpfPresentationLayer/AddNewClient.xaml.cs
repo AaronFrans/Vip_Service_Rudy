@@ -20,9 +20,10 @@ namespace WpfPresentationLayer
     /// </summary>
     public partial class AddNewClient : Window
     {
-        private ViewModel vm = new ViewModel();
-        public AddNewClient()
+        private ViewModel vm;
+        public AddNewClient(ViewModel vm)
         {
+            this.vm = vm;
             InitializeComponent();
             DataContext = vm;
         }
@@ -37,6 +38,10 @@ namespace WpfPresentationLayer
                 toAdd = new Client((ClientType)ClientType.SelectedItem, vm.GetDiscounts((ClientType)ClientType.SelectedItem), new Address(Street.Text, Town.Text, StreetNumber.Text), Name.Text, BtwNumber.Text, new List<ReservationsPerYear>());
 
                 vm.AddClient(toAdd);
+
+                ReservationForm rf = new ReservationForm(vm);
+                rf.Show();
+                Close();
             }
             catch (Exception ex)
             {

@@ -17,7 +17,6 @@ namespace Tests
         {
             TimeSpan StartHour = new TimeSpan(40, 0, 0);
             TimeSpan EndHour = new TimeSpan(40, 0, 0);
-            int MaxAmountOfHours = 11;
             long StartTicks = 1440000000000;
             long EndTicks = 1440000000000;
 
@@ -25,7 +24,6 @@ namespace Tests
 
             airport.StartHour.Should().Be(StartHour);
             airport.EndHour.Should().Be(EndHour);
-            airport.MaxAmountOfHours.Should().Be(MaxAmountOfHours);
             airport.StartHourTicks.Should().Be(StartTicks);
             airport.EndHourTicks.Should().Be(EndTicks);
         }
@@ -413,7 +411,6 @@ namespace Tests
             int Price = 1000;
             TimeSpan StartHour = new TimeSpan(40, 0, 0);
             TimeSpan EndHour = new TimeSpan(40, 0, 0);
-            int MaxAmountOfHours = 11;
             long StartTicks = 1440000000000;
             long EndTicks = 1440000000000;
 
@@ -422,7 +419,6 @@ namespace Tests
             wellness.Price.Should().Be(Price);
             wellness.StartHour.Should().Be(StartHour);
             wellness.EndHour.Should().Be(EndHour);
-            wellness.MaxAmountOfHours.Should().Be(MaxAmountOfHours);
             wellness.StartHourTicks.Should().Be(StartTicks);
             wellness.EndHourTicks.Should().Be(EndTicks);
         }

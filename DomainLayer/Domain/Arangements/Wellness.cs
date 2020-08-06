@@ -6,11 +6,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DomainLayer.Domain.Arangements
 {
-    public class Wellness: Arangement
+    public class Wellness : Arangement
     {
         public int Price { get; private set; }
 
-        
+        public static int Duration { get; private set; } = 10;
         static public TimeSpan NightHourBegin { get; private set; } = new TimeSpan(22, 0, 0);
 
         static public TimeSpan NightHourEnd { get; private set; } = new TimeSpan(1, 6, 0, 0);
@@ -25,6 +25,15 @@ namespace DomainLayer.Domain.Arangements
             EndHour = new TimeSpan(EndHourTicks);
         }
 
+        static public bool IsStartAllowed(TimeSpan startHour)
+        {
+            if (startHour.Hours > 12 || startHour.Hours < 7)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public void SetTime(TimeSpan startHour)
         {
             if (startHour.Seconds > 0 || startHour.Minutes > 0)
@@ -37,7 +46,7 @@ namespace DomainLayer.Domain.Arangements
             }
             StartHour = startHour;
 
-            EndHour = StartHour.Add(new TimeSpan(10, 0, 0));
+            EndHour = StartHour.Add(new TimeSpan(Duration, 0, 0));
         }
 
         public TimeSpan GetEndTime()

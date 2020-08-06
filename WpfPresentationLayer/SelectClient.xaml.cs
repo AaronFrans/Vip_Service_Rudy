@@ -18,11 +18,12 @@ namespace WpfPresentationLayer
     /// </summary>
     public partial class SelectClient : Window
     {
-        private ViewModel vm = new ViewModel();
-        public SelectClient()
+        private ViewModel vm;
+        public SelectClient(ViewModel vm)
         {
             InitializeComponent();
-            vm.AddItems();
+            this.vm = vm;
+            vm.Setup("Clients");
             DataContext = vm;
         }
 
@@ -52,7 +53,16 @@ namespace WpfPresentationLayer
 
         private void SelectClientButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if(vm.SelectedClient !=null)
+            {
+                ReservationForm rf = new ReservationForm(vm);
+                rf.Show();
+                
+            }
+            else
+            {
+                MessageBox.Show("Selecteer aub een klant.");
+            }
         }
     }
 }

@@ -22,13 +22,20 @@ namespace WpfPresentationLayer
     /// </summary>
     public partial class SelectLimousine : Window
     {
-        private ViewModel vm = new ViewModel();
-
+        private ViewModel vm;
 
         public SelectLimousine()
         {
             InitializeComponent();
-            vm.AddItems();
+            vm = new ViewModel();
+            vm.Setup("Limousines");
+            DataContext = vm;
+        }
+        public SelectLimousine(ViewModel vm)
+        {
+            InitializeComponent();
+            this.vm = vm;
+            vm.Setup("Limousines");
             DataContext = vm;
         }
 
@@ -47,13 +54,42 @@ namespace WpfPresentationLayer
 
         private void NewClientButton_Click(object sender, RoutedEventArgs e)
         {
-            if(vm.SelectedLimousine != null)
-            FilterButton.Content = vm.SelectedLimousine.Name;
+            if (vm.SelectedLimousine != null)
+            {
+                if (vm.HasArangement(vm.SelectedLimousine.Name, vm.SelectedArangement))
+                {
+                    AddNewClient anc = new AddNewClient(vm);
+                    anc.Show();
+                }
+                else
+                {
+                    MessageBox.Show($"Het gekozen arangement is niet beschikbaar voor limousine {vm.SelectedLimousine.Name}.");
+                }
+            }
+            else
+            {
+                MessageBox.Show($"Selecteer aub een liomousine.");
+            }
         }
 
         private void ExistingClientButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (vm.SelectedLimousine != null)
+            {
+                if (vm.HasArangement(vm.SelectedLimousine.Name, vm.SelectedArangement))
+                {
+                    SelectClient sc = new SelectClient(vm);
+                    sc.Show();
+                }
+                else
+                {
+                    MessageBox.Show($"Het gekozen arangement is niet beschikbaar voor limousine {vm.SelectedLimousine.Name}.");
+                }
+            }
+            else
+            {
+                MessageBox.Show($"Selecteer aub een liomousine.");
+            }
         }
     }
 }
