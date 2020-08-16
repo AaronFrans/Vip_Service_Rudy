@@ -102,7 +102,7 @@ namespace DomainLayer.Domain.Vloot
                     }
                 case "Nightlife":
                     {
-                        if (Arangements.Any(a => a.GetType().ToString() == typeof(NightLife).ToString()))
+                        if (Arangements.Any(a => a.GetType().ToString() == typeof(Nightlife).ToString()))
                         {
                             return true;
                         }
@@ -117,7 +117,6 @@ namespace DomainLayer.Domain.Vloot
 
 
         }
-
         public KeyValuePair<int, List<HourType>> PriceForArangement(DateTime hireDate, string arangementType, int? extraHours = null, TimeSpan? startHour = null, TimeSpan? endHour = null)
         {
             KeyValuePair<int, List<HourType>> toReturn = new KeyValuePair<int, List<HourType>>();
@@ -168,11 +167,11 @@ namespace DomainLayer.Domain.Vloot
                         toReturn = WeddingPrice((TimeSpan)startHour, extraHours, hireDate);
                     }
                     break;
-                case "NightLife":
+                case "Nightlife":
                     {
                         if (startHour == null)
                         {
-                            throw new DomainException("Het arangement NightLife heeft een start uur nodig.");
+                            throw new DomainException("Het arangement Nightlife heeft een start uur nodig.");
                         }
                         toReturn = NightLifePrice((TimeSpan)startHour, extraHours, hireDate);
                     }
@@ -294,13 +293,13 @@ namespace DomainLayer.Domain.Vloot
         }
         private KeyValuePair<int, List<HourType>> NightLifePrice(TimeSpan startHour, int? extraHours, DateTime hireDate)
         {
-            if (!Arangements.Any(a => a.GetType().ToString() == typeof(NightLife).ToString()))
+            if (!Arangements.Any(a => a.GetType().ToString() == typeof(Nightlife).ToString()))
             {
                 throw new DomainException($"Limousine {Name} does not have a nightlife arangement.");
             }
             else
             {
-                var ar = Arangements.Single(a => a.GetType().ToString() == typeof(NightLife).ToString()) as NightLife;
+                var ar = Arangements.Single(a => a.GetType().ToString() == typeof(Nightlife).ToString()) as Nightlife;
                 ar.SetTime(startHour, extraHours);
                 var toReturn = ar.GetCalculatedPrice(FirstHourPrice);
                 TimeSpan end = ar.GetEndTime();
@@ -321,7 +320,6 @@ namespace DomainLayer.Domain.Vloot
                    FirstHourPrice == limousine.FirstHourPrice &&
                    Name == limousine.Name;
         }
-
         public override int GetHashCode()
         {
             return HashCode.Combine(FirstHourPrice, Name);

@@ -7,19 +7,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DomainLayer.Domain.Arangements
 {
-    public class NightLife: Arangement
+    public class Nightlife: Arangement
     {
         public int Price { get; private set; }
-
         public static int Duration { get; private set; } = 7;
-
-        static public TimeSpan NightHourBegin { get; private set; } = new TimeSpan(22, 0, 0);
-       
-        static public TimeSpan NightHourEnd { get; private set; } = new TimeSpan(1, 6, 0, 0);
-
-
         static public float NightHourPercentage { get; private set; } = 140.0f;
-
         [NotMapped]
         public int? ExtraHours { get; private set; } = null;
 
@@ -73,7 +65,7 @@ namespace DomainLayer.Domain.Arangements
                 EndHour = new TimeSpan(startHour.Hours + Duration + (int)extraHours, 0, 0);
                 if ((EndHour.TotalHours - StartHour.TotalHours) > MaxAmountOfHours)
                 {
-                    throw new DomainException("Zorg er a.u.b. voor dat het eind uur niet meer dan elf uur na het start uur is. (Het NightLife arangement heeft een standaartduuratie van 4 uur)");
+                    throw new DomainException("Zorg er a.u.b. voor dat het eind uur niet meer dan elf uur na het start uur is. (Het Nightlife arangement heeft een standaartduuratie van 4 uur)");
                 }
             }
             else
@@ -82,7 +74,6 @@ namespace DomainLayer.Domain.Arangements
 
             }
         }
-
         public TimeSpan GetEndTime()
         {
 
@@ -91,9 +82,8 @@ namespace DomainLayer.Domain.Arangements
             EndHour = new TimeSpan(40, 0, 0);
             return toReturn;
         }
-
         [JsonConstructor]
-        public NightLife(int price)
+        public Nightlife(int price)
         {
             Price = price;
             EndHourTicks = 1440000000000;

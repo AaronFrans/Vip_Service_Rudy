@@ -35,7 +35,16 @@ namespace DataLayer.Repositories
 
         public List<ClientDiscount> GetDiscountsForType(ClientType type)
         {
-            return context.Clients.Include(c => c.StaffelDiscount).Single(c => c.Type == type).StaffelDiscount;
+            List<ClientDiscount> toReturn = null;
+            if(context.Clients.Include(c => c.StaffelDiscount).Any(c => c.Type == type))
+            {
+                toReturn = context.Clients.Include(c => c.StaffelDiscount).Single(c => c.Type == type).StaffelDiscount;
+            }
+            else
+            {
+                toReturn =  Parser.GetDiscounts().Where(d => d.ClientType == type).ToList();
+            }
+            return toReturn;
         }
 
         public List<Client> GetClientsNonTracking()
@@ -45,33 +54,5 @@ namespace DataLayer.Repositories
                                   .Include(c => c.PastReservations)
                                   .AsNoTracking().ToList(); ;
         }
-        public Client GetClientNonTracking(int clientNumber)
-        {
-            if(context.Clients.AsNoTracking().ToList().Any(c => c.ClientNumber == clientNumber))
-            {
-                return context.Clients.AsNoTracking()
-                                      .Include(c => c.StaffelDiscount)
-                                      .Include(c => c.Address)
-                                      .Include(c => c.PastReservations)
-                                      .AsNoTracking()
-                                      .ToList()
-                                      .Single(c => c.ClientNumber == clientNumber);
-            }
-            else return null;
-        }
-        public Client GetClientNonTracking(string name)
-        {
-            if (context.Clients.AsNoTracking().ToList().Any(c => c.Name == name))
-            {
-                return context.Clients.AsNoTracking()
-                                      .Include(c => c.StaffelDiscount)
-                                      .Include(c => c.Address)
-                                      .Include(c => c.PastReservations)
-                                      .AsNoTracking()
-                                      .ToList()
-                                      .Single(c => c.Name == name);
-            }
-            else return null;
-        }
-    }
+       }
 }

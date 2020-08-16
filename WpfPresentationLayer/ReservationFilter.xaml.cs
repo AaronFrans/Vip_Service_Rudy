@@ -26,11 +26,16 @@ namespace WpfPresentationLayer
             DataContext = vm;
         }
 
-        private void ShowReservationsButton_Click(object sender, RoutedEventArgs e)
+        private async void ShowReservationsButton_Click(object sender, RoutedEventArgs e)
         {
             if(vm.FilterByClient || vm.FilterByDate)
             {
-
+                Mouse.OverrideCursor = Cursors.Wait;
+                await vm.SetupAsync("Reservations");
+                Mouse.OverrideCursor = null;
+                SelectReservation sr = new SelectReservation(vm);
+                sr.Show();
+                Close();
             }
             else
             {

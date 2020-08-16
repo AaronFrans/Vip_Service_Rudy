@@ -26,14 +26,14 @@
                     <TextBlock Margin="0,0,10,0">Naam:</TextBlock>
                     <TextBlock Text="{Binding SelectedReservation.Details.Limousine.Name}"/>
                 </StackPanel>
-                <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
+                <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
                     <TextBlock Margin="0,0,10,0">Gekozen Arangement:</TextBlock>
                     <TextBlock Text="{Binding SelectedReservation.Details.Arangement}"/>
                 </StackPanel>
-                <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
+                <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
                     <TextBlock Margin="0,0,10,0">Eerste uur prijs:</TextBlock>
                     <TextBlock Text="€"/>
-                    <TextBlock Text="{Binding SelectedReservation.Details.FirstHOurPrice}"/>
+                    <TextBlock Text="{Binding SelectedReservation.Details.Limousine.FirstHourPrice}"/>
                 </StackPanel>
             </StackPanel>
         </Grid>
@@ -67,11 +67,11 @@
                 </StackPanel>
                 <StackPanel  Margin="10,0,0,5" Orientation="Horizontal">
                     <TextBlock Margin="0,0,10,0">Tijdstip:</TextBlock>
-                    <TextBlock Text="{Binding SelectedReservation.StartHour.Hour}"/>
+                    <TextBlock Text="{Binding SelectedReservation.ReservationDate.Hour}"/>
                     <TextBlock Text=":"/>
-                    <TextBlock Text="{Binding SelectedReservation.StartHour.Minute}"/>
+                    <TextBlock Text="{Binding SelectedReservation.ReservationDate.Minute}"/>
                     <TextBlock Text=":"/>
-                    <TextBlock Text="{Binding SelectedReservation.StartHour.Second}"/>
+                    <TextBlock Text="{Binding SelectedReservation.ReservationDate.Second}"/>
                 </StackPanel>
             </StackPanel>
         </Grid>
@@ -137,27 +137,27 @@
                 </StackPanel>
                 <StackPanel>
                     <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
-                        <TextBlock Margin="0,0,0,5">SubTotaal:</TextBlock>
+                        <TextBlock Margin="0,0,5,5">SubTotaal:</TextBlock>
                         <TextBlock Text="€"/>
-                        <TextBlock Margin="0,0,5,5" Text="{Binding SelectedReservation.Details.SubTotaal}"/>
+                        <TextBlock Margin="0,0,5,5" Text="{Binding SelectedReservation.Details.SubTotal}"/>
                     </StackPanel>
                     <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
-                        <TextBlock Margin="0,0,0,5">Used discount:</TextBlock>
-                        <TextBlock Margin="0,0,0,5" Text="{Binding SelectedReservation.Details.SubTotaal}"/>
+                        <TextBlock Margin="0,0,5,5">Used discount:</TextBlock>
+                        <TextBlock Margin="0,0,0,5" Text="{Binding SelectedReservation.Details.UsedDiscount}"/>
                         <TextBlock Text="%"/>
                     </StackPanel>
                     <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
-                        <TextBlock Margin="0,0,0,5">Prijs zonder btw:</TextBlock>
+                        <TextBlock Margin="0,0,5,5">Prijs zonder btw:</TextBlock>
                         <TextBlock Text="€"/>
                         <TextBlock Margin="0,0,5,5" Text="{Binding SelectedReservation.Details.AmountWithoutBtw}"/>
                     </StackPanel>
                     <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
-                        <TextBlock Margin="0,0,0,5">Btw hoeveelhijd:</TextBlock>
+                        <TextBlock Margin="0,0,5,5">Btw hoeveelhijd:</TextBlock>
                         <TextBlock Text="€"/>
                         <TextBlock Margin="0,0,5,5" Text="{Binding SelectedReservation.Details.BtwAmount}"/>
                     </StackPanel>
                     <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
-                        <TextBlock Margin="0,0,0,5">Te betalen:</TextBlock>
+                        <TextBlock Margin="0,0,5,5">Te betalen:</TextBlock>
                         <TextBlock Text="€"/>
                         <TextBlock Margin="0,0,5,5" Text="{Binding SelectedReservation.Details.ToPayAmount}"/>
                     </StackPanel>

@@ -23,7 +23,6 @@ namespace WpfPresentationLayer
         {
             InitializeComponent();
             this.vm = vm;
-            vm.Setup("Clients");
             DataContext = vm;
         }
 
@@ -51,13 +50,17 @@ namespace WpfPresentationLayer
             vm.FilterClientsByNumber(toSearch);
         }
 
-        private void SelectClientButton_Click(object sender, RoutedEventArgs e)
+        private async void SelectClientButton_Click(object sender, RoutedEventArgs e)
         {
             if(vm.SelectedClient !=null)
             {
+                Mouse.OverrideCursor = Cursors.Wait;
+                await vm.SetupAsync("ReservationForm");
+                Mouse.OverrideCursor = null;
                 ReservationForm rf = new ReservationForm(vm);
                 rf.Show();
-                
+                Close();
+
             }
             else
             {

@@ -22,64 +22,49 @@ namespace DomainLayer.Domain
         public Reservering HireVehicle(string name, string typeArangement, Address location, int clientNr, DateTime reservationDate, Address endLocation, DateTime dateLimousineNeeded,
             int? extraHours = null, TimeSpan? startHour = null, TimeSpan? endHour = null)
         {
-            Reservering reservering = unitOfWork.vloot.HireVehicle(name, typeArangement, location, clientNr, reservationDate,endLocation,dateLimousineNeeded,extraHours,startHour,endHour);
+            Reservering reservering = unitOfWork.Vloot.HireVehicle(name, typeArangement, location, clientNr, reservationDate,endLocation,dateLimousineNeeded,extraHours,startHour,endHour);
             unitOfWork.Complete();
 
             return reservering;
         }
         public List<Limousine> GetVehicles()
         {
-            return unitOfWork.vloot.GetVehiclesNonTracking();
+            return unitOfWork.Vloot.GetVehiclesNonTracking();
         }
         public void AddVehicle(Limousine vehicle)
         {
-            unitOfWork.vloot.AddVehicle(vehicle);
+            unitOfWork.Vloot.AddVehicle(vehicle);
             unitOfWork.Complete();
         }
         public void AddVehicles(List<Limousine> vehicles)
         {
-            unitOfWork.vloot.AddVehicles(vehicles);
+            unitOfWork.Vloot.AddVehicles(vehicles);
             unitOfWork.Complete();
         }
 
         public void AddClient(Client client)
         {
-            unitOfWork.clients.AddClient(client);
+            unitOfWork.Clients.AddClient(client);
             unitOfWork.Complete();
         }
         public void AddClients(List<Client> clients)
         {
-            unitOfWork.clients.AddClients(clients);
+            unitOfWork.Clients.AddClients(clients);
             unitOfWork.Complete();
-        }
-
-        public Client GetClientViaNumber(int clientNumber)
-        {
-            return unitOfWork.clients.GetClientNonTracking(clientNumber);
-        }
-        public Client GetClientViaInfo(string name)
-        {
-            return unitOfWork.clients.GetClientNonTracking(name);
         }
         public List<Client> GetClients()
         {
-            return unitOfWork.clients.GetClientsNonTracking();
+            return unitOfWork.Clients.GetClientsNonTracking();
         }
 
         public List<ClientDiscount> GetDiscountsForType(ClientType type)
         {
-            return unitOfWork.clients.GetDiscountsForType(type);
-        }
-
-        public void UpdateVehicles(DateTime hireDate)
-        {
-            unitOfWork.vloot.UpdateLimousinesAvailability(hireDate);
-            unitOfWork.Complete();
+            return unitOfWork.Clients.GetDiscountsForType(type);
         }
 
         public List<Reservering> GetReservations()
         {
-            return unitOfWork.vloot.GetReservations();
+            return unitOfWork.Vloot.GetReservations();
         }
 
     }

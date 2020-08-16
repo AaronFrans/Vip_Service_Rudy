@@ -12,14 +12,14 @@ namespace DataLayer.UoW
     {
         private ManagerContext context;
 
-        public IClientRepository clients { get; private set; }
-        public IVloot vloot { get; private set; }
+        public IClientRepository Clients { get; private set; }
+        public IVloot Vloot { get; private set; }
 
         public UnitOfWork(ManagerContext context)
         {
             this.context = context;
-            this.clients = new ClientRepository(context);
-            this.vloot = new Vloot(context);
+            this.Clients = new ClientRepository(context);
+            this.Vloot = new Vloot(context);
         }
 
         public int Complete()

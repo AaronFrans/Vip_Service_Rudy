@@ -32,7 +32,6 @@ namespace DomainLayer.Domain.Clients
             BtwNumber = btwNumber;
             PastReservations = pastReservations;
         }
-
         public void AddReservation()
         {
             if (PastReservations.Any(d => d.Year == DateTime.Now.Year))
@@ -44,7 +43,6 @@ namespace DomainLayer.Domain.Clients
                 PastReservations.Add(new ReservationsPerYear(DateTime.Now.Year,0));
             }
         }
-
         public float GetDiscount()
         {
             if (PastReservations.Any(d => d.Year == DateTime.Now.Year))

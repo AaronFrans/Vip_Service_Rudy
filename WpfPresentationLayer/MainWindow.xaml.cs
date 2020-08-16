@@ -31,5 +31,15 @@ namespace WpfPresentationLayer
             rf.Show();
             Close();
         }
+
+        private async void NewReservationButton_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            await vm.SetupAsync("Limousines");
+            Mouse.OverrideCursor = null;
+            SelectLimousine sl = new SelectLimousine(vm);
+            sl.Show();
+            Close();
+        }
     }
 }

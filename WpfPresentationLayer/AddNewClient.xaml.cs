@@ -28,7 +28,7 @@ namespace WpfPresentationLayer
             DataContext = vm;
         }
 
-        private void MakeClientButton_Click(object sender, RoutedEventArgs e)
+        private async void MakeClientButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -39,6 +39,9 @@ namespace WpfPresentationLayer
 
                 vm.AddClient(toAdd);
 
+                Mouse.OverrideCursor = Cursors.Wait;
+                await vm.SetupAsync("ReservationForm");
+                Mouse.OverrideCursor = null;
                 ReservationForm rf = new ReservationForm(vm);
                 rf.Show();
                 Close();

@@ -12,7 +12,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Filter By:" Grid.Row="0" FontSize="20"/>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Filteren Op:" Grid.Row="0" FontSize="20"/>
         <Grid Grid.Row="1" Margin="15,0,15,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

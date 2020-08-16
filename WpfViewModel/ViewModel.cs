@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace WpfViewModel
 {
@@ -99,22 +100,22 @@ namespace WpfViewModel
         {
             return sm.GetDiscountsForType(type);
         }
-        public void Setup(string toLoad)
+        public async Task SetupAsync(string toLoad)
         {
             switch (toLoad)
             {
                 case "Limousines":
                     {
-                        limousines = sm.GetVehicles();
+                        limousines = await Task.Run(() => sm.GetVehicles());
                         LimousineInfo = new ObservableCollection<LimousineView>();
-                        MakeLimousineInfo(limousines);
+                        await Task.Run(() => MakeLimousineInfo(limousines));
                     }
                     break;
                 case "Clients":
                     {
-                        clientsUnfiltered = sm.GetClients();
+                        clientsUnfiltered = await Task.Run(() => sm.GetClients());
                         Clients = new ObservableCollection<Client>(clientsUnfiltered);
-                    }
+                    } 
                     break;
                 case "ReservationForm":
                     {
@@ -122,24 +123,21 @@ namespace WpfViewModel
                         {
                             HoursInADay.Add(i);
                         }
-                        SetupForArangement();
+                        await Task.Run(() => SetupForArangement());
                     }
                     break;
-                case "ReservationConfirmation":
+                case "ReservationDetails":
                     {
                         SetupHourVis();
                     }
                     break;
                 case "Reservations":
                     {
-                        reservationsUnfiltered = sm.GetReservations();
+                        reservationsUnfiltered = await Task.Run(() => sm.GetReservations());
                         Reservations = new ObservableCollection<Reservering>(reservationsUnfiltered);
                     }
                     break;
             }
-
-
-
         }
 
         public void IsStartAllowed()
@@ -154,7 +152,7 @@ namespace WpfViewModel
                     break;
                 case "Nightlife":
                     {
-                        if (!NightLife.IsStartAllowed((TimeSpan)SelectedStartTime))
+                        if (!Nightlife.IsStartAllowed((TimeSpan)SelectedStartTime))
                             throw new Exception("Het geselcteerde arangement kan aleen een start uur hebben tussen 7u en 15u.");
                     }
                     break;
@@ -214,8 +212,8 @@ namespace WpfViewModel
         }
         public void BindDates(DateTime startDate, DateTime endDate, int? extraHours)
         {
-            SelectedDate = new DateTime(startDate.Year, startDate.Month, startDate.Day);
             SelectedStartTime = new TimeSpan(startDate.Hour, 0, 0);
+            SelectedDate = new DateTime(startDate.Year, startDate.Month, startDate.Day).AddHours(startDate.Hour);
             if (EndHourVis == true)
             {
                 SelectedEndTime = new TimeSpan((int)(endDate - startDate).TotalHours, 0, 0) + SelectedStartTime;
@@ -225,13 +223,14 @@ namespace WpfViewModel
                     SelectedEndTime = new TimeSpan(startDate.Hour + GetExtraHour(), 0, 0);
             }
             SelectedExtraHours = extraHours;
+
         }
         private int GetExtraHour()
         {
             return SelectedArangement switch
             {
                 "Wedding" => Wedding.Duration,
-                "Nightlife" => NightLife.Duration,
+                "Nightlife" => Nightlife.Duration,
                 _ => 0,
             };
         }
@@ -265,7 +264,7 @@ namespace WpfViewModel
                     {
                         EndHourVis = false;
                         ExtraHourVis = true;
-                        for (int i = 0; i <= Arangement.MaxAmountOfHours - NightLife.Duration; i++)
+                        for (int i = 0; i <= Arangement.MaxAmountOfHours - Nightlife.Duration; i++)
                         {
                             ExtraHours.Add(i);
                         }
@@ -288,7 +287,7 @@ namespace WpfViewModel
                 toAdd = new LimousineView();
                 toAdd.Name = item.Name;
                 toAdd.FirstHourPrice = item.FirstHourPrice;
-                toAdd.NightLife = item.Arangements.Where(x => x.GetType() == typeof(NightLife)).Select(a => ((a as NightLife).Price as int?)).FirstOrDefault();
+                toAdd.NightLife = item.Arangements.Where(x => x.GetType() == typeof(Nightlife)).Select(a => ((a as Nightlife).Price as int?)).FirstOrDefault();
                 toAdd.Wedding = item.Arangements.Where(x => x.GetType() == typeof(Wedding)).Select(a => ((a as Wedding).Price as int?)).FirstOrDefault();
                 toAdd.Wellness = item.Arangements.Where(x => x.GetType() == typeof(Wellness)).Select(a => ((a as Wellness).Price as int?)).FirstOrDefault();
 
@@ -362,6 +361,34 @@ namespace WpfViewModel
             return toReturn;
         }
 
+        public void FilterReservations(string clientNumber, DateTime? date)
+        {
+            DateTime Date = DateTime.MinValue;
+            if(date != null)
+            {
+                Date = (DateTime)date;
+            }
+            int ClientNumber = 0;
+            if (FilterByClient)
+            {
+                ClientNumber = int.Parse(clientNumber);
+            }
+            if(FilterByClient && FilterByDate)
+            {
+
+                Reservations = new ObservableCollection<Reservering>(reservationsUnfiltered.Where(r => r.Client.ClientNumber == ClientNumber & r.ReservationDate.Year == Date.Year
+                & r.ReservationDate.Month == Date.Month & r.ReservationDate.Day == Date.Day));
+            }
+            else if(FilterByDate)
+            {
+                Reservations = new ObservableCollection<Reservering>(reservationsUnfiltered.Where(r => r.ReservationDate.Year == Date.Year
+               & r.ReservationDate.Month == Date.Month & r.ReservationDate.Day == Date.Day));
+            }
+            else if(FilterByClient)
+            {
+                Reservations = new ObservableCollection<Reservering>(reservationsUnfiltered.Where(r => r.Client.ClientNumber == ClientNumber));
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void RaisePropertyChanged(string propertyName)

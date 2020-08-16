@@ -27,7 +27,7 @@ namespace Tests
                 new Wellness(3200),
                 new Airport(),
                 new Business(),
-                new NightLife(2500)
+                new Nightlife(2500)
             };
             int FirsHourprice = 130;
             int Available = 1;
@@ -44,7 +44,7 @@ namespace Tests
             limousine.Arangements.Any(s => s.GetType().ToString().Equals(new Wellness(3200).GetType().ToString())).Should().BeTrue();
             limousine.Arangements.Any(s => s.GetType().ToString().Equals(new Airport().GetType().ToString())).Should().BeTrue();
             limousine.Arangements.Any(s => s.GetType().ToString().Equals(new Business().GetType().ToString())).Should().BeTrue();
-            limousine.Arangements.Any(s => s.GetType().ToString().Equals(new NightLife(2500).GetType().ToString())).Should().BeTrue();
+            limousine.Arangements.Any(s => s.GetType().ToString().Equals(new Nightlife(2500).GetType().ToString())).Should().BeTrue();
         }
         [TestMethod]
         public void LimousineTest_Methods()
@@ -55,7 +55,7 @@ namespace Tests
                 new Wellness(3200),
                 new Airport(),
                 new Business(),
-                new NightLife(2500)
+                new Nightlife(2500)
             };
             Limousine limousine = new Limousine(100, "Tesla Model X", 10, arangements);
             int price = 2000;
@@ -69,7 +69,7 @@ namespace Tests
             price = 2500;
             dateNeeded = new DateTime(2000, 2, 24, 10, 0, 0);
 
-            limousine.PriceForArangement(dateNeeded, "NightLife", startHour: new TimeSpan(22, 0, 0)).Key.Should().Be(price);
+            limousine.PriceForArangement(dateNeeded, "Nightlife", startHour: new TimeSpan(22, 0, 0)).Key.Should().Be(price);
             TimeSpan startHour = new TimeSpan(10, 0, 0);
             TimeSpan endHour = new TimeSpan(15, 0, 0);
             price = 360;
@@ -126,13 +126,13 @@ namespace Tests
             arangements.Add(new Wedding(2000));
 
 
-            act = () => limousine.PriceForArangement(dateNeeded, "NightLife");
-            act.Should().Throw<DomainException>().WithMessage($"Het arangement NightLife heeft een start uur nodig.");
+            act = () => limousine.PriceForArangement(dateNeeded, "Nightlife");
+            act.Should().Throw<DomainException>().WithMessage($"Het arangement Nightlife heeft een start uur nodig.");
 
 
-            act = () => limousine.PriceForArangement(dateNeeded, "NightLife", startHour: new TimeSpan(20,0,0));
+            act = () => limousine.PriceForArangement(dateNeeded, "Nightlife", startHour: new TimeSpan(20,0,0));
             act.Should().Throw<DomainException>().WithMessage($"Limousine {limousine.Name} does not have a nightlife arangement.");
-            arangements.Add(new NightLife(2500));
+            arangements.Add(new Nightlife(2500));
 
 
             act = () => limousine.PriceForArangement(dateNeeded, "Airport");

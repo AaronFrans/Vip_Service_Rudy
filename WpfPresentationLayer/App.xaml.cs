@@ -13,5 +13,10 @@ namespace WpfPresentationLayer
     /// </summary>
     public partial class App : Application
     {
+        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            MessageBox.Show("Er is iets fout gegaan. Gelieve contact op te nemen met de maker van deze app");
+            e.Handled = true;
+        }
     }
 }

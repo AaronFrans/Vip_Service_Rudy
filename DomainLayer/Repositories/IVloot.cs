@@ -17,8 +17,6 @@ namespace DomainLayer.Repositories
         public Reservering HireVehicle(string name, string typeArangement, Address location, int clientNr, DateTime reservationDate, Address endLocation, DateTime dateLimousineNeeded,
              int? extraHours = null, TimeSpan? startHour = null, TimeSpan? endHour = null);
 
-        public void UpdateLimousinesAvailability(DateTime hireDate);
-
         public List<Reservering> GetReservations();
 
     }

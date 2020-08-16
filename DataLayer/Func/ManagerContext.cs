@@ -60,7 +60,7 @@ namespace DataLayer.Func
                                                 .HasValue<Airport>(1)
                                                 .HasValue<Business>(2)
                                                 .HasValue<Wellness>(3)
-                                                .HasValue<NightLife>(4)
+                                                .HasValue<Nightlife>(4)
                                                 .HasValue<Wedding>(5);
             modelBuilder.Entity<Client>().Property(c => c.ClientNumber)
                                                 .ValueGeneratedNever();
@@ -72,7 +72,7 @@ namespace DataLayer.Func
 
         public DbSet<Airport> Airport { get; set; }
         public DbSet<Business> Business { get; set; }
-        public DbSet<NightLife> NightLife { get; set; }
+        public DbSet<Nightlife> NightLife { get; set; }
         public DbSet<Wedding> Wedding { get; set; }
         public DbSet<Wellness> Wellness { get; set; }
     }

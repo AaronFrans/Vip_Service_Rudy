@@ -24,9 +24,10 @@ namespace WpfPresentationLayer
         public ReservationForm(ViewModel vm)
         {
             InitializeComponent();
+            StartTimeDate.DisplayDateStart = DateTime.Now;
+            EndTimeDate.DisplayDateStart = DateTime.Now;
             this.vm = vm;
             DataContext = vm;
-            vm.Setup("ReservationForm");
             SetupVisibilities();
         }
 

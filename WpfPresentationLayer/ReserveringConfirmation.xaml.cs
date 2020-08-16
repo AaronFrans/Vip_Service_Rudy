@@ -35,8 +35,11 @@ namespace WpfPresentationLayer
             Close();
         }
 
-        private void DenyButton_Click(object sender, RoutedEventArgs e)
+        private async void DenyButton_Click(object sender, RoutedEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
+            await vm.SetupAsync("ReservationDetails");
+            Mouse.OverrideCursor = null;
             SelectLimousine sl = new SelectLimousine();
             sl.Show();
             Close();

@@ -28,14 +28,12 @@ namespace WpfPresentationLayer
         {
             InitializeComponent();
             vm = new ViewModel();
-            vm.Setup("Limousines");
             DataContext = vm;
         }
         public SelectLimousine(ViewModel vm)
         {
             InitializeComponent();
             this.vm = vm;
-            vm.Setup("Limousines");
             DataContext = vm;
         }
 
@@ -60,6 +58,7 @@ namespace WpfPresentationLayer
                 {
                     AddNewClient anc = new AddNewClient(vm);
                     anc.Show();
+                    Close();
                 }
                 else
                 {
@@ -72,14 +71,18 @@ namespace WpfPresentationLayer
             }
         }
 
-        private void ExistingClientButton_Click(object sender, RoutedEventArgs e)
+        private async void ExistingClientButton_Click(object sender, RoutedEventArgs e)
         {
             if (vm.SelectedLimousine != null)
             {
                 if (vm.HasArangement(vm.SelectedLimousine.Name, vm.SelectedArangement))
                 {
+                    Mouse.OverrideCursor = Cursors.Wait;
+                    await vm.SetupAsync("Clients");
+                    Mouse.OverrideCursor = null;
                     SelectClient sc = new SelectClient(vm);
                     sc.Show();
+                    Close();
                 }
                 else
                 {

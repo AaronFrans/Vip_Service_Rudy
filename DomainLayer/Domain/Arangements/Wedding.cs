@@ -11,14 +11,7 @@ namespace DomainLayer.Domain.Arangements
     public class Wedding : Arangement
     {
         public int Price { get; private set; }
-
         public static int Duration { get; private set; } = 7;
-
-        static public TimeSpan NightHourBegin { get; private set; } = new TimeSpan(22, 0, 0);
-
-        static public TimeSpan NightHourEnd { get; private set; } = new TimeSpan(1, 6, 0, 0);
-
-
         static public float SecondHoursPercentage { get; private set; } = 65.0f;
         [NotMapped]
         public int? ExtraHours { get; private set; } = null;

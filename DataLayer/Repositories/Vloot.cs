@@ -38,17 +38,13 @@ namespace DataLayer.Repositories
                                    .Include(s => s.Arangements)
                                    .AsNoTracking().ToList();
         }
-        public void UpdateLimousinesAvailability(DateTime hireDate)
-        {
-            context.Vehicles.Include(c => c.HireDates).ForEachAsync(l => l.IsVehicleAvailable(hireDate));
-        }
 
         public Reservering HireVehicle(string name, string typeArangement, Address location, int clientNr, DateTime reservationDate, Address endLocation, DateTime dateLimousineNeeded,
             int? extraHours = null, TimeSpan? startHour = null, TimeSpan? endHour = null)
         {
             if (!context.Vehicles.AsNoTracking().Any(l => l.Name == (name)))
             {
-                throw new DomainException($"Deze vloot heeft de gevraagde limousine niet.");
+                throw new DomainException($"Deze Vloot heeft de gevraagde limousine niet.");
             }
             var limo = context.Vehicles.Include(l => l.Arangements)
                                        .Include(l => l.HireDates)
@@ -71,11 +67,16 @@ namespace DataLayer.Repositories
         {
                 return context.Reservations.AsNoTracking()
                                            .Include(r => r.Client)
+                                           .Include(r => r.Client.Address)
+                                           .Include(r => r.Client.StaffelDiscount)
+                                           .Include(r => r.Client.PastReservations)
                                            .Include(r => r.Location)
                                            .Include(r => r.Details)
                                            .Include(r => r.Details.StartLocation)
                                            .Include(r => r.Details.EndLocation)
                                            .Include(r => r.Details.Limousine)
+                                           .Include(r => r.Details.Limousine.Arangements)
+                                           .Include(r => r.Details.Limousine.HireDates)
                                            .Include(r => r.Details.Hours).ToList();
             
         }

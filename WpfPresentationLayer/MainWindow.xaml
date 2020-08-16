@@ -18,7 +18,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="SearchReservationButton" Grid.Column="0" Content="Zoek reservatie op" HorizontalAlignment="Center" VerticalAlignment="Center" Click="SearchReservationButton_Click" />
-            <Button x:Name="NewReservationButton" Grid.Column="1" Content="Maak een nieuwe reservatie aan" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button x:Name="NewReservationButton" Grid.Column="1" Content="Maak een nieuwe reservatie aan" HorizontalAlignment="Center" VerticalAlignment="Center" Click="NewReservationButton_Click"/>
         </Grid>
     </Grid>
 </Window>

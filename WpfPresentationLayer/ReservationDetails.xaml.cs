@@ -25,7 +25,6 @@ namespace WpfPresentationLayer
             InitializeComponent();
             this.vm = vm;
             DataContext = vm;
-            vm.Setup("ReservationConfirmation");
             SetupHourPanels();
         }
 

@@ -125,7 +125,7 @@ namespace Tests
                 new Wellness(3200),
                 new Airport(),
                 new Business(),
-                new NightLife(2500)
+                new Nightlife(2500)
             };
             Limousine limousine = new Limousine(130, "Tesla Model X", 1, arangements);
 

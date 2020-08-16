@@ -13,9 +13,6 @@ namespace DomainLayer.Repositories
         public void AddClients(List<Client> clients);
 
         public List<ClientDiscount> GetDiscountsForType(ClientType type);
-
-        public Client GetClientNonTracking(int clientNumber);
-        public Client GetClientNonTracking(string name);
         public List<Client> GetClientsNonTracking();
     }
 }

@@ -53,7 +53,7 @@ namespace Tests
             arangements.Add(new Wellness(3500));
             arangements.Add(new Airport());
             arangements.Add(new Wedding(2000));
-            arangements.Add(new NightLife(3210));
+            arangements.Add(new Nightlife(3210));
             Limousine l4 = new Limousine(290, "test4", 7, arangements);
 
             List<Limousine> ls = new List<Limousine>() { l2, l3, l4 };
@@ -76,8 +76,6 @@ namespace Tests
             ls[0].Available.Should().Be(3);
             ls[0].FirstHourPrice.Should().Be(200);
         }
-
-
         [TestMethod]
         public void AddClientTests()
         {
@@ -120,33 +118,11 @@ namespace Tests
             cs[0].StaffelDiscount.First().ClientType.Should().Be(ClientType.Vip);
             cs[0].Type.Should().Be(ClientType.Vip);
 
-            var c1 = sm.GetClientViaNumber(1);
-
-            c1.Address.Should().Be(new Address("Leurshoek", "Beveren", "61") { Id = 1 });
-            c1.BtwNumber.Should().BeNull();
-            c1.ClientNumber.Should().Be(1);
-            c1.Name.Should().BeEquivalentTo("Aaron Frans");
-            c1.PastReservations.Should().BeEmpty();
-            c1.StaffelDiscount.Count.Should().Be(4);
-            c1.StaffelDiscount.First().ClientType.Should().Be(ClientType.Vip);
-            c1.Type.Should().Be(ClientType.Vip);
-
-            var c1_b = sm.GetClientViaInfo("Aaron Frans");
-            c1_b.Address.Should().Be(new Address("Leurshoek", "Beveren", "61") { Id = 1 });
-            c1_b.BtwNumber.Should().BeNull();
-            c1_b.ClientNumber.Should().Be(1);
-            c1_b.Name.Should().BeEquivalentTo("Aaron Frans");
-            c1_b.PastReservations.Should().BeEmpty();
-            c1_b.StaffelDiscount.Count.Should().Be(4);
-            c1_b.StaffelDiscount.First().ClientType.Should().Be(ClientType.Vip);
-            c1_b.Type.Should().Be(ClientType.Vip);
-
             var ds = sm.GetDiscountsForType(ClientType.Vip);
 
             ds.Count.Should().Be(4);
             ds[1].ClientType.Should().Be(ClientType.Vip);
         }
-
         [TestMethod]
         public void HireLimousineTest()
         {
@@ -183,31 +159,21 @@ namespace Tests
             result.Details.BtwAmount.Should().Be(180);
             result.Details.ToPayAmount.Should().Be(3180);
         }
-
-
         [TestMethod]
-        public void UpdateLimousinesTests()
+        public void ReservationGetTests()
         {
             ManagerContextTest mct = new ManagerContextTest(true);
             ServiceManager sm = new ServiceManager(new UnitOfWork(mct));
 
-            var StartLocation = new Address("Van Creanbroeck", "Gent", "9120");
-            var ReservationDate = DateTime.Now;
+            var rs = sm.GetReservations();
 
-            sm.HireVehicle("test2", "Wellness", StartLocation, 1, ReservationDate,
-            StartLocation, new DateTime(2020, 10, 5), startHour: new TimeSpan(8, 0, 0));
+            rs.Count.Should().Be(1);
 
-            var NewReservationDate = new DateTime(2020, 10, 5, 17, 0, 0);
-            sm.UpdateVehicles(NewReservationDate);
-
-            sm.GetVehicles().Single(c => c.Name.Equals("test2")).HireDates.Count.Should().Be(1);
-
-            NewReservationDate = new DateTime(2020, 10, 5, 17, 0, 0);
-            sm.UpdateVehicles(NewReservationDate);
-
-            sm.GetVehicles().Single(c => c.Name.Equals("test2")).HireDates.Count.Should().Be(0);
-
+            rs[0].Client.ClientNumber.Should().Be(1);
+            rs[0].Details.Limousine.Name.Should().BeEquivalentTo("test1");
+            rs[0].Details.ToPayAmount.Should().Be(3180);
         }
+
     }
 }
 

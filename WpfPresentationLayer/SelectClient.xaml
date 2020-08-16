@@ -25,9 +25,8 @@
             <Button  Grid.Column="1" x:Name="NameFilterButton" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Click="NameFilterButton_Click" >Zoek</Button>
             <TextBox Grid.Column="0" Grid.Row="1" x:Name="ClientNumberFilter"  Margin="10,10,10,10" VerticalAlignment="Center" VerticalContentAlignment="Center" Text="Zoek een klant op klant nummer" GotKeyboardFocus="ClientNumberFilter_GotKeyboardFocus"/>
             <Button  Grid.Column="1" Grid.Row="1" x:Name="NumberFilterButton" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Click="NumberFilterButton_Click">Zoek</Button>
-
         </Grid>
-        <DataGrid Grid.Row="1" ItemsSource = "{Binding Clients}" SelectedItem="{Binding SelectedClient}" AutoGenerateColumns="False" SelectionMode="Extended" x:Name="Vloot" CanUserAddRows="False" Margin="10,10,10,10">
+        <DataGrid Grid.Row="1" ItemsSource = "{Binding Clients}" SelectedItem="{Binding SelectedClient}" AutoGenerateColumns="False" SelectionMode="Extended" x:Name="Clients" CanUserAddRows="False" Margin="10,10,10,10">
             <DataGrid.Columns  >
                 <DataGridTextColumn Header="Klanten nummer" x:Name="Id" Binding="{Binding ClientNumber}" Width="*"/>
                 <DataGridTextColumn Header="Naam" x:Name="Naam" Binding="{Binding Name}" Width="*"/>

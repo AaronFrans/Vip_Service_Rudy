@@ -5,8 +5,8 @@ namespace DomainLayer.OtherInterfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        public IClientRepository clients { get; }
-        public IVloot vloot { get; }
+        public IClientRepository Clients { get; }
+        public IVloot Vloot { get; }
         int Complete();
     }
 }

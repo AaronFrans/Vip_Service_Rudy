@@ -11,9 +11,6 @@ namespace DomainLayer.Domain.Arangements
         public int Price { get; private set; }
 
         public static int Duration { get; private set; } = 10;
-        static public TimeSpan NightHourBegin { get; private set; } = new TimeSpan(22, 0, 0);
-
-        static public TimeSpan NightHourEnd { get; private set; } = new TimeSpan(1, 6, 0, 0);
 
         [JsonConstructor]
         public Wellness(int price)

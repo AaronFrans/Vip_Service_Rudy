@@ -298,7 +298,7 @@ namespace DataLayer.Migrations.Manager
                     b.HasDiscriminator().HasValue(2);
                 });
 
-            modelBuilder.Entity("DomainLayer.Domain.Arangements.NightLife", b =>
+            modelBuilder.Entity("DomainLayer.Domain.Arangements.Nightlife", b =>
                 {
                     b.HasBaseType("DomainLayer.Domain.Arangements.Arangement");
 

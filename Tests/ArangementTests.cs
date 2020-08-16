@@ -52,10 +52,8 @@ namespace Tests
             result.Key.Should().Be(totalPrice);
             result.Value.Single(h => h.Type == "Eerste uur").TotalPrice.Should().Be(firstHourPrice);
             result.Value.Single(h => h.Type == "Nacht uren").TotalPrice.Should().Be(nightHoursPrice);
-            result.Value.Single(h => h.Type == "Dag uren").TotalPrice.Should().Be(dayHoursPrice);
             result.Value.Single(h => h.Type == "Eerste uur").NrOfHours.Should().Be(firstHour);
             result.Value.Single(h => h.Type == "Nacht uren").NrOfHours.Should().Be(nightHours);
-            result.Value.Single(h => h.Type == "Dag uren").NrOfHours.Should().Be(dayHours);
             airport.StartHour.Should().Be(originalStartHour);
             airport.EndHour.Should().Be(originalEndHour);
 
@@ -75,10 +73,8 @@ namespace Tests
             result.Key.Should().Be(totalPrice);
             result.Value.Single(h => h.Type == "Eerste uur").TotalPrice.Should().Be(firstHourPrice);
             result.Value.Single(h => h.Type == "Nacht uren").TotalPrice.Should().Be(nightHoursPrice);
-            result.Value.Single(h => h.Type == "Dag uren").TotalPrice.Should().Be(dayHoursPrice);
             result.Value.Single(h => h.Type == "Eerste uur").NrOfHours.Should().Be(firstHour);
             result.Value.Single(h => h.Type == "Nacht uren").NrOfHours.Should().Be(nightHours);
-            result.Value.Single(h => h.Type == "Dag uren").NrOfHours.Should().Be(dayHours);
             airport.StartHour.Should().Be(originalStartHour);
             airport.EndHour.Should().Be(originalEndHour);
 
@@ -97,10 +93,8 @@ namespace Tests
             airport.GetEndTime();
             result.Key.Should().Be(totalPrice);
             result.Value.Single(h => h.Type == "Eerste uur").TotalPrice.Should().Be(firstHourPrice);
-            result.Value.Single(h => h.Type == "Nacht uren").TotalPrice.Should().Be(nightHoursPrice);
             result.Value.Single(h => h.Type == "Dag uren").TotalPrice.Should().Be(dayHoursPrice);
             result.Value.Single(h => h.Type == "Eerste uur").NrOfHours.Should().Be(firstHour);
-            result.Value.Single(h => h.Type == "Nacht uren").NrOfHours.Should().Be(nightHours);
             result.Value.Single(h => h.Type == "Dag uren").NrOfHours.Should().Be(dayHours);
             airport.StartHour.Should().Be(originalStartHour);
             airport.EndHour.Should().Be(originalEndHour);
@@ -251,10 +245,8 @@ namespace Tests
             result.Key.Should().Be(totalPrice);
             result.Value.Single(h => h.Type == "Eerste uur").TotalPrice.Should().Be(firstHourPrice);
             result.Value.Single(h => h.Type == "Nacht uren").TotalPrice.Should().Be(nightHoursPrice);
-            result.Value.Single(h => h.Type == "Dag uren").TotalPrice.Should().Be(dayHoursPrice);
             result.Value.Single(h => h.Type == "Eerste uur").NrOfHours.Should().Be(firstHour);
             result.Value.Single(h => h.Type == "Nacht uren").NrOfHours.Should().Be(nightHours);
-            result.Value.Single(h => h.Type == "Dag uren").NrOfHours.Should().Be(dayHours);
             business.StartHour.Should().Be(originalStartHour);
             business.EndHour.Should().Be(originalEndHour);
 
@@ -274,10 +266,8 @@ namespace Tests
             result.Key.Should().Be(totalPrice);
             result.Value.Single(h => h.Type == "Eerste uur").TotalPrice.Should().Be(firstHourPrice);
             result.Value.Single(h => h.Type == "Nacht uren").TotalPrice.Should().Be(nightHoursPrice);
-            result.Value.Single(h => h.Type == "Dag uren").TotalPrice.Should().Be(dayHoursPrice);
             result.Value.Single(h => h.Type == "Eerste uur").NrOfHours.Should().Be(firstHour);
             result.Value.Single(h => h.Type == "Nacht uren").NrOfHours.Should().Be(nightHours);
-            result.Value.Single(h => h.Type == "Dag uren").NrOfHours.Should().Be(dayHours);
             business.StartHour.Should().Be(originalStartHour);
             business.EndHour.Should().Be(originalEndHour);
 
@@ -296,10 +286,8 @@ namespace Tests
             business.GetEndTime();
             result.Key.Should().Be(totalPrice);
             result.Value.Single(h => h.Type == "Eerste uur").TotalPrice.Should().Be(firstHourPrice);
-            result.Value.Single(h => h.Type == "Nacht uren").TotalPrice.Should().Be(nightHoursPrice);
             result.Value.Single(h => h.Type == "Dag uren").TotalPrice.Should().Be(dayHoursPrice);
             result.Value.Single(h => h.Type == "Eerste uur").NrOfHours.Should().Be(firstHour);
-            result.Value.Single(h => h.Type == "Nacht uren").NrOfHours.Should().Be(nightHours);
             result.Value.Single(h => h.Type == "Dag uren").NrOfHours.Should().Be(dayHours);
             business.StartHour.Should().Be(originalStartHour);
             business.EndHour.Should().Be(originalEndHour);
@@ -522,7 +510,7 @@ namespace Tests
             long StartTicks = 1440000000000;
             long EndTicks = 1440000000000;
 
-            NightLife nightLife = new NightLife(2000);
+            Nightlife nightLife = new Nightlife(2000);
 
             nightLife.Price.Should().Be(Price);
             nightLife.StartHour.Should().Be(StartHour);
@@ -534,7 +522,7 @@ namespace Tests
         [TestMethod]
         public void NightLifeTest_Methods()
         {
-            NightLife nightLife = new NightLife(2000);
+            Nightlife nightLife = new Nightlife(2000);
             TimeSpan StartHour = new TimeSpan(20, 0, 0);
             TimeSpan EndHour = new TimeSpan(27, 0, 0);
             int extraHours = 2;
@@ -561,7 +549,7 @@ namespace Tests
         [TestMethod]
         public void NightLifeTest_Exceptions()
         {
-            NightLife nightLife = new NightLife(2000);
+            Nightlife nightLife = new Nightlife(2000);
             Action act = () => nightLife.GetCalculatedPrice(200);
             act.Should().Throw<DomainException>().WithMessage("Zorg er aub voor dat de start- en eindtijd ingevuld zijn");
 
@@ -570,7 +558,7 @@ namespace Tests
 
             act = () => nightLife.SetTime(new TimeSpan(20, 0, 0),10);
             act.Should().Throw<DomainException>().WithMessage("Zorg er a.u.b. voor dat het eind uur niet meer dan elf uur na het start uur is." +
-                " (Het NightLife arangement heeft een standaartduuratie van 4 uur)");
+                " (Het Nightlife arangement heeft een standaartduuratie van 4 uur)");
         }
 
     }
