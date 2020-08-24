@@ -46,7 +46,7 @@ namespace WpfPresentationLayer
                 rf.Show();
                 Close();
             }
-            catch (Exception ex)
+            catch (ArgumentException ex)
             {
 
                 MessageBox.Show(ex.Message);
@@ -58,13 +58,13 @@ namespace WpfPresentationLayer
         private void IsFilledIn()
         {
             if (string.IsNullOrWhiteSpace(Name.Text))
-                throw new Exception("Geef aub een naam in");
+                throw new ArgumentException("Geef aub een naam in");
             if (string.IsNullOrWhiteSpace(Town.Text))
-                throw new Exception("Geef aub een gemeente naam in");
+                throw new ArgumentException("Geef aub een gemeente naam in");
             if (string.IsNullOrWhiteSpace(Street.Text))
-                throw new Exception("Geef aub een straat naam in");
+                throw new ArgumentException("Geef aub een straat naam in");
             if (string.IsNullOrWhiteSpace(StreetNumber.Text))
-                throw new Exception("Geef aub een straat nummer in");
+                throw new ArgumentException("Geef aub een straat nummer in");
         }
 
     }

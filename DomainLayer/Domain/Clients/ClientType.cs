@@ -4,6 +4,9 @@ using System.Text;
 
 namespace DomainLayer.Domain.Clients
 {
+    /// <summary>
+    /// The possible types of clients.
+    /// </summary>
     public enum ClientType
     {
         Vip,

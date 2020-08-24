@@ -8,19 +8,47 @@ using System.Linq;
 
 namespace DomainLayer.Domain.Vloot
 {
+    /// <summary>
+    /// Represents a limousine that can be hired.
+    /// </summary>
     public class Limousine
     {
+        /// <summary>
+        /// The price the first hour costs.
+        /// </summary>
         public int FirstHourPrice { get; private set; }
+        /// <summary>
+        /// The name of the limousine.
+        /// </summary>
         [Key]
         public string Name { get; private set; }
+        /// <summary>
+        /// The total amount of times this type of limousine is available.
+        /// </summary>
         public int Available { get; private set; }
+        /// <summary>
+        /// The available arangemnets for this type of limousine.
+        /// </summary>
         public List<Arangement> Arangements { get; private set; }
+        /// <summary>
+        /// The past reservations for this type of limousine.
+        /// </summary>
         public List<HireDate> HireDates { get; private set; }
 
+        /// <summary>
+        /// An empty constructor.
+        /// </summary>
         public Limousine()
         {
 
         }
+        /// <summary>
+        /// A constructor used to make a ?Limousine object.
+        /// </summary>
+        /// <param name="firstHourPrice">The price the first hour costs.</param>
+        /// <param name="name">The name of the limousine.</param>
+        /// <param name="available">The total amount of times this type of limousine is available.</param>
+        /// <param name="arangements">The available arangemnets for this type of limousine.</param>
         [JsonConstructor]
         public Limousine(int firstHourPrice, string name, int available, List<Arangement> arangements)
         {
@@ -44,6 +72,11 @@ namespace DomainLayer.Domain.Vloot
 
         }
 
+        /// <summary>
+        /// Checks if an arangement shows up more than once.
+        /// </summary>
+        /// <param name="arangements">The arangements to check.</param>
+        /// <returns>A boolean representing if an arangements shows up twice. If true there are multiple.</returns>
         private bool CheckForDoubles(List<Arangement> arangements)
         {
 
@@ -52,6 +85,11 @@ namespace DomainLayer.Domain.Vloot
                 return true;
             return false;
         }
+        /// <summary>
+        /// Checks if an arangements is available for this limousine.
+        /// </summary>
+        /// <param name="arangementName">Arangement to check.</param>
+        /// <returns>>A boolean representing if an arangements is available. If true it is available.</returns>
         public bool HasArangement(string arangementName)
         {
             switch (arangementName)
@@ -117,6 +155,15 @@ namespace DomainLayer.Domain.Vloot
 
 
         }
+        /// <summary>
+        /// Gets the price for a given arangement.
+        /// </summary>
+        /// <param name="hireDate">Date the limousine will be hired.</param>
+        /// <param name="arangementType">Type of arangement to use.</param>
+        /// <param name="extraHours">Amount of extra hours (if applicable).</param>
+        /// <param name="startHour">When the arangement starts (if applicable).</param>
+        /// <param name="endHour">When the arangement ends (if applicable).</param>
+        /// <returns>A KeyValuePair where the key is the total price and the value is a list of HourTypes objects.</returns>
         public KeyValuePair<int, List<HourType>> PriceForArangement(DateTime hireDate, string arangementType, int? extraHours = null, TimeSpan? startHour = null, TimeSpan? endHour = null)
         {
             KeyValuePair<int, List<HourType>> toReturn = new KeyValuePair<int, List<HourType>>();
@@ -173,7 +220,7 @@ namespace DomainLayer.Domain.Vloot
                         {
                             throw new DomainException("Het arangement Nightlife heeft een start uur nodig.");
                         }
-                        toReturn = NightLifePrice((TimeSpan)startHour, extraHours, hireDate);
+                        toReturn = NightlifePrice((TimeSpan)startHour, extraHours, hireDate);
                     }
                     break;
                 default:
@@ -183,10 +230,19 @@ namespace DomainLayer.Domain.Vloot
             return toReturn;
         }
 
+        /// <summary>
+        /// Add a HireDate to the HireDates property.
+        /// </summary>
+        /// <param name="hireDate">Date the limousine will be hired.</param>
         private void AddHireDate(DateTime hireDate)
         {
             HireDates.Add(new HireDate(hireDate));
         }
+        /// <summary>
+        /// Checks if a limousine is available for a givcen date.
+        /// </summary>
+        /// <param name="hireDate">Date the limousine will be hired.</param>
+        /// <returns>A boolean that represents if the limousine is availble. If true it is available.</returns>
         public bool IsVehicleAvailable(DateTime hireDate)
         {
             if (HireDates.Count == Available)
@@ -204,6 +260,13 @@ namespace DomainLayer.Domain.Vloot
         }
 
 
+        /// <summary>
+        /// Calculates price for the airport arangement.
+        /// </summary>
+        /// <param name="startHour">When the arangemnt starts</param>
+        /// <param name="endHour">When the arangemnt ends</param>
+        /// <param name="hireDate">When the limousine is to be hired.</param>
+        /// <returns>A KeyValuePair where the key is the total price and the value is a list of HourTypes objects.</returns>
         private KeyValuePair<int, List<HourType>> AirportPrice(TimeSpan startHour, TimeSpan endHour, DateTime hireDate)
         {
             if (!Arangements.Any(a => a.GetType().ToString() == typeof(Airport).ToString()))
@@ -226,6 +289,13 @@ namespace DomainLayer.Domain.Vloot
                 return toReturn;
             }
         }
+        /// <summary>
+        /// Calculates price for the business arangement.
+        /// </summary>
+        /// <param name="startHour">When the arangemnt starts</param>
+        /// <param name="endHour">When the arangemnt ends</param>
+        /// <param name="hireDate">When the limousine is to be hired.</param>
+        /// <returns>A KeyValuePair where the key is the total price and the value is a list of HourTypes objects.</returns>
         private KeyValuePair<int, List<HourType>> BusinessPrice(TimeSpan startHour, TimeSpan endHour, DateTime hireDate)
         {
             if (!Arangements.Any(a => a.GetType().ToString() == typeof(Business).ToString()))
@@ -248,6 +318,12 @@ namespace DomainLayer.Domain.Vloot
                 return toReturn;
             }
         }
+        /// <summary>
+        /// Calculates price for the wellness arangement.
+        /// </summary>
+        /// <param name="startHour">When the arangemnt starts</param>
+        /// <param name="hireDate">When the limousine is to be hired.</param>
+        /// <returns>A KeyValuePair where the key is the total price and the value is a list of HourTypes objects.</returns>
         private KeyValuePair<int, List<HourType>> WellnessPrice(TimeSpan startHour, DateTime hireDate)
         {
             if (!Arangements.Any(a => a.GetType().ToString() == typeof(Wellness).ToString()))
@@ -269,6 +345,13 @@ namespace DomainLayer.Domain.Vloot
                 return new KeyValuePair<int, List<HourType>>(ar.Price, new List<HourType>());
             }
         }
+        /// <summary>
+        /// Calculates price for the wedding arangement.
+        /// </summary>
+        /// <param name="startHour">When the arangemnt starts</param>
+        /// <param name="extraHours">Extra hours to add to the duration of the arangement.</param>
+        /// <param name="hireDate">When the limousine is to be hired.</param>
+        /// <returns>A KeyValuePair where the key is the total price and the value is a list of HourTypes objects.</returns>
         private KeyValuePair<int, List<HourType>> WeddingPrice(TimeSpan startHour, int? extraHours, DateTime hireDate)
         {
             if (!Arangements.Any(a => a.GetType().ToString() == typeof(Wedding).ToString()))
@@ -291,7 +374,14 @@ namespace DomainLayer.Domain.Vloot
                 return toReturn;
             }
         }
-        private KeyValuePair<int, List<HourType>> NightLifePrice(TimeSpan startHour, int? extraHours, DateTime hireDate)
+        /// <summary>
+        /// Calculates price for the nightlife arangement.
+        /// </summary>
+        /// <param name="startHour">When the arangemnt starts</param>
+        /// <param name="extraHours">Extra hours to add to the duration of the arangement.</param>
+        /// <param name="hireDate">When the limousine is to be hired.</param>
+        /// <returns>A KeyValuePair where the key is the total price and the value is a list of HourTypes objects.</returns>
+        private KeyValuePair<int, List<HourType>> NightlifePrice(TimeSpan startHour, int? extraHours, DateTime hireDate)
         {
             if (!Arangements.Any(a => a.GetType().ToString() == typeof(Nightlife).ToString()))
             {

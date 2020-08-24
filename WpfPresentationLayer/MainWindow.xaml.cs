@@ -24,7 +24,6 @@ namespace WpfPresentationLayer
             InitializeComponent();
             vm = new ViewModel();
         }
-
         private void SearchReservationButton_Click(object sender, RoutedEventArgs e)
         {
             ReservationFilter rf = new ReservationFilter(vm);

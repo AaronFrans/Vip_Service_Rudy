@@ -10,7 +10,7 @@
         "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Arangements.Arangement, DomainLayer]], System.Private.CoreLib",
         "$values": [
           {
-            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "$type": "DomainLayer.Domain.Arangements.Nightlife, DomainLayer",
             "Price": 1500,
             "ExtraHours": null,
             "Id": 0,
@@ -75,7 +75,7 @@
         "$type": "System.Collections.Generic.List`1[[DomainLayer.Domain.Arangements.Arangement, DomainLayer]], System.Private.CoreLib",
         "$values": [
           {
-            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "$type": "DomainLayer.Domain.Arangements.Nightlife, DomainLayer",
             "Price": 1600,
             "ExtraHours": null,
             "Id": 0,
@@ -331,7 +331,7 @@
             "MaxAmountOfHours": 11
           },
           {
-            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "$type": "DomainLayer.Domain.Arangements.Nightlife, DomainLayer",
             "Price": 1500,
             "ExtraHours": null,
             "Id": 0,
@@ -396,7 +396,7 @@
             "MaxAmountOfHours": 11
           },
           {
-            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "$type": "DomainLayer.Domain.Arangements.Nightlife, DomainLayer",
             "Price": 790,
             "ExtraHours": null,
             "Id": 0,
@@ -461,7 +461,7 @@
             "MaxAmountOfHours": 11
           },
           {
-            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "$type": "DomainLayer.Domain.Arangements.Nightlife, DomainLayer",
             "Price": 900,
             "ExtraHours": null,
             "Id": 0,
@@ -526,7 +526,7 @@
             "MaxAmountOfHours": 11
           },
           {
-            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "$type": "DomainLayer.Domain.Arangements.Nightlife, DomainLayer",
             "Price": 850,
             "ExtraHours": null,
             "Id": 0,
@@ -591,7 +591,7 @@
             "MaxAmountOfHours": 11
           },
           {
-            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "$type": "DomainLayer.Domain.Arangements.Nightlife, DomainLayer",
             "Price": 1290,
             "ExtraHours": null,
             "Id": 0,
@@ -645,7 +645,7 @@
             "MaxAmountOfHours": 11
           },
           {
-            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "$type": "DomainLayer.Domain.Arangements.Nightlife, DomainLayer",
             "Price": 990,
             "ExtraHours": null,
             "Id": 0,
@@ -689,7 +689,7 @@
             "MaxAmountOfHours": 11
           },
           {
-            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "$type": "DomainLayer.Domain.Arangements.Nightlife, DomainLayer",
             "Price": 990,
             "ExtraHours": null,
             "Id": 0,
@@ -862,7 +862,7 @@
             "MaxAmountOfHours": 11
           },
           {
-            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "$type": "DomainLayer.Domain.Arangements.Nightlife, DomainLayer",
             "Price": 800,
             "ExtraHours": null,
             "Id": 0,
@@ -917,7 +917,7 @@
             "MaxAmountOfHours": 11
           },
           {
-            "$type": "DomainLayer.Domain.Arangements.NightLife, DomainLayer",
+            "$type": "DomainLayer.Domain.Arangements.Nightlife, DomainLayer",
             "Price": 800,
             "ExtraHours": null,
             "Id": 0,

@@ -8,18 +8,32 @@ using System.Text;
 
 namespace DomainLayer.Domain.Arangements
 {
+    /// <summary>
+    /// An arangement that is paid by hour.
+    /// </summary>
     public class Business : Arangement
     {
-
+        /// <summary>
+        /// When Nighthour begins.
+        /// </summary>
         static public TimeSpan NightHourBegin { get; private set; } = new TimeSpan(22, 0, 0);
-
+        /// <summary>
+        /// When Nighthour ends.
+        /// </summary>
         static public TimeSpan NightHourEnd { get; private set; } = new TimeSpan(1, 6, 0, 0);
 
-
+        /// <summary>
+        /// Percentage used for second hour price calulation.
+        /// </summary>
         static public float SecondHoursPercentage { get; private set; } = 65.0f;
-
+        /// <summary>
+        /// Percentage used for night hour price calulation.
+        /// </summary>
         static public float NightHourPercentage { get; private set; } = 140.0f;
 
+        /// <summary>
+        /// Constructor for business object. Sets start hour and end hour.
+        /// </summary>
         [JsonConstructor]
         public Business()
         {
@@ -29,6 +43,11 @@ namespace DomainLayer.Domain.Arangements
             EndHour = new TimeSpan(EndHourTicks);
         }
 
+        /// <summary>
+        /// Calculates the price for the arangement.
+        /// </summary>
+        /// <param name="firstHourPrice">The price of the first hour.</param>
+        /// <returns>A KeyValuePair where the key is the total price and the value is a list of HourTypes objects.</returns>
         public KeyValuePair<int, List<HourType>> GetPrice(int firstHourPrice)
         {
             if (StartHour.TotalHours == 40 || EndHour.TotalHours == 40)
@@ -106,7 +125,11 @@ namespace DomainLayer.Domain.Arangements
 
 
         }
-
+        /// <summary>
+        /// Sets the start and end time.
+        /// </summary>
+        /// <param name="startHour">When the arangement starts.</param>
+        /// <param name="endHour">When the arangement end.</param>
         public void SetTime(TimeSpan startHour, TimeSpan endHour)
         {
             if (startHour.TotalHours < 0)
@@ -137,6 +160,10 @@ namespace DomainLayer.Domain.Arangements
             EndHour = endHour;
         }
 
+        /// <summary>
+        /// Returns when the arangement ends and resets the arangment.
+        /// </summary>
+        /// <returns>The and time of the arangement.</returns>
         public TimeSpan GetEndTime()
         {
             TimeSpan toReturn = EndHour;

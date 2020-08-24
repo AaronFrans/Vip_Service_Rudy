@@ -8,8 +8,15 @@ using System.Linq;
 
 namespace DataLayer.Func
 {
+    /// <summary>
+    /// Parses all data files.
+    /// </summary>
     public class Parser
     {
+        /// <summary>
+        /// Parses all discounts in the Discount.json file.
+        /// </summary>
+        /// <returns>A list of ClientDiscount objects.</returns>
         public static List<ClientDiscount> GetDiscounts()
         {
             List<ClientDiscount> discounts = new List<ClientDiscount>();
@@ -21,7 +28,10 @@ namespace DataLayer.Func
 
             return discounts;
         }
-
+        /// <summary>
+        /// Parses all limousines in the Limousines.json file.
+        /// </summary>
+        /// <returns>A list of Limousine objects.</returns>
         public static List<Limousine> GetLimousines()
         {
             List<Limousine> limousines = new List<Limousine>();
@@ -32,13 +42,15 @@ namespace DataLayer.Func
             };
             using (StreamReader sr = new StreamReader(@"Files\Limousines.json"))
             {
-
                 limousines = JsonConvert.DeserializeObject<List<Limousine>>(sr.ReadToEnd(),settings);
             }
 
             return limousines;
         }
-
+        /// <summary>
+        /// Parses all clients in the klanten.txt file.
+        /// </summary>
+        /// <returns>A list of Client objects.</returns>
         public static List<Client> GetClients()
         {
             using (StreamReader sr = new StreamReader(@"Files\klanten.txt"))
@@ -106,7 +118,11 @@ namespace DataLayer.Func
                 return toReturn;
             }
         }
-
+        /// <summary>
+        /// Makes an Address object with the given input string.
+        /// </summary>
+        /// <param name="input">The addres following the format: Street StreetNumber - Town.</param>
+        /// <returns>An Address object made from the given input.</returns>
         private static Address MakeAddress(string input)
         {
             var splitAddress = input.Split('-');

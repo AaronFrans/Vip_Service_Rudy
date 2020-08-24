@@ -7,14 +7,34 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DomainLayer.Domain.Arangements
 {
+    /// <summary>
+    /// An arangment that has a default price and duration, but can be hired for longer with an axtra cost.
+    /// </summary>
     public class Nightlife: Arangement
     {
+        /// <summary>
+        /// The default price of the arangement.
+        /// </summary>
         public int Price { get; private set; }
+        /// <summary>
+        /// The amount of hours the arangement lasts by default.
+        /// </summary>
         public static int Duration { get; private set; } = 7;
+        /// <summary>
+        /// Percentage used for night hour price calulation.
+        /// </summary>
         static public float NightHourPercentage { get; private set; } = 140.0f;
+        /// <summary>
+        /// Extra hours added to the arangement (if applicable).
+        /// </summary>
         [NotMapped]
         public int? ExtraHours { get; private set; } = null;
 
+        /// <summary>
+        /// Determines if the given start time is allowed.
+        /// </summary>
+        /// <param name="startHour">The start time.</param>
+        /// <returns>A boolean representing whether the given start time is allowed. If true it is allowed.</returns>
         static public bool IsStartAllowed(TimeSpan startHour)
         {
             if (startHour.Hours > 24 || startHour.Hours < 20)
@@ -24,6 +44,24 @@ namespace DomainLayer.Domain.Arangements
             return true;
         }
 
+        /// <summary>
+        /// Constructor for nightlife object. Sets start hour and end hour.
+        /// </summary>
+        /// <param name="price">The default price of the arangment.</param>
+        [JsonConstructor]
+        public Nightlife(int price)
+        {
+            Price = price;
+            EndHourTicks = 1440000000000;
+            StartHourTicks = 1440000000000;
+            StartHour = new TimeSpan(StartHourTicks);
+            EndHour = new TimeSpan(EndHourTicks);
+        }
+
+        /// <summary>
+        /// Calculates the price for the arangement.
+        /// </summary>
+        /// <param name="firstHourPrice">The price of the first hour.</param>
         public KeyValuePair<int, List<HourType>> GetCalculatedPrice(int firstHourPrice)
         {
             if (EndHour.TotalHours == 40)
@@ -44,6 +82,11 @@ namespace DomainLayer.Domain.Arangements
 
             return new KeyValuePair<int, List<HourType>>(returnPrice, hourTypes);
         }
+        /// <summary>
+        /// Sets the start and end time.
+        /// </summary>
+        /// <param name="startHour">When the arangement starts.</param>
+        /// <param name="extraHours">Extra hours to add to the duration of the arangment.</param>
         public void SetTime(TimeSpan startHour,int? extraHours)
         {
             if (startHour.Seconds > 0 || startHour.Minutes > 0)
@@ -74,6 +117,10 @@ namespace DomainLayer.Domain.Arangements
 
             }
         }
+        /// <summary>
+        /// Returns when the arangement ends and resets the arangment.
+        /// </summary>
+        /// <returns>The and time of the arangement.</returns>
         public TimeSpan GetEndTime()
         {
 
@@ -81,15 +128,6 @@ namespace DomainLayer.Domain.Arangements
             StartHour = new TimeSpan(40, 0, 0);
             EndHour = new TimeSpan(40, 0, 0);
             return toReturn;
-        }
-        [JsonConstructor]
-        public Nightlife(int price)
-        {
-            Price = price;
-            EndHourTicks = 1440000000000;
-            StartHourTicks = 1440000000000;
-            StartHour = new TimeSpan(StartHourTicks);
-            EndHour = new TimeSpan(EndHourTicks);
         }
     }
 }

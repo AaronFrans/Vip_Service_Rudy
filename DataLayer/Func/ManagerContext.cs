@@ -14,19 +14,33 @@ using System.Text;
 
 namespace DataLayer.Func
 {
+    /// <summary>
+    /// Used to connect to the database.
+    /// </summary>
     public class ManagerContext : DbContext
     {
         private string connectionString;
 
+        /// <summary>
+        /// Empty constructor.
+        /// </summary>
         public ManagerContext()
         {
         }
-
+        
+        /// <summary>
+        /// Constructor used to connect to the database.
+        /// </summary>
+        /// <param name="db">Which database should be used, default is the production database.</param>
         public ManagerContext(string db = "Production") : base()
         {
             SetConnectionString(db);
         }
 
+        /// <summary>
+        /// Gets the connection string from the AppSettings.json file.
+        /// </summary>
+        /// <param name="db">Determines which database should be used. The defvault is the production database.</param>
         private void SetConnectionString(string db = "Production")
         {
             var builder = new ConfigurationBuilder();
@@ -66,23 +80,57 @@ namespace DataLayer.Func
                                                 .ValueGeneratedNever();
         }
 
+        /// <summary>
+        /// Gives acces to the Limousines in the database.
+        /// </summary>
         public DbSet<Limousine> Vehicles { get; set; }
+        /// <summary>
+        /// Gives acces to the reservations in the database.
+        /// </summary>
         public DbSet<Reservering> Reservations { get; set; }
+        /// <summary>
+        /// Gives acces to the clients in the database.
+        /// </summary>
         public DbSet<Client> Clients { get; set; }
 
-        public DbSet<Airport> Airport { get; set; }
-        public DbSet<Business> Business { get; set; }
-        public DbSet<Nightlife> NightLife { get; set; }
-        public DbSet<Wedding> Wedding { get; set; }
-        public DbSet<Wellness> Wellness { get; set; }
+        /// <summary>
+        /// Used for implementation of the abstract arrangement class.
+        /// </summary>
+        private DbSet<Airport> Airport { get; set; }
+        /// <summary>
+        /// Used for implementation of the abstract arrangement class.
+        /// </summary>
+        private DbSet<Business> Business { get; set; }
+        /// <summary>
+        /// Used for implementation of the abstract arrangement class.
+        /// </summary>
+        private DbSet<Nightlife> NightLife { get; set; }
+        /// <summary>
+        /// Used for implementation of the abstract arrangement class.
+        /// </summary>
+        private DbSet<Wedding> Wedding { get; set; }
+        /// <summary>
+        /// Used for implementation of the abstract arrangement class.
+        /// </summary>
+        private DbSet<Wellness> Wellness { get; set; }
     }
 
+    /// <summary>
+    /// Used to easily test the functionality of the database.
+    /// </summary>
     public class ManagerContextTest : ManagerContext
     {
+        /// <summary>
+        /// Empty contructor, it will connect  to the test databse.
+        /// </summary>
         public ManagerContextTest() : base("Test")
         {
 
         }
+        /// <summary>
+        /// Constructor used to connect to the test database.
+        /// </summary>
+        /// <param name="keepExistingDB">Determines if the test database should be emptied. It will delete by default.</param>
         public ManagerContextTest(bool keepExistingDB = false) : base("Test")
         {
             if (keepExistingDB)

@@ -62,7 +62,7 @@ namespace WpfPresentationLayer
                 rc.Show();
                 Close();
             }
-            catch (Exception ex)
+            catch (ArgumentException ex)
             {
 
                 MessageBox.Show(ex.Message);
@@ -72,20 +72,20 @@ namespace WpfPresentationLayer
         private void IsFilledIn()
         {
             if (StartTimeDate.SelectedDate == null)
-                throw new Exception("Kies aub een start datum.");
+                throw new ArgumentException("Kies aub een start datum.");
             if (EndTimePanel.Visibility == Visibility.Visible)
             {
                 if (EndTimeDate.SelectedDate == null)
-                    throw new Exception("Kies aub een eind datum.");
+                    throw new ArgumentException("Kies aub een eind datum.");
             }
             if (string.IsNullOrWhiteSpace(StartStreet.Text))
-                throw new Exception("Vul de straat van de start locatie in.");
+                throw new ArgumentException("Vul de straat van de start locatie in.");
             if (string.IsNullOrWhiteSpace(StartStreetNumber.Text))
-                throw new Exception("Vul het straat nummer van de start locatie in.");
+                throw new ArgumentException("Vul het straat nummer van de start locatie in.");
             if (string.IsNullOrWhiteSpace(EndStreet.Text))
-                throw new Exception("Vul de straat van de eind locatie in.");
+                throw new ArgumentException("Vul de straat van de eind locatie in.");
             if (string.IsNullOrWhiteSpace(EndStreetNumber.Text))
-                throw new Exception("Vul de straat van de eind locatie in.");
+                throw new ArgumentException("Vul de straat van de eind locatie in.");
         }
 
         private void BindAddressInfo()

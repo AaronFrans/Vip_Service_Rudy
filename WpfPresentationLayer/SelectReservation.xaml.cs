@@ -55,7 +55,7 @@ namespace WpfPresentationLayer
                 IsFilled();
                 vm.FilterReservations(ClientInput.Text, DateInput.SelectedDate);
             }
-            catch (Exception ex)
+            catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -67,12 +67,12 @@ namespace WpfPresentationLayer
             if (vm.FilterByClient)
             {
                 if (!int.TryParse(ClientInput.Text, out int clientNummer))
-                    throw new Exception("Een klantenNummer moet een geheel getal zijn");
+                    throw new ArgumentException("Een klantenNummer moet een geheel getal zijn");
             }
             if (vm.FilterByDate)
             {
                 if (DateInput.SelectedDate == null)
-                    throw new Exception("Selecteer aub een datum om op te zoeken");
+                    throw new ArgumentException("Selecteer aub een datum om op te zoeken");
             }
         }
 
