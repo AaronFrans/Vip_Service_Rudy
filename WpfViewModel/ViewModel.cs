@@ -20,7 +20,7 @@ namespace WpfViewModel
         /// <summary>
         /// The service manager to acces the database.
         /// </summary>
-        public ServiceManager sm = new ServiceManager(new UnitOfWork(new DataLayer.Func.ManagerContext("Production")));
+        public ServiceManager sm = new ServiceManager(new UnitOfWork(new DataLayer.Func.ManagerContext("Test")));
 
         /// <summary>
         /// Original limousines in the database.

@@ -137,12 +137,12 @@
                 </StackPanel>
                 <StackPanel>
                     <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
-                        <TextBlock Margin="0,0,5,5">SubTotaal:</TextBlock>
+                        <TextBlock Margin="0,0,5,5">Subtotaal:</TextBlock>
                         <TextBlock Text="€"/>
                         <TextBlock Margin="0,0,5,5" Text="{Binding SelectedReservation.Details.SubTotal}"/>
                     </StackPanel>
                     <StackPanel Margin="10,0,0,5" Orientation="Horizontal">
-                        <TextBlock Margin="0,0,5,5">Used discount:</TextBlock>
+                        <TextBlock Margin="0,0,5,5">Gebruikte korting:</TextBlock>
                         <TextBlock Margin="0,0,0,5" Text="{Binding SelectedReservation.Details.UsedDiscount}"/>
                         <TextBlock Text="%"/>
                     </StackPanel>
